@@ -11,6 +11,12 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function getTransaction($id) {
+        $transactions = Transaction::find($id);
+        return response()->json($transactions);
+    }
+
     public function index()
     {
         //
@@ -61,7 +67,6 @@ class TransactionController extends Controller
         $book = Book::find($id);
         $borrowed_class = Transaction::where('book_id', '=', $id);
         $borrowed_class = $borrowed_class->where('return_time', '=', null)->get();
-
         return view('book.formPengembalian', ['title' => 'Formulir Pengembalian Buku', 'book' => $book, 'transactions' => $borrowed_class]);
     }
 
@@ -78,11 +83,9 @@ class TransactionController extends Controller
         ]);
 
         // Book
-        $book = Book::all();
-        $book = $book->find($request->book_id)->update([
-            'stock' => $request->amount,
+        $book = Book::find($request->book_id)->update([
+            'stock' => $request->old_stock + $request->amount,
         ]);
-        // dd($request->id,$book);
 
 
         return redirect('/')->with('success', 'pengembalian buku berhasil');

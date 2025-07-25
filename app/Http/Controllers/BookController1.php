@@ -41,7 +41,6 @@ class BookController1 extends Controller
         $book = Book::find($id);
         $borrowed_class = Transaction::where('book_id','=',$id);
         $borrowed_class = $borrowed_class->where('return_time','=',null)->get();
-
         return view('book.formPengembalian',['title' => 'Formulir Pengembalian Buku','book' => $book,'transactions' => $borrowed_class]);
     }
 

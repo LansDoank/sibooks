@@ -13,7 +13,7 @@
                     <a href="#">
                         <p class="text-gray-600 font-medium mt-1">Kelas : {{ $book->kelas->name }}</p>
                     </a>
-                    <p class="text-gray-600 font-medium mt-1">Stock {{ $book->stock }}</p>
+                    <p class="text-gray-600 font-medium mt-1">Stock : {{ $book->stock }}</p>
                     <div class="mt-1 sm:items-center sm:gap-4 sm:flex">
                         <p class=" font-medium text-gray-600 dark:text-white">
                             Penulis : {{ $book->author }}
