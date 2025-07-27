@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Classroom;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class TransactionController extends Controller
      * Display a listing of the resource.
      */
 
-    public function getTransaction($id) {
+    public function getTransaction($id)
+    {
         $transactions = Transaction::find($id);
         return response()->json($transactions);
     }
@@ -25,9 +27,11 @@ class TransactionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $book = Book::find($id);
+        $classrooms = Classroom::all();
+        return view('book.form', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Peminjaman Buku']);
     }
 
     /**
@@ -35,12 +39,20 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $transaction = new Transaction();
-        $transaction->kelas_peminjam = $request->kelas;
-        $transaction->book_id = $request->id;
-        $transaction->jumlah_buku = $request->amount;
-        $transaction->borrow_time = now();
-        $transaction->save();
+        $transaction = Transaction::where('kelas_peminjam', '=', $request->kelas)->where('book_id', '=', $request->id)->first();
+        if ($transaction) {
+            $transaction->update([
+                'jumlah_buku' => $transaction->jumlah_buku + $request->amount,
+            ]);
+        } else {
+            $transaction = new Transaction();
+            $transaction->kelas_peminjam = $request->kelas;
+            $transaction->book_id = $request->id;
+            $transaction->jumlah_buku = $request->amount;
+            $transaction->borrow_time = now();
+            $transaction->save();
+        }
+
 
         $books = Book::all();
         $books = $books->find($request->id)->update([

@@ -51,9 +51,9 @@
                                     <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ Str::limit($buku->title, 15) }}</h5>
                                 </a>
-                                <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->kelas->id }}">
+                                <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
                                     <p class="mb-2 text-sm font-medium text-gray-700">
-                                        Kelas {{ $buku->kelas->name }}
+                                        Kelas {{ $buku->grade->name }}
                                     </p>
                                 </a>
                             </div>
@@ -81,7 +81,7 @@
                                 </a>
                                 <a class=" mt-2" href="/book/kelas?id=2">
                                     <p class="mb-2 text-sm font-medium text-gray-700 hover:underline">
-                                        Kelas {{ $buku->kelas->name }}
+                                        Kelas {{ $buku->grade->name }}
                                     </p>
                                 </a>
 
@@ -110,7 +110,7 @@
                                 </a>
                                 <a class="hover:underline" href="/book/kelas?id=3">
                                     <p class="mb-2 text-sm font-medium text-gray-700">
-                                        Kelas {{ $buku->kelas->name }}
+                                        Kelas {{ $buku->grade->name }}
                                     </p>
                                 </a>
                             </div>

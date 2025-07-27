@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classroom;
+use App\Models\Grade;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Kelas;
@@ -17,10 +19,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->call([KelasSeeder::class]);
+        $this->call([GradeSeeder::class]);
 
         Book::factory(30)->recycle([
-            Kelas::all()
+            Grade::all()
         ])->create();
 
         User::create([
@@ -28,10 +30,13 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin'),
         ]);
 
+        $classrooms = ['X PH 1','X PH 2','X PH 3','X MPLB 1','X MPLB 2','X PPLG 1','XI PH 1','XI PH 2','XI PH 3','XI MPLB 1','XI MPLB 2','XI PPLG 1','XII PH 1','XII PH 2','XII MPLB 1','XII MPLB 2','XII PPLG 1','XII PPLG 2'];
+        
+        foreach($classrooms as $classroom) {
+            Classroom::create([
+                'name' => $classroom,
+            ]);
+        } 
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

@@ -11,7 +11,7 @@
                         {{ $book->title }}
                     </h1>
                     <a href="#">
-                        <p class="text-gray-600 font-medium mt-1">Kelas : {{ $book->kelas->name }}</p>
+                        <p class="text-gray-600 font-medium mt-1">Kelas : {{ $book->grade->name }}</p>
                     </a>
                     <p class="text-gray-600 font-medium mt-1">Stock : {{ $book->stock }}</p>
                     <div class="mt-1 sm:items-center sm:gap-4 sm:flex">

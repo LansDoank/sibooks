@@ -15,4 +15,8 @@ class Book extends Model
     public function kelas(): BelongsTo {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function grade(): BelongsTo {
+        return $this->belongsTo(Grade::class);
+    }
 }

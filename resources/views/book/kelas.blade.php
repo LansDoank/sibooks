@@ -46,9 +46,9 @@
                                 <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ Str::limit($buku->title, 15) }}</h5>
                             </a>
-                            <a href="/book/kelas?id={{ $buku->kelas->id }}&search=kelas {{ $buku->kelas->name }}">
+                            <a href="/book/kelas?id={{ $buku->grade->id }}&search=kelas {{ $buku->grade->name }}">
                                 <p class="mb-2 text-sm font-medium text-gray-700">
-                                    Kelas {{ $buku->kelas->name }}
+                                    Kelas {{ $buku->grade->name }}
                                 </p>
                             </a>
                         </div>

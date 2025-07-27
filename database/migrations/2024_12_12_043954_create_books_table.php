@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('publisher');
             $table->integer('year');    
             $table->integer('stock');
-            $table->foreignId('kelas_id')->constrained(
-                table: 'kelas', indexName: 'book_kelas_id'
+            $table->foreignId('grade_id')->constrained(
+                table: 'grades', indexName: 'book_grade_id'
             );
             $table->timestamps();
         });

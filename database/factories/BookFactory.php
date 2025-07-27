@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Grade;
 use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,7 +26,7 @@ class BookFactory extends Factory
             'publisher' => fake()->name(),
             'year' => 2024,
             'stock' => fake()->numberBetween(10,50),
-            'kelas_id' => Kelas::factory()
+            'grade_id' => Grade::factory()
         ];
     }
 }
