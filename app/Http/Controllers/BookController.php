@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Grade;
 use App\Models\Kelas;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -34,7 +35,9 @@ class BookController extends Controller
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
 
-        return view('book.kelas',['books' => $books,'kelas' => $kelas->value('name')]);
+        $grade = Grade::find($request->id)->name;
+
+        return view('book.kelas',['grade' => $grade,'books' => $books,'kelas' => $kelas->value('name')]);
     }
 
     public function pengembalian($id) {

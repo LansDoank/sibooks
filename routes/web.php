@@ -35,5 +35,7 @@ Route::get('/user/login',[UserController::class,'login']);
 
 Route::post('/user/login',[UserController::class,'loginPost']);
 
+Route::get('/user/logout',[UserController::class,'logout'])->name('logout');
+
 Route::get('/api/kelas/{transaction_id}',[TransactionController::class,'getTransaction'])->name('api.transaction');
 

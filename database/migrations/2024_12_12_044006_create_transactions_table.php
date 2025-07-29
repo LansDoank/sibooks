@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('kelas_name')->constrained(
-            //     table: 'users', indexName: 'transaction_user_id'
-            // );
+            $table->string('borrower_image');
             $table->string('kelas_peminjam');
             $table->foreignId('book_id')->constrained(
                 table: 'books', indexName: 'transaction_book_id'

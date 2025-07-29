@@ -31,7 +31,7 @@
     <section class="max-w-screen-lg rounded-md bg-white shadow mx-auto p-8 my-14 border">
         <div>
             <div class="mb-5">
-                <h1 class="text-2xl font-medium">Buku Kelas {{$kelas}}</h1>
+                <h1 class="text-2xl font-medium">Buku Kelas {{$grade}}</h1>
             </div>
             <div class="flex gap-5 flex-wrap justify-center">
                 @foreach ($books as $buku)

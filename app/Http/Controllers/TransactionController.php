@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\Classroom;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class TransactionController extends Controller
 {
@@ -31,7 +33,7 @@ class TransactionController extends Controller
     {
         $book = Book::find($id);
         $classrooms = Classroom::all();
-        return view('book.form', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Peminjaman Buku']);
+        return view('book.formPeminjaman', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Peminjaman Buku']);
     }
 
     /**
@@ -46,7 +48,9 @@ class TransactionController extends Controller
             ]);
         } else {
             $transaction = new Transaction();
-            $transaction->kelas_peminjam = $request->kelas;
+            $borrower_image = $request->file('borrower-image');
+            $transaction->borrower_image = $borrower_image->store('borrower_image');
+            $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
             $transaction->borrow_time = now();
