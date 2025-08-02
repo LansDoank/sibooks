@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->call([GradeSeeder::class]);
+        $this->call([GradeSeeder::class,BookSeeder::class]);
 
         Book::factory(30)->recycle([
             Grade::all()

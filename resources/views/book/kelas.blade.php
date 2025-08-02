@@ -45,10 +45,10 @@
                         </a>
                         <div class="p-3">
                             <a href="/book/{{ $buku->id }}">
-                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ Str::limit($buku->title, 15) }}</h5>
                             </a>
-                            <a href="/book/kelas?id={{ $buku->grade->id }}">
+                            <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
                                 <p class="mb-2 text-sm font-medium text-gray-700">
                                     Kelas {{ $buku->grade->name }}
                                 </p>

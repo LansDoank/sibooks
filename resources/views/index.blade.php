@@ -42,7 +42,7 @@
                         <div
                             class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <a href="/book/{{ $buku->id }}">
-                                <img class="rounded-t-lg object-cover w-full h-72" src="/ipas.jpg"
+                                <img class="rounded-t-lg object-cover w-full h-72" src="{{$buku->image}}"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
