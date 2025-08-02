@@ -30,9 +30,11 @@
     </section>
     <section class="max-w-screen-lg rounded-md bg-white shadow mx-auto p-8 my-14 border">
         <div>
+            @if($grade)
             <div class="mb-5">
                 <h1 class="text-2xl font-medium">Buku Kelas {{$grade}}</h1>
             </div>
+            @endif
             <div class="flex gap-5 flex-wrap justify-center">
                 @foreach ($books as $buku)
                     <div
@@ -42,11 +44,11 @@
                                 alt="{{ $buku->title }}" />
                         </a>
                         <div class="p-3">
-                            <a href="#">
+                            <a href="/book/{{ $buku->id }}">
                                 <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ Str::limit($buku->title, 15) }}</h5>
                             </a>
-                            <a href="/book/kelas?id={{ $buku->grade->id }}&search=kelas {{ $buku->grade->name }}">
+                            <a href="/book/kelas?id={{ $buku->grade->id }}">
                                 <p class="mb-2 text-sm font-medium text-gray-700">
                                     Kelas {{ $buku->grade->name }}
                                 </p>

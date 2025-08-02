@@ -22,29 +22,32 @@ class BookController extends Controller
         return view('book.tampil', ['books' => $books]);
     }
 
-    public function kelas(Request $request) {
+    public function kelas(Request $request)
+    {
         $books = Book::all();
         $kelas = Kelas::find($request);
+        $grade = null;
 
-        if($request->id) {
+        if ($request->id) {
             $id = $request->id;
-            $books = Book::where('grade_id','=',$id)->get();
+            $books = Book::where('grade_id', '=', $id)->get();
+            $grade = Grade::where('id', 'like', '%' . $request->id . '%')->first()->name;
         }
 
         if ($request->search) {
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
 
-        $grade = Grade::find($request->id)->name;
 
-        return view('book.kelas',['grade' => $grade,'books' => $books,'kelas' => $kelas->value('name')]);
+        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name')]);
     }
 
-    public function pengembalian($id) {
+    public function pengembalian($id)
+    {
         $book = Book::find($id);
-        $borrowed_class = Transaction::where('book_id','=',$id);
-        $borrowed_class = $borrowed_class->where('return_time','=',null)->get();
-        return view('book.formPengembalian',['title' => 'Formulir Pengembalian Buku','book' => $book,'transactions' => $borrowed_class]);
+        $borrowed_class = Transaction::where('book_id', '=', $id);
+        $borrowed_class = $borrowed_class->where('return_time', '=', null)->get();
+        return view('book.formPengembalian', ['title' => 'Formulir Pengembalian Buku', 'book' => $book, 'transactions' => $borrowed_class]);
     }
 
     /**

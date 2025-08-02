@@ -58,6 +58,7 @@
                         Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with
                         Magic Keyboard or Magic Keyboard with Touch ID.
                     </p>
+                    {{QrCode::generate($book->qr_code)}}
                 </div>
             </div>
         </div>
