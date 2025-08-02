@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
 use App\Models\Grade;
+use Illuminate\Support\Str;
+
 
 class BookSeeder extends Seeder
 {
@@ -18,6 +20,7 @@ class BookSeeder extends Seeder
             'qr_code' => fake()->sentence(),
             'image' => '/img/ipas.jpg',
             'title' => fake()->sentence(),
+            'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
             'publisher' => fake()->name(),
             'year' => 2024,
@@ -28,6 +31,7 @@ class BookSeeder extends Seeder
             'qr_code' => fake()->sentence(),
             'image' => '/img/japan.jpeg',
             'title' => fake()->sentence(),
+            'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
             'publisher' => fake()->name(),
             'year' => 2025,
@@ -38,6 +42,7 @@ class BookSeeder extends Seeder
             'qr_code' => fake()->sentence(),
             'image' => '/img/totoro.jpg',
             'title' => fake()->sentence(),
+            'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
             'publisher' => fake()->name(),
             'year' => 2024,
@@ -48,6 +53,7 @@ class BookSeeder extends Seeder
             'qr_code' => fake()->sentence(),
             'image' => '/img/luffy.jpeg',
             'title' => fake()->sentence(),
+            'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
             'publisher' => fake()->name(),
             'year' => 2025,

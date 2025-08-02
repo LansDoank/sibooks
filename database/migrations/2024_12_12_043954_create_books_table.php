@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('qr_code')->nullable();
             $table->string('image');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('author');
             $table->string('publisher');
             $table->integer('year');    

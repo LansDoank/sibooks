@@ -41,12 +41,12 @@
                     @foreach ($kelasX as $buku)
                         <div
                             class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="/book/{{ $buku->id }}">
+                            <a href="/book/{{ $buku->slug }}">
                                 <img class="rounded-t-lg object-cover w-full h-72" src="{{$buku->image}}"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
-                                <a href="/book/{{ $buku->id }}">
+                                <a href="/book/{{ $buku->slug }}">
                                     <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ Str::limit($buku->title, 15) }}</h5>
                                 </a>
@@ -69,12 +69,12 @@
                     @foreach ($kelasXi as $buku)
                         <div
                             class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="/book/{{ $buku->id }}">
+                            <a href="/book/{{ $buku->slug }}">
                                 <img class="rounded-t-lg object-cover w-full h-72" src="/ipas.jpg"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
-                                <a href="/book/{{ $buku->id }}">
+                                <a href="/book/{{ $buku->slug }}">
                                     <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ Str::limit($buku->title, 15) }}</h5>
                                 </a>
@@ -98,12 +98,12 @@
                     @foreach ($kelasXii as $buku)
                         <div
                             class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="/book/{{ $buku->id }}">
+                            <a href="/book/{{ $buku->slug }}">
                                 <img class="rounded-t-lg object-cover w-full h-72" src="/ipas.jpg"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
-                                <a href="/book/{{ $buku->id }}">
+                                <a href="/book/{{ $buku->slug }}">
                                     <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ Str::limit($buku->title, 15) }}</h5>
                                 </a>

@@ -69,9 +69,12 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($slug)
     {
-        $book = Book::find($id);
+        $book = Book::where('slug','=',$slug)->first();
+        if(!$book) {
+            return redirect('/');
+        }
         return view('book.detailBook', ['book' => $book]);
     }
 
