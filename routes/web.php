@@ -4,6 +4,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 use App\Models\Transaction;
@@ -31,9 +32,16 @@ Route::get('/book/pengembalian/{book}',[TransactionController::class,'edit'])->n
 
 Route::post('/book/pengembalian',[TransactionController::class,'update'])->name('transaction.update');
 
-Route::get('/user/login',[UserController::class,'login']);
+Route::get('/user/login',[UserController::class,'login'])->name('login');
+
+Route::get('/user/logout',[UserController::class,'logout'])->name('logout');
 
 Route::post('/user/login',[UserController::class,'loginPost']);
 
 Route::get('/api/kelas/{transaction_id}',[TransactionController::class,'getTransaction'])->name('api.transaction');
 
+Route::get('/admin',[AdminController::class,'index'])->name('admin.index')->middleware('auth');
+
+Route::get('/admin/akun',[AdminController::class,'akun'])->name('admin.akun')->middleware('auth');
+
+Route::get('/admin/buku',[AdminController::class,'buku'])->name('admin.buku')->middleware('auth');

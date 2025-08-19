@@ -13,11 +13,17 @@ class UserController extends Controller
         return view('user.login');
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('index')->with('isLogin', false);
+    }
+
     public function loginPost(Request $request)
     {
         $data = $request->only('username','password');
-        if(Auth::attempt($data)){
-            return redirect('/')->with('isLogin',true);
+        if(Auth::attempt(credentials: $data)){
+            return redirect()->route('admin.index')->with('isLogin',true);
         } else {
             return redirect('/user/login');
         };

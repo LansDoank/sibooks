@@ -4,8 +4,7 @@
             <div class="max-w-screen mb-8 lg:mb-16 text-center">
                 <h2 class="mb-4 text-5xl tracking-tight font-extrabold text-gray-900 dark:text-white">PERPUSTAKAAN DIGITAL <br>
                     SMK Al-MADANI GARUT</h2>
-                <p class="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where
-                    technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+                <p class="text-gray-500 sm:text-xl dark:text-gray-400">Dengan SiBooks, membaca buku jadi mudah, cepat, dan menyenangkan.       </p>
             </div>
             <div>
 

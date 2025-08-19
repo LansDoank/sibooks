@@ -40,13 +40,13 @@
                 @if (1==1)
                     <li class="text-center">
                         <a href="/user/login"
-                            class="block text-white rounded bg-blue-500  lg:px-5 lg:py-2 hover:border hover:border-blue-400 transition hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                            class="block box-border text-white rounded bg-blue-500  lg:px-5 lg:py-2 border hover:border-blue-400 hover:text-blue-600 transition hover:bg-gray-100 "
                             type="button">Masuk</a>
                     </li>
                 @else
                     <li class="text-center">
                         <a href="/user/login"
-                            class="block text-white rounded bg-red-500  lg:px-5 lg:py-2 hover:border hover:border-red-400 transition hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                            class="block box-border text-white rounded bg-red-500  lg:px-5 lg:py-2 border   hover:border-red-400 transition hover:bg-gray-100 "
                             type="button">Keluar</a>
                     </li>
                 @endif

@@ -21,37 +21,65 @@
             alert({{session('success')}})
         </script>
     @endif
-    <div id="pendaftaran" class="flex relative h-screen flex-col justify-center lg:justify-center items-center h-[712px] w-full">
-        <form class="bg-white shadow border md:p-8 p-4 w-[280px] lg:w-[600px] rounded rounded-2xl" action="/user/login/"
-            method="POST">
-            @csrf
-            <div class="flex justify-center">
-                <img class="lg:w-24 w-20" src="/logo.png" alt="">
+    <form action="/user/login" method="POST">
+        @csrf
+        <section class="bg-gray-50 dark:bg-gray-900">
+            <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                    <img class="w-8 h-8 mr-2" src="/img/logo-almadani.png"
+                        alt="logo">
+                    SiBooks
+                </a>
+                <div
+                    class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <h1
+                            class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                            Masuk ke akun anda
+                        </h1>
+                        <form class="space-y-4 md:space-y-6" action="#">
+                            <div>
+                                <label for="username"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                                <input type="text" name="username" id="username"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="name@company.com" required="">
+                            </div>
+                            <div>
+                                <label for="password"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input type="password" name="password" id="password" placeholder="••••••••"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required="">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="remember" aria-describedby="remember" type="checkbox"
+                                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                                            >
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="remember" class="text-gray-500 dark:text-gray-300">Ingat
+                                            saya</label>
+                                    </div>
+                                </div>
+                                <a href="#"
+                                    class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Lupa
+                                    password?</a>
+                            </div>
+                            <button type="submit"
+                                class="w-full text-white bg-blue-600 transition hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Masuk</button>
+                            <p class="text-sm text-center font-light text-gray-500 dark:text-gray-400">
+                                Tidak mempunyai akun? <a href="#"
+                                    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Daftar</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h1 class="text-center text-2xl md:text-3xl font-bold mb-5 lg:mb-10 font-['poppins']">Login</h1>
-            </div>
-            <ul>
-                <li class="my-2">
-                    <label for="name" class="font-medium text-xs lg:text-base font-['poppins']">Username</label>
-                    <br>
-                    <input id="name" placeholder="John Doe" name="username" class="border w-full my-2 px-2 py-2 h-9 md:h-10 rounded"
-                        type="text">
-                </li>
-                <li class="my-2">
-                    <label for="adress" class="font-medium text-xs lg:text-base font-['poppins']">Password</label>
-                    <br>
-                    <input id="adress" name="password" placeholder="*****" class="border w-full h-9 md:h-10 my-2 px-2 py-2 rounded"
-                        type="password">
-                </li>
-
-                <li class="w-full flex justify-center flex flex-col flew-wrap">
-                    <button type="submit"
-                        class="w-full bg-blue-600 transition hover:bg-blue-500 text-sm lg:text-lg mt-3 px-8 py-2 text-white rounded-lg font-medium">Masuk</button>
-                </li>
-            </ul>
-        </form>
-    </div>
+        </section>
+    </form>
 </body>
 
 </html>
