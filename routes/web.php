@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AkunController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 use App\Models\Transaction;
@@ -43,5 +44,7 @@ Route::get('/api/kelas/{transaction_id}',[TransactionController::class,'getTrans
 Route::get('/admin',[AdminController::class,'index'])->name('admin.index')->middleware('auth');
 
 Route::get('/admin/akun',[AdminController::class,'akun'])->name('admin.akun')->middleware('auth');
+
+Route::get('/admin/akun/tambah',[AkunController::class,''])->name('akun.tambah')->middleware('auth');
 
 Route::get('/admin/buku',[AdminController::class,'buku'])->name('admin.buku')->middleware('auth');

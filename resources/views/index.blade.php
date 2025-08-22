@@ -2,9 +2,8 @@
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-md sm:py-16 lg:px-6">
             <div class="max-w-screen mb-8 lg:mb-16 text-center">
-                <h2 class="mb-4 text-5xl tracking-tight font-extrabold text-gray-900 dark:text-white">PERPUSTAKAAN DIGITAL <br>
-                    SMK Al-MADANI GARUT</h2>
-                <p class="text-gray-500 sm:text-xl dark:text-gray-400">Dengan SiBooks, membaca buku jadi mudah, cepat, dan menyenangkan.       </p>
+                <h2 id="heading-index" class="mb-4 text-5xl tracking-tight font-extrabold text-gray-900 dark:text-white"></h2>
+                <p id="subheading-index" class="text-gray-500 sm:text-xl dark:text-gray-400"></p>
             </div>
             <div>
 
@@ -48,7 +47,8 @@
                             <div class="p-3">
                                 <a href="/book/{{ $buku->id }}">
                                     <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{ Str::limit($buku->title, 15) }}</h5>
+                                        {{ Str::limit($buku->title, 15) }}
+                                    </h5>
                                 </a>
                                 <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
                                     <p class="mb-2 text-sm font-medium text-gray-700">
@@ -76,7 +76,8 @@
                             <div class="p-3">
                                 <a href="/book/{{ $buku->id }}">
                                     <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{ Str::limit($buku->title, 15) }}</h5>
+                                        {{ Str::limit($buku->title, 15) }}
+                                    </h5>
                                 </a>
                                 <a class=" mt-2" href="/book/kelas?id=2">
                                     <p class="mb-2 text-sm font-medium text-gray-700 hover:underline">
@@ -105,7 +106,8 @@
                             <div class="p-3">
                                 <a href="/book/{{ $buku->id }}">
                                     <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{ Str::limit($buku->title, 15) }}</h5>
+                                        {{ Str::limit($buku->title, 15) }}
+                                    </h5>
                                 </a>
                                 <a class="hover:underline" href="/book/kelas?id=3">
                                     <p class="mb-2 text-sm font-medium text-gray-700">

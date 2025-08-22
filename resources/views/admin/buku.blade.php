@@ -1,6 +1,8 @@
 <x-dashboard>
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slot:username>{{ $username }}</x-slot:username>
+    <x-slot:heading>{{ $heading }}</x-slot:heading>
+
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -14,7 +16,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
+                          <thead>
                             <tr>
                                 <th>Judul</th>
                                 <th>Penulis</th>

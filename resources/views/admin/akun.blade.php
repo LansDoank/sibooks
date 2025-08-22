@@ -1,10 +1,22 @@
 <x-dashboard>
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-slot:username>{{ $username }}</x-slot:username>
+    <x-slot:heading>{{ $heading }}</x-slot:heading>
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Data Akun</h1>
+         <div class="d-flex justify-content-between align-items-center mb-3">
+             <h1 class="h3 mb-2 text-gray-800">Data Akun</h1>
+             <div class="d-flex">
+                 <button class="btn btn-success mr-2" onclick="window.location.href='/admin/akun/create'">
+                     <i class="fas fa-plus me-1"></i> Tambah Akun
+                 </button>
+                 <button class="btn btn-primary mr-2" onclick="window.location.href='/admin/akun/create'">
+                     <i class="fas fa-plus"></i> Tambah Akun
+                 </button>
+                <button></button>
+             </div>
+         </div>
       
         <!-- DataTales Example -->
         <div class="card shadow mb-4">

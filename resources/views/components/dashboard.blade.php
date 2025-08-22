@@ -41,7 +41,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -105,9 +105,9 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <h2 class="ms-3">{{ $heading }}</h2>
 
                     <ul class="navbar-nav ml-auto">
-
 
 
                         <div class="topbar-divider d-none d-sm-block"></div>
