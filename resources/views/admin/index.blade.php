@@ -1,6 +1,6 @@
 <x-dashboard>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <x-slot:username>{{ $username }}</x-slot:username>
+    <x-slot:fullname>{{ $fullname }}</x-slot:fullname>
     <x-slot:heading>{{ $heading }}</x-slot:heading>
     <div class="container-fluid">
 

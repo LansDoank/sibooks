@@ -37,7 +37,8 @@
                         class="block py-2 px-3 flex items-center text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Kelas
                         XII</a>
                 </li>
-                @if (1==1)
+                {{ dd($isLogin) }}
+                @if ($isLogin)
                     <li class="text-center">
                         <a href="/user/login"
                             class="block box-border text-white rounded bg-blue-500  lg:px-5 lg:py-2 border hover:border-blue-400 hover:text-blue-600 transition hover:bg-gray-100 "
@@ -45,8 +46,8 @@
                     </li>
                 @else
                     <li class="text-center">
-                        <a href="/user/login"
-                            class="block box-border text-white rounded bg-red-500  lg:px-5 lg:py-2 border   hover:border-red-400 transition hover:bg-gray-100 "
+                        <a href="/user/logout"
+                            class="block box-border text-white rounded bg-red-500 hover:text-red-500 lg:px-5 lg:py-2 border   hover:border-red-400 transition hover:bg-gray-100 "
                             type="button">Keluar</a>
                     </li>
                 @endif

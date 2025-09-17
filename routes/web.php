@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -10,41 +11,46 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 use App\Models\Transaction;
 
-Route::get('/', function () {   
-    return view('index',[
-        'kelasX' => Book::where('grade_id' ,'=',1)->paginate(4),
-        'kelasXi' => Book::where('grade_id' ,'=',2)->paginate(4),
-        'kelasXii' => Book::where('grade_id' ,'=',3)->paginate(4)
-    ]);
-})->name('index');
+Route::get('/', [IndexController::class,'index'])->name('index');
 
-Route::get('/book/kelas',[BookController::class,'kelas'])->name('book.kelas');
+Route::get('/book/kelas', [BookController::class, 'kelas'])->name('book.kelas');
 
-Route::get('/book/tampil',[BookController::class,'index'])->name('book.index');
+Route::get('/book/tampil', [BookController::class, 'index'])->name('book.index');
 
-Route::get('/book/{book}',[BookController::class,'show'])->name("book.show");
+Route::get('/book/{book}', [BookController::class, 'show'])->name("book.show");
 
-Route::get('/book/pinjam/{book}',[TransactionController::class,'create'])->name('transaction.show');
+Route::get('/book/pinjam/{book}', [TransactionController::class, 'create'])->name('transaction.show');
 
-Route::post('/book/pinjam',[TransactionController::class,'store'])->name('transaction.post');
+Route::post('/book/pinjam', [TransactionController::class, 'store'])->name('transaction.post');
 
-Route::get('/book/pengembalian/{book}',[TransactionController::class,'edit'])->name('transaction.edit');
+Route::get('/book/pengembalian/{book}', [TransactionController::class, 'edit'])->name('transaction.edit');
 
 
-Route::post('/book/pengembalian',[TransactionController::class,'update'])->name('transaction.update');
+Route::post('/book/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
 
-Route::get('/user/login',[UserController::class,'login'])->name('login');
+Route::get('/user/login', [UserController::class, 'login'])->name('login');
 
-Route::get('/user/logout',[UserController::class,'logout'])->name('logout');
+Route::post('/user/login', [UserController::class, 'loginPost']);
 
-Route::post('/user/login',[UserController::class,'loginPost']);
+Route::post('/user/logout',[UserController::class,'logout'])->name('logout');
 
-Route::get('/api/kelas/{transaction_id}',[TransactionController::class,'getTransaction'])->name('api.transaction');
+Route::get('/user/register', [UserController::class, 'register'])->name('register');
 
-Route::get('/admin',[AdminController::class,'index'])->name('admin.index')->middleware('auth');
+Route::post('/user/store', [UserController::class, 'registerPost']);
 
-Route::get('/admin/akun',[AdminController::class,'akun'])->name('admin.akun')->middleware('auth');
+Route::get('/user/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/admin/akun/tambah',[AkunController::class,''])->name('akun.tambah')->middleware('auth');
 
-Route::get('/admin/buku',[AdminController::class,'buku'])->name('admin.buku')->middleware('auth');
+Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTransaction'])->name('api.transaction');
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
+
+Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user')->middleware('auth');
+
+Route::get('/admin/user/create', [UserController::class, 'create'])->name('user.create')->middleware('auth');
+
+Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.store')->middleware('auth');
+
+Route::get('/admin/book', [AdminController::class, 'book'])->name('admin.book')->middleware('auth');
+
+Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');

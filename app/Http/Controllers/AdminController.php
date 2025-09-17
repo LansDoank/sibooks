@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Book;
@@ -8,20 +9,34 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index() {
-        $username = Auth::user()->username;
-        return view('admin.index',['title' => 'Admin Dashboard','heading' => 'Admin','username' =>$username]);
+    public function index()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+        return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname]);
     }
 
-    public function akun() {
-        $username = Auth::user()->username;
-        $accounts = User::all(); 
-        return view('admin.akun',['title' => 'Tabel Akun','heading' => 'Akun','username' =>$username,'accounts' => $accounts]);
+    public function user()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+        $accounts = User::all();
+        return view('admin.user', ['title' => 'Tabel Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'accounts' => $accounts]);
     }
 
-    public function buku() {
-        $username = Auth::user()->username;
+    public function book()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
         $books = Book::all();
-        return view('admin.buku',['title' => 'Tabel Akun','heading' => 'Buku','username' =>$username,'books' => $books]);
+        return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books]);
+    }
+
+    public function transaction()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+        $transactions = Transaction::with('book')->get();
+        return view('admin.transaction', ['title' => 'Tabel Transaksi','fullname' => $fullname,'heading' => 'Transaksi', 'transactions' => $transactions]);
     }
 }
