@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('qr_code')->nullable();
             $table->string('image');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('author');
             $table->string('publisher');
             $table->integer('year');    

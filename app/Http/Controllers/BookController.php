@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Grade;
 use App\Models\Kelas;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -21,27 +22,32 @@ class BookController extends Controller
         return view('book.tampil', ['books' => $books]);
     }
 
-    public function kelas(Request $request) {
+    public function kelas(Request $request)
+    {
         $books = Book::all();
         $kelas = Kelas::find($request);
+        $grade = null;
 
-        if($request->id) {
+        if ($request->id) {
             $id = $request->id;
-            $books = Book::where('grade_id','=',$id)->get();
+            $books = Book::where('grade_id', '=', $id)->get();
+            $grade = Grade::where('id', 'like', '%' . $request->id . '%')->first()->name;
         }
 
         if ($request->search) {
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
 
-        return view('book.kelas',['books' => $books,'kelas' => $kelas->value('name')]);
+
+        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name')]);
     }
 
-    public function pengembalian($id) {
+    public function pengembalian($id)
+    {
         $book = Book::find($id);
-        $borrowed_class = Transaction::where('book_id','=',$id);
-        $borrowed_class = $borrowed_class->where('return_time','=',null)->get();
-        return view('book.formPengembalian',['title' => 'Formulir Pengembalian Buku','book' => $book,'transactions' => $borrowed_class]);
+        $borrowed_class = Transaction::where('book_id', '=', $id);
+        $borrowed_class = $borrowed_class->where('return_time', '=', null)->get();
+        return view('book.formPengembalian', ['title' => 'Formulir Pengembalian Buku', 'book' => $book, 'transactions' => $borrowed_class]);
     }
 
     /**
@@ -63,9 +69,12 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($slug)
     {
-        $book = Book::find($id);
+        $book = Book::where('slug','=',$slug)->first();
+        if(!$book) {
+            return redirect('/');
+        }
         return view('book.detailBook', ['book' => $book]);
     }
 
