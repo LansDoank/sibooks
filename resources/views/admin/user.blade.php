@@ -59,7 +59,7 @@
                                     <td class="text-start">
                                         <div class="flex justify-center  gap-2">
                                             <a href="/admin/user/edit/{{ $account->id }}" class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>
-                                            <a onclick="return confirm('Yakin?');" href="/admin/user/delete?id={{ $account->id }}" class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
+                                            <a onclick="return confirm('Yakin?');" href="/admin/user/delete/{{ $account->id }}" class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
                                         </div>
                                     </td>
 

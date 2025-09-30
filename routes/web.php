@@ -38,6 +38,7 @@ Route::get('/user/register', [UserController::class, 'register'])->name('registe
 
 Route::post('/user/store', [UserController::class, 'registerPost']);
 
+
 Route::get('/user/logout', [UserController::class, 'logout'])->name('logout');
 
 
@@ -50,6 +51,8 @@ Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user')-
 Route::get('/admin/user/create', [UserController::class, 'create'])->name('user.create')->middleware('auth');
 
 Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.store')->middleware('auth');
+
+Route::get('/admin/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
 Route::get('/admin/book', [AdminController::class, 'book'])->name('admin.book')->middleware('auth');
 
