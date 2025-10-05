@@ -21,7 +21,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
         $accounts = User::all();
-        return view('admin.user', ['title' => 'Tabel Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'accounts' => $accounts]);
+        return view('admin.user', ['title' => 'Tabel Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'accounts' => $accounts,'user' => $user]);
     }
 
     public function book()

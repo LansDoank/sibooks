@@ -20,41 +20,43 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->call([GradeSeeder::class,BookSeeder::class]);
+        $this->call([GradeSeeder::class, BookSeeder::class]);
 
         Book::factory(30)->recycle([
             Grade::all()
         ])->create();
 
-        $role = ['admin','user'];
+        $role = ['admin', 'user'];
 
-        foreach($role as $r) {
-           Role::create([
+        foreach ($role as $r) {
+            Role::create([
                 'name' => $r,
-           ]);
+            ]);
         }
 
         User::create([
             'role_id' => 1,
             'fullname' => 'Admin',
+            'image' => '/img/default-pp.jpg',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
         ]);
-
+        
         User::create([
             'role_id' => 2,
             'fullname' => 'User Biasa',
+            'image' => '/img/default-pp.jpg',
             'email' => 'user@gmail.com',
             'password' => bcrypt('user'),
         ]);
 
-        $classrooms = ['X PH 1','X PH 2','X PH 3','X MPLB 1','X MPLB 2','X PPLG 1','XI PH 1','XI PH 2','XI PH 3','XI MPLB 1','XI MPLB 2','XI PPLG 1','XII PH 1','XII PH 2','XII MPLB 1','XII MPLB 2','XII PPLG 1','XII PPLG 2'];
-        
-        foreach($classrooms as $classroom) {
+        $classrooms = ['X PH 1', 'X PH 2', 'X PH 3', 'X MPLB 1', 'X MPLB 2', 'X PPLG 1', 'XI PH 1', 'XI PH 2', 'XI PH 3', 'XI MPLB 1', 'XI MPLB 2', 'XI PPLG 1', 'XII PH 1', 'XII PH 2', 'XII MPLB 1', 'XII MPLB 2', 'XII PPLG 1', 'XII PPLG 2'];
+
+        foreach ($classrooms as $classroom) {
             Classroom::create([
                 'name' => $classroom,
             ]);
-        } 
+        }
 
     }
 }

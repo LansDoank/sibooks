@@ -1,7 +1,4 @@
-<x-dashboard>
-    <x-slot:title>{{ $title }}</x-slot:title>
-    <x-slot:fullname>{{ $fullname }}</x-slot:fullname>
-    <x-slot:heading>{{ $heading }}</x-slot:heading>
+<x-dashboard :title="$title" :fullname="$fullname" :heading="$heading" :user="$user">
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -58,8 +55,11 @@
                                     <td class="text-start">{{ $account->created_at }}</td>
                                     <td class="text-start">
                                         <div class="flex justify-center  gap-2">
-                                            <a href="/admin/user/edit/{{ $account->id }}" class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>
-                                            <a onclick="return confirm('Yakin?');" href="/admin/user/delete/{{ $account->id }}" class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
+                                            <a href="/admin/user/edit/{{ $account->id }}"
+                                                class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>
+                                            <a onclick="return confirm('Yakin?');"
+                                                href="/admin/user/delete/{{ $account->id }}"
+                                                class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
                                         </div>
                                     </td>
 
