@@ -18,7 +18,12 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
 
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+    <link rel="stylesheet" href="/DataTables/datatables.css" />
+
+    <script src="/DataTables/datatables.js"></script>
     <!-- Custom styles for this template-->
 
 </head>
@@ -84,8 +89,8 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed d-flex" href="/admin/transaction" data-target="#collapseTwo" aria-expanded="true"
-                    aria-controls="collapseTwo">
+                <a class="nav-link collapsed d-flex" href="/admin/transaction" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
                         <path
@@ -165,6 +170,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     {{$slot}}
+                   
                 </div>
                 <!-- /.container-fluid -->
 
@@ -228,7 +234,14 @@
     <!-- Page level custom scripts -->
     <script src="/js/demo/chart-area-demo.js"></script>
     <script src="/js/demo/chart-pie-demo.js"></script>
+    <!-- <script>
+        var DataTable = require('datatables.net');
+        require('datatables.net-responsive');
 
+        let table = new DataTable('#myTable', {
+            responsive: true
+        });
+    </script> -->
 </body>
 
 </html>

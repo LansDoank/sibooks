@@ -13,6 +13,11 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $fullname = $user->fullname;
+
+        if($user->role->name == 'user') {
+            return redirect()->route('index');
+        }
+
         return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname]);
     }
 
@@ -20,6 +25,11 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $fullname = $user->fullname;
+
+        if($user->role->name == 'user') {
+            return redirect()->route('index');
+        }
+
         $accounts = User::all();
         return view('admin.user', ['title' => 'Tabel Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'accounts' => $accounts]);
     }
@@ -28,6 +38,11 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $fullname = $user->fullname;
+
+        if($user->role->name == 'user') {
+            return redirect()->route('index');
+        }
+
         $books = Book::all();
         return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books]);
     }
@@ -36,6 +51,11 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $fullname = $user->fullname;
+
+        if($user->role->name == 'user') {
+            return redirect()->route('index');
+        }
+
         $transactions = Transaction::with('book')->get();
         return view('admin.transaction', ['title' => 'Tabel Transaksi','fullname' => $fullname,'heading' => 'Transaksi', 'transactions' => $transactions]);
     }

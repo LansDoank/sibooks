@@ -11,10 +11,6 @@
                 <button class="btn btn-success mr-2" onclick="window.location.href='/admin/user/create'">
                     <i class="fas fa-plus me-1"></i> Tambah Akun
                 </button>
-                <button class="btn btn-primary mr-2" onclick="window.location.href='/admin/akun/create'">
-                    <i class="fas fa-plus"></i> Tambah Akun
-                </button>
-                <button></button>
             </div>
         </div>
 
@@ -55,7 +51,7 @@
                                     <td class="text-start">{{ $account->fullname }}</td>
                                     <td class="text-start">{{ $account->email }}</td>
                                     <td class="text-start">{{ $account->role->name }}</td>
-                                    <td class="text-start">{{ $account->created_at }}</td>
+                                    <td class="text-start">{{ $account->created_at->diffForHumans() }}</td>
                                     <td class="text-start">
                                         <div class="flex justify-center  gap-2">
                                             <a href="/admin/user/edit/{{ $account->id }}" class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>

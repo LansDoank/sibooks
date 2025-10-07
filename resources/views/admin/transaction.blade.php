@@ -17,6 +17,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Foto Peminjam</th>
                                 <th>Kelas Peminjam</th>
                                 <th>Nama Buku</th>
                                 <th>Jumlah Buku</th>
@@ -26,6 +27,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Foto Peminjam</th>
                                 <th>Kelas Peminjam</th>
                                 <th>Nama Buku</th>
                                 <th>Jumlah Buku</th>
@@ -36,6 +38,7 @@
                         <tbody>
                             @foreach ($transactions as $transaction)
                                 <tr>
+                                    <td><img src="{{ $transaction->borrower_image }}" alt=""></td>
                                     <td>{{ $transaction->kelas_peminjam }}</td>
                                     <td>{{ $transaction->book->title }}</td>
                                     <td>{{ $transaction->jumlah_buku }}</td>

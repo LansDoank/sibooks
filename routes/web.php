@@ -57,3 +57,5 @@ Route::get('/admin/user/delete/{id}', [UserController::class, 'delete'])->name('
 Route::get('/admin/book', [AdminController::class, 'book'])->name('admin.book')->middleware('auth');
 
 Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
+
+Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
