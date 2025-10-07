@@ -77,7 +77,7 @@ class UserController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
         $roles = Role::all();
-        return view('user.create', ['title' => 'Form Buat Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'roles' => $roles]);
+        return view('user.create', ['title' => 'Form Buat Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'roles' => $roles, 'user' => $user]);
     }
 
     public function store(Request $request)
@@ -109,6 +109,42 @@ class UserController extends Controller
         if ($user) {
             $user->delete();
             return redirect()->route('admin.user')->with('success', 'Akun berhasil dihapus.');
+        } else {
+            return redirect()->route('admin.user')->with('error', 'Akun tidak ditemukan.');
+        }
+    }
+
+    public function edit($id)
+    {
+        $account = User::find($id);
+        $user = Auth::user();
+        $roles = Role::all();
+
+
+        return view('user.edit', ['title' => 'Form Edit Akun', 'heading' => 'Edit Akun', 'account' => $account, 'user' => $user,'roles' => $roles]);
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'fullname' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'role' => 'required',
+        ]);
+
+        $user = User::find($request->id);
+        if ($user) {
+            $user->role_id = $request->role;
+            $user->fullname = $request->fullname;
+            $user->email = $request->email;
+            if ($request->password) {
+                $user->password = bcrypt($request->password);
+            }
+            $user->updated_at = now();
+            $user->save();
+
+            return redirect()->route('admin.user')->with('success', 'Akun berhasil diupdate.');
         } else {
             return redirect()->route('admin.user')->with('error', 'Akun tidak ditemukan.');
         }

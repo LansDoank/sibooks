@@ -1,8 +1,4 @@
-<x-dashboard>
-    <x-slot:title>{{ $title }}</x-slot:title>
-    <x-slot:fullname>{{ $fullname }}</x-slot:fullname>
-    <x-slot:heading>{{ $heading }}</x-slot:heading>
-
+<x-dashboard :title="$title" :fullname="$fullname" :heading="$heading" :user="$user">
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -19,6 +15,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Kode Qr</th>
                                 <th>Judul</th>
                                 <th>Stok</th>
                                 <th>Penulis</th>
@@ -30,6 +27,7 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
+                                <th>Kode Qr</th>
                                 <th>Judul</th>
                                 <th>Stok</th>
                                 <th>Penulis</th>
@@ -43,6 +41,7 @@
                             @foreach ($books as $book)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $book->qr_code }}</td>
                                     <td>{{ $book->title }}</td>
                                     <td>{{ $book->stock }}</td>
                                     <td>{{ $book->author }}</td>

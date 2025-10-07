@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Role;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -18,7 +19,7 @@ class AdminController extends Controller
             return redirect()->route('index');
         }
 
-        return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname]);
+        return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname,'user' => $user]);
     }
 
     public function user()
@@ -44,19 +45,19 @@ class AdminController extends Controller
         }
 
         $books = Book::all();
-        return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books]);
+        return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books,'user' => $user]);
     }
 
     public function transaction()
     {
         $user = Auth::user();
         $fullname = $user->fullname;
-
+  
         if($user->role->name == 'user') {
             return redirect()->route('index');
         }
 
         $transactions = Transaction::with('book')->get();
-        return view('admin.transaction', ['title' => 'Tabel Transaksi','fullname' => $fullname,'heading' => 'Transaksi', 'transactions' => $transactions]);
+        return view('admin.transaction', ['title' => 'Tabel Transaksi','fullname' => $fullname,'heading' => 'Transaksi', 'transactions' => $transactions,'user' => $user]);
     }
 }

@@ -17,7 +17,7 @@ class BookSeeder extends Seeder
     public function run(): void
     {
         Book::create([
-            'qr_code' => fake()->sentence(),
+            'qr_code' => 'http:127.0.0.1:8000/book/' + Str::slug(fake()->sentence()),
             'image' => '/img/ipas.jpg',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,
@@ -28,7 +28,7 @@ class BookSeeder extends Seeder
             'grade_id' => 1
         ]);
         Book::create([
-            'qr_code' => fake()->sentence(),
+            'qr_code' => 'http:127.0.0.1:8000/book/' + Str::slug(fake()->sentence()),
             'image' => '/img/japan.jpeg',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,
@@ -39,7 +39,7 @@ class BookSeeder extends Seeder
             'grade_id' => 1
         ]);
         Book::create([
-            'qr_code' => fake()->sentence(),
+            'qr_code' => 'http:127.0.0.1:8000/book/' + Str::slug(fake()->sentence()),
             'image' => '/img/totoro.jpg',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,
@@ -50,7 +50,7 @@ class BookSeeder extends Seeder
             'grade_id' => 1
         ]);
         Book::create([
-            'qr_code' => fake()->sentence(),
+            'qr_code' => 'http:127.0.0.1:8000/book/' + Str::slug(fake()->sentence()),
             'image' => '/img/luffy.jpeg',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,

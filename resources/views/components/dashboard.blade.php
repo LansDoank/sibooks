@@ -126,7 +126,9 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <h2 class="ms-3">{{ $heading }}</h2>
+                    <a href="{{ redirect()->back() }}">
+                        <h2 class="ms-3">{{ $heading }}</h2>
+                    </a>
 
                     <ul class="navbar-nav ml-auto">
 
@@ -137,7 +139,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $fullname }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $user->fullname }}</span>
                                 <img class="img-profile rounded-circle" src={{$user->image}}>
                             </a>
                             <!-- Dropdown - User Information -->

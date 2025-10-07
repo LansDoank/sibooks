@@ -1,8 +1,9 @@
+<x-navbar :isLogin="$isLogin"></x-navbar>
 <x-layout>
     <section class="max-w-screen-lg  mx-auto p-8 my-4">
         <div class="text-center mb-8">
-            @if (!request('id'))
-                <h1 class="font-semibold text-3xl">Hasil pencarian dari : {{ request('search') }}</h1>
+            @if ($grade|| request('search'))
+                <h1 class="font-semibold text-3xl">Hasil pencarian dari : {{ $grade ? "Kelas " .  $grade :  request('search') }}</h1>
             @endif
         </div>
         <div>

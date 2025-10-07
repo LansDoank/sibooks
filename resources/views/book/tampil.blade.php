@@ -1,3 +1,4 @@
+<x-navbar :isLogin="$isLogin"></x-navbar>
 <x-layout>
     <section class="max-w-screen-lg  mx-auto p-8 my-4">
         <div class="text-center mb-8">

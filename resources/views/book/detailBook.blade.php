@@ -1,9 +1,10 @@
+<x-navbar :isLogin="$isLogin"></x-navbar>
 <x-layout>
     <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
         <div class="max-w-screen-lg px-4 mx-auto 2xl:px-0">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                    <img class="w-full h-full object-cover dark:hidden" src="{{$book->image}}" alt="{{ $book->title }}" />
+                    <img class="w-full h-full object-cover" src="{{$book->image}}"  />
                 </div>
 
                 <div class="mt-6 sm:mt-8 lg:mt-0">

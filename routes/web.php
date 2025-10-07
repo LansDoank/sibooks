@@ -54,6 +54,10 @@ Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.s
 
 Route::get('/admin/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
+Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+
+Route::post('/admin/user/update', [UserController::class, 'update'])->name('user.update');
+
 Route::get('/admin/book', [AdminController::class, 'book'])->name('admin.book')->middleware('auth');
 
 Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');

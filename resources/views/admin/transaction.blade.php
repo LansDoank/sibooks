@@ -1,7 +1,4 @@
-<x-dashboard>
-    <x-slot:title>{{ $title }}</x-slot:title>
-    <x-slot:fullname>{{ $fullname }}</x-slot:fullname>
-    <x-slot:heading>{{ $heading }}</x-slot:heading>
+<x-dashboard :title="$title" :fullname="$fullname" :heading="$heading" :user="$user">
     <div class="container-fluid">
 
         <!-- Page Heading -->

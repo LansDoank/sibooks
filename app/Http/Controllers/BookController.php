@@ -7,6 +7,7 @@ use App\Models\Grade;
 use App\Models\Kelas;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -16,22 +17,25 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $books = Book::all();
+        $user = Auth::user();
         if ($request->search) {
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
-        return view('book.tampil', ['books' => $books]);
+        return view('book.tampil', ['books' => $books,'isLogin' => $user]);
     }
 
     public function kelas(Request $request)
     {
         $books = Book::all();
         $kelas = Kelas::find($request);
+        $user = Auth::user();
         $grade = null;
 
         if ($request->id) {
             $id = $request->id;
             $books = Book::where('grade_id', '=', $id)->get();
-            $grade = Grade::where('id', 'like', '%' . $request->id . '%')->first()->name;
+            $grade = Grade::where('id', '=',$request->id)->first()->name;
+            // dd($grade);
         }
 
         if ($request->search) {
@@ -39,7 +43,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name')]);
+        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name'),'isLogin' => $user]);
     }
 
     public function pengembalian($id)
@@ -72,10 +76,11 @@ class BookController extends Controller
     public function show($slug)
     {
         $book = Book::where('slug','=',$slug)->first();
+        $user = Auth::user();
         if(!$book) {
             return redirect('/');
         }
-        return view('book.detailBook', ['book' => $book]);
+        return view('book.detailBook', ['book' => $book,'isLogin' => $user]);
     }
 
     /**
