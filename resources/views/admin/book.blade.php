@@ -41,7 +41,7 @@
                             @foreach ($books as $book)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $book->qr_code }}</td>
+                                    <td>{{ QrCode::generate($book->qr_code) }}</td>
                                     <td>{{ $book->title }}</td>
                                     <td>{{ $book->stock }}</td>
                                     <td>{{ $book->author }}</td>

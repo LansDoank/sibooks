@@ -46,7 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="{{ request()->is('admin') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
                 <a class="nav-link" href="/admin/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -61,7 +61,7 @@
             </div>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <li class="{{ request()->is('admin/user') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
                 <a class="nav-link collapsed d-flex" href="/admin/user" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -76,7 +76,7 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="{{ request()->is('admin/book') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
                 <a class="nav-link collapsed d-flex" href="/admin/book" data-target="#collapseTwo" aria-expanded="true"
                     aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -89,7 +89,7 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="{{ request()->is('admin/transaction') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
                 <a class="nav-link collapsed d-flex" href="/admin/transaction" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -145,19 +145,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
