@@ -46,7 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="{{ request()->is('admin') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
+            <li class="{{ request()->is('admin') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
                 <a class="nav-link" href="/admin/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -61,7 +61,7 @@
             </div>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="{{ request()->is('admin/user') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
+            <li class="{{ request()->is('admin/user') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
                 <a class="nav-link collapsed d-flex" href="/admin/user" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -76,7 +76,7 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="{{ request()->is('admin/book') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
+            <li class="{{ request()->is('admin/book') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
                 <a class="nav-link collapsed d-flex" href="/admin/book" data-target="#collapseTwo" aria-expanded="true"
                     aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -89,7 +89,7 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="{{ request()->is('admin/transaction') ? 'active' : '' }} flex justify-center md:justify-start nav-item">>
+            <li class="{{ request()->is('admin/transaction') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
                 <a class="nav-link collapsed d-flex" href="/admin/transaction" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

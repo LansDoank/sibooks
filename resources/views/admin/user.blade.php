@@ -1,6 +1,16 @@
 <x-dashboard :title="$title" :fullname="$fullname" :heading="$heading" :user="$user">
     <div class="container-fluid">
 
+        @if (Session::get('success'))
+            <div class="bg-green-100 rounded px-4 py-2 my-3 text-green-500 border !border-green-300">
+                <p>{{  Session::get('success')}} 👍</p>
+            </div>
+        @elseif(Session::get('error'))
+            <div class="bg-green-100 rounded px-4 py-2 my-3 text-green-500 border !border-green-300">
+                <p>{{  Session::get('success')}} 👍</p>
+            </div>
+        @endif
+
         <!-- Page Heading -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3 mb-2 text-gray-800">Data Akun</h1>

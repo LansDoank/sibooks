@@ -60,6 +60,10 @@ Route::post('/admin/user/update', [UserController::class, 'update'])->name('user
 
 Route::get('/admin/book', [AdminController::class, 'book'])->name('admin.book')->middleware('auth');
 
+Route::get('/admin/book/create', [BookController::class, 'create'])->name('book.create')->middleware('auth');
+
+Route::post('/admin/book/store', [BookController::class, 'store'])->name('book.store')->middleware('auth');
+
 Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
 
 Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');

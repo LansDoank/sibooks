@@ -105,7 +105,7 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         if ($user) {
             $user->delete();
             return redirect()->route('admin.user')->with('success', 'Akun berhasil dihapus.');
@@ -116,7 +116,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $account = User::find($id);
+        $account = User::findOrFail($id);
         $user = Auth::user();
         $roles = Role::all();
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Grade;
 use App\Models\Kelas;
+use App\Models\Role;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BookController extends Controller
 {
@@ -21,7 +23,7 @@ class BookController extends Controller
         if ($request->search) {
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
-        return view('book.tampil', ['books' => $books,'isLogin' => $user]);
+        return view('book.tampil', ['books' => $books, 'isLogin' => $user]);
     }
 
     public function kelas(Request $request)
@@ -34,7 +36,7 @@ class BookController extends Controller
         if ($request->id) {
             $id = $request->id;
             $books = Book::where('grade_id', '=', $id)->get();
-            $grade = Grade::where('id', '=',$request->id)->first()->name;
+            $grade = Grade::where('id', '=', $request->id)->first()->name;
             // dd($grade);
         }
 
@@ -43,7 +45,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name'),'isLogin' => $user]);
+        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name'), 'isLogin' => $user]);
     }
 
     public function pengembalian($id)
@@ -59,7 +61,12 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        $fullname = $user->fullname;
+        $books = Book::all();
+        $grades = Grade::all();
+        // $roles = Role::all();
+        return view('book.create', ['title' => 'Form Buat Buku', 'heading' => 'Buku', 'fullname' => $fullname, 'user' => $user, 'books' => $books, 'grades' => $grades]);
     }
 
     /**
@@ -67,7 +74,28 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        // $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'stock' => 'required|int|max:255',
+        //     'grade' => 'required|int|max:255',
+        // ]);
+
+        $book = Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug($request->title),
+            'image' => $request->file('image'),
+            'title' => $request->title,
+            'stock' => $request->stock,
+            'grade_id' => $request->grade,
+            'author' => $request->author,
+            'publisher' => $request->publisher,
+            'year' => $request->year,
+        ]);
+
+
+        $book->save();
+
+        return redirect('/admin/book');
     }
 
     /**
@@ -75,12 +103,12 @@ class BookController extends Controller
      */
     public function show($slug)
     {
-        $book = Book::where('slug','=',$slug)->first();
+        $book = Book::where('slug', '=', $slug)->first();
         $user = Auth::user();
-        if(!$book) {
+        if (!$book) {
             return redirect('/');
         }
-        return view('book.detailBook', ['book' => $book,'isLogin' => $user]);
+        return view('book.detailBook', ['book' => $book, 'isLogin' => $user]);
     }
 
     /**
