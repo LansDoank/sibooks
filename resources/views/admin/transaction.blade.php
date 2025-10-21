@@ -11,12 +11,12 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table id="myTable" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Foto Peminjam</th>
                                 <th>Kelas Peminjam</th>
-                                <th>Nama Buku</th>
+                                <th class="w-48">Nama Buku</th>
                                 <th>Jumlah Buku</th>
                                 <th>Waktu Pinjam</th>
                                 <th>Waktu Pengembalian</th>

@@ -21,10 +21,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
 
-    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
-    <link rel="stylesheet" href="/DataTables/datatables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
 
-    <script src="/DataTables/datatables.js"></script>
     <!-- Custom styles for this template-->
 
 </head>
@@ -89,7 +87,8 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="{{ request()->is('admin/transaction') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
+            <li
+                class="{{ request()->is('admin/transaction') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
                 <a class="nav-link collapsed d-flex" href="/admin/transaction" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -159,8 +158,26 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <!-- <table id="myTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Column 1</th>
+                                <th>Column 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Row 1 Data 1</td>
+                                <td>Row 1 Data 2</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2 Data 1</td>
+                                <td>Row 2 Data 2</td>
+                            </tr>
+                        </tbody>
+                    </table> -->
                     {{$slot}}
-                   
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -215,23 +232,21 @@
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+
     <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.js"></script>
+    <!-- (hapus jika file tidak ada) -->
+    <!-- <script src="/js/sb-admin-2.js"></script> -->
 
-    <!-- Page level plugins -->
-    <script src="/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/chart-area-demo.js"></script>
-    <script src="/js/demo/chart-pie-demo.js"></script>
-    <!-- <script>
-        var DataTable = require('datatables.net');
-        require('datatables.net-responsive');
-
-        let table = new DataTable('#myTable', {
-            responsive: true
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                responsive: true
+            });
         });
-    </script> -->
+    </script>
+
 </body>
 
 </html>
