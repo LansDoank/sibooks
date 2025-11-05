@@ -4,7 +4,7 @@
         <div class="max-w-screen-lg px-4 mx-auto 2xl:px-0">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                    <img class="w-full h-full object-cover" src="{{$book->image}}"  />
+                    <img class="w-full h-full object-cover" src="{{$book->image}}" />
                 </div>
 
                 <div class="mt-6 sm:mt-8 lg:mt-0">
@@ -21,11 +21,11 @@
                         </p>
                     </div>
                     @if($book->stock <= 0)
-                    <div class="my-3">
-                        <p class="text-sm text-red-600">Maaf Buku Kosong</p>
-                    </div>
+                        <div class="my-3">
+                            <p class="text-sm text-red-600">Maaf Buku Kosong</p>
+                        </div>
                     @endif
-                    <div class="mt-3 sm:gap-4 sm:items-center sm:flex sm:mt-2">
+                    <div class="mt-3 sm:items-center sm:flex sm:mt-5 lg:grid-cols-3">
                         @if ($book->stock > 0)
                             <a href="/book/pinjam/{{ $book->id }}" data-modal-target="popup-modal"
                                 data-modal-toggle="popup-modal" type="button" title=""
@@ -41,9 +41,22 @@
                         @endif
                         <a href="/book/pengembalian/{{ $book->id }}" data-modal-target="popup-modal"
                             data-modal-toggle="popup-modal" type="button" title=""
-                            class="flex text-white font-medium items-center hover:bg-yellow-600 transition border py-2 px-5 rounded bg-yellow-500">
+                            class="flex text-white font-medium items-center hover:bg-red-600 transition border py-2 px-5 rounded bg-red-500">
                             Kembalikan Buku
                         </a>
+                        @if ($book->download)
+                            <a download href="{{asset('storage/') . $book->download }}" data-modal-target="popup-modal"
+                                data-modal-toggle="popup-modal" type="button" title=""
+                                class="flex text-white font-medium items-center hover:bg-yellow-600 transition border py-2 px-5 rounded bg-yellow-500">
+                                Download Buku
+                            </a>
+                        @else
+                            <a download href="{{asset('storage/') . $book->download }}" data-modal-target="popup-modal"
+                                data-modal-toggle="popup-modal" type="button" title=""
+                                class="flex text-white font-medium items-center hover:bg-yellow-600 transition border py-2 px-5 rounded bg-yellow-500">
+                                Buku Tidak Tersedia
+                            </a>
+                        @endif
                     </div>
 
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
