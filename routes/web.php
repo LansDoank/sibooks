@@ -67,3 +67,5 @@ Route::post('/admin/book/store', [BookController::class, 'store'])->name('book.s
 Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
 
 Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
+
+Route::get('/admin/class', [AdminController::class, 'class'])->name('admin.class')->middleware('auth');

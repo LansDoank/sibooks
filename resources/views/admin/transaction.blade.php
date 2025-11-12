@@ -35,7 +35,7 @@
                         <tbody>
                             @foreach ($transactions as $transaction)
                                 <tr>
-                                    <td><img class="w-24 h-24 object-cover" src="{{ asset('storage/' . $transaction->borrower_image) }}" alt=""></td>
+                                    <td><img class="w-24 h-24 object-cover" src="{{ asset( 'storage/'.$transaction->borrower_image) }}" alt=""></td>
                                     <td>{{ $transaction->kelas_peminjam }}</td>
                                     <td>{{ $transaction->book->title }}</td>
                                     <td>{{ $transaction->jumlah_buku }}</td>

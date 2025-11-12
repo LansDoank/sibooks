@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Classroom;
 use App\Models\Role;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
@@ -59,5 +60,19 @@ class AdminController extends Controller
 
         $transactions = Transaction::with('book')->get();
         return view('admin.transaction', ['title' => 'Tabel Transaksi','fullname' => $fullname,'heading' => 'Transaksi', 'transactions' => $transactions,'user' => $user]);
+    }
+
+    public function class()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+  
+        if($user->role->name == 'user') {
+            return redirect()->route('index');
+        }
+
+        $class = Classroom::all();
+
+        return view('admin.class', ['title' => 'Tabel Kelas','fullname' => $fullname,'heading' => 'Kelas','user' => $user,'classes' => $class]);
     }
 }

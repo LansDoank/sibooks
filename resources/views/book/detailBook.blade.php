@@ -25,36 +25,36 @@
                             <p class="text-sm text-red-600">Maaf Buku Kosong</p>
                         </div>
                     @endif
-                    <div class="mt-3 sm:items-center sm:flex sm:mt-5 lg:grid-cols-3">
+                    <div class="mt-3 sm:items-center sm:mt-5 grid grid-cols-3 gap-3">
                         @if ($book->stock > 0)
                             <a href="/book/pinjam/{{ $book->id }}" data-modal-target="popup-modal"
                                 data-modal-toggle="popup-modal" type="button" title=""
-                                class="flex text-white font-medium items-center bg-green-600  border py-2 px-5 rounded bg-green-500 hover:bg-green-700 transition">
-                                Pinjam Buku
+                                class="flex justify-center text-white font-medium items-center bg-green-600  border py-2 px-5 rounded bg-green-500 hover:bg-green-700 transition">
+                                Pinjam
                             </a>
                         @else
                             <button disabled data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button"
                                 title=""
-                                class="flex cursor-pointer text-white font-medium items-center border py-2 px-5 rounded bg-gray-500">
-                                Pinjam Buku
+                                class="flex justify-center cursor-pointer text-white font-medium items-center border py-2 px-5 rounded bg-gray-500">
+                                Pinjam
                             </button>
                         @endif
                         <a href="/book/pengembalian/{{ $book->id }}" data-modal-target="popup-modal"
                             data-modal-toggle="popup-modal" type="button" title=""
-                            class="flex text-white font-medium items-center hover:bg-red-600 transition border py-2 px-5 rounded bg-red-500">
-                            Kembalikan Buku
+                            class="flex justify-center text-white font-medium items-center hover:bg-red-600 transition border py-2 px-5 rounded bg-red-500">
+                            Kembalikan
                         </a>
                         @if ($book->download)
                             <a download href="{{asset('storage/') . $book->download }}" data-modal-target="popup-modal"
                                 data-modal-toggle="popup-modal" type="button" title=""
-                                class="flex text-white font-medium items-center hover:bg-yellow-600 transition border py-2 px-5 rounded bg-yellow-500">
-                                Download Buku
+                                class="flex justify-center text-white font-medium items-center hover:bg-yellow-600 transition border py-2 px-5 rounded bg-yellow-500">
+                                Download
                             </a>
                         @else
-                            <a download href="{{asset('storage/') . $book->download }}" data-modal-target="popup-modal"
-                                data-modal-toggle="popup-modal" type="button" title=""
-                                class="flex text-white font-medium items-center hover:bg-yellow-600 transition border py-2 px-5 rounded bg-yellow-500">
-                                Buku Tidak Tersedia
+                            <a  data-modal-target="popup-modal"
+                                data-modal-toggle="popup-modal" type="button" title="" 
+                                class="flex justify-center text-white font-medium items-center transition border py-2 px-5 rounded bg-gray-500">
+                                Tidak Tersedia
                             </a>
                         @endif
                     </div>

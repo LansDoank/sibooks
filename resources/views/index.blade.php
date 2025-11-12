@@ -121,7 +121,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="kelas-xi my-6">
+            <div id="kelas-xi" class="kelas-xi my-6">
                 <div class="mb-5 flex justify-between">
                     <h1 class="text-xl font-semibold">Buku Paket Kelas XI</h1>
                     <a class="text-blue-600 font-medium" href="/book/kelas?id=2">Lihat Semuanya</a>

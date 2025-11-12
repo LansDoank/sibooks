@@ -49,7 +49,8 @@ class TransactionController extends Controller
         } else {
             $transaction = new Transaction();
             $borrower_image = $request->file('borrower-image');
-            $transaction->borrower_image = $borrower_image->store('borrower_image');
+            // $transaction->borrower_image =  Storage::put('public/borrower_image', $borrower_image);
+            $transaction->borrower_image = $borrower_image->store('borrower_image','public');
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
