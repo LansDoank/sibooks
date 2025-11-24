@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -69,3 +70,11 @@ Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name(
 Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
 
 Route::get('/admin/class', [AdminController::class, 'class'])->name('admin.class')->middleware('auth');
+
+Route::get('/admin/class/edit/{id}', [ClassController::class, 'edit'])->name('class.edit')->middleware('auth');
+
+Route::get('/admin/class/create', [ClassController::class, 'create'])->name('class.create')->middleware('auth');
+
+Route::post('/admin/class/update', [ClassController::class, 'update'])->name('class.update')->middleware('auth');
+
+Route::get('/admin/class/delete/{id}', [ClassController::class, 'delete'])->name('class.delete')->middleware('auth');
