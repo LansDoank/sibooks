@@ -26,7 +26,6 @@ Route::post('/book/pinjam', [TransactionController::class, 'store'])->name('tran
 
 Route::get('/book/pengembalian/{book}', [TransactionController::class, 'edit'])->name('transaction.edit');
 
-
 Route::post('/book/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
 
 Route::get('/user/login', [UserController::class, 'login'])->name('login');
@@ -39,9 +38,7 @@ Route::get('/user/register', [UserController::class, 'register'])->name('registe
 
 Route::post('/user/store', [UserController::class, 'registerPost']);
 
-
 Route::get('/user/logout', [UserController::class, 'logout'])->name('logout');
-
 
 Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTransaction'])->name('api.transaction');
 
@@ -65,15 +62,19 @@ Route::get('/admin/book/create', [BookController::class, 'create'])->name('book.
 
 Route::post('/admin/book/store', [BookController::class, 'store'])->name('book.store')->middleware('auth');
 
+Route::get('/admin/book/report/pdf', [BookController::class, 'pdf'])->name('admin.pdf')->middleware('auth');
+
 Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
 
 Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
 
 Route::get('/admin/class', [AdminController::class, 'class'])->name('admin.class')->middleware('auth');
 
-Route::get('/admin/class/edit/{id}', [ClassController::class, 'edit'])->name('class.edit')->middleware('auth');
-
 Route::get('/admin/class/create', [ClassController::class, 'create'])->name('class.create')->middleware('auth');
+
+Route::post('/admin/class/store', [ClassController::class, 'store'])->name('class.store')->middleware('auth');
+
+Route::get('/admin/class/edit/{id}', [ClassController::class, 'edit'])->name('class.edit')->middleware('auth');
 
 Route::post('/admin/class/update', [ClassController::class, 'update'])->name('class.update')->middleware('auth');
 

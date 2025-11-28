@@ -5,7 +5,7 @@
             <form action="/admin/class/store" method="post">
                 @csrf
                 <div class="grid gap-4 sm:grid-cols-2 lg:gap-y-0">
-                    <div class="sm:col-span-2">
+                    <div class="sm:col-span-2 mb-3">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Nama Kelas</label>
                         <input type="text" name="name" id="name"

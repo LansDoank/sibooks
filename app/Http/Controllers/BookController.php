@@ -132,6 +132,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
+    }
+
+    public function pdf() {
+        return view('book.pdf',['books' => Book::all(),'title'=>'Laporan Data Buku']);
     }
 }
