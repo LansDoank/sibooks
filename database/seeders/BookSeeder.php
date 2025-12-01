@@ -18,7 +18,7 @@ class BookSeeder extends Seeder
     {
         Book::create([
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
-            'image' => '/img/ipas.jpg',
+            'image' => '/img/indo10.png',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
@@ -29,7 +29,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
-            'image' => '/img/japan.jpeg',
+            'image' => '/img/mtk10.png',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
@@ -40,7 +40,7 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
-            'image' => '/img/totoro.jpg',
+            'image' => '/img/pai10.jpg',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
@@ -51,7 +51,29 @@ class BookSeeder extends Seeder
         ]);
         Book::create([
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
-            'image' => '/img/luffy.jpeg',
+            'image' => '/img/pkn10.webp',
+            'title' => fake()->sentence(),
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 1
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/tik10.png',
+            'title' => fake()->sentence(),
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 1
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/sbk10.jpg',
             'title' => fake()->sentence(),
             'slug' => Str::slug(fake()->sentence()) ,
             'author' => fake()->name(),
