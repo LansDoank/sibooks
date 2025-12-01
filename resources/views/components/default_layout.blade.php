@@ -60,7 +60,7 @@
 <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
-    const photoInput = document.getElementById('photo');
+    const photoInput = document.getElementById('borrower_image');
     const statusText = document.getElementById('status');
 
     let captured = false; // supaya tidak foto berkali-kali

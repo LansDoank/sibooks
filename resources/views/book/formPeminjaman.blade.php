@@ -48,7 +48,7 @@
                 <video id="video" width="320" autoplay muted></video>
                 <canvas id="canvas" style="display:none;"></canvas>
 
-                <input type="hidden" name="photo" id="photo">
+                <input type="hidden" name="borrower_image" id="borrower_image">
 
                 <p id="status">Mendeteksi wajah...</p>
             </div>
