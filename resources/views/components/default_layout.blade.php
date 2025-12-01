@@ -56,5 +56,49 @@
         })
     })
 </script>
+<script src="https://unpkg.com/face-api.js"></script>
+<script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const photoInput = document.getElementById('photo');
+    const statusText = document.getElementById('status');
 
+    let captured = false; // supaya tidak foto berkali-kali
+
+    // load model face-api
+    Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri('/models')
+    ]).then(startCamera);
+
+    function startCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => video.srcObject = stream);
+    }
+
+    video.addEventListener('play', () => {
+        const interval = setInterval(async () => {
+            const detection = await faceapi.detectSingleFace(
+                video,
+                new faceapi.TinyFaceDetectorOptions()
+            );
+
+            if (detection && !captured) {
+                captured = true;
+                statusText.innerText = "Wajah terdeteksi ✅";
+
+                // ambil foto
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0);
+
+                photoInput.value = canvas.toDataURL('image/png');
+
+                // auto submit
+                setTimeout(() => {
+                    document.forms[0].submit();
+                }, 500);
+            }
+        }, 500);
+    });
+</script>
 </html>
