@@ -41,16 +41,43 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $transaction = Transaction::where('kelas_peminjam', '=', $request->kelas)->where('book_id', '=', $request->id)->first();
+        // validasi sederhana
+        // $request->validate([
+        //     'id' => 'required',
+        //     'amount' => 'required|numeric|min:1',
+        //     'stock' => 'required|numeric',
+        //     'kelas' => 'required',
+        //     'borrower_image' => 'required'
+        // ]);
+
+        // cek transaksi lama
+        $transaction = Transaction::where('kelas_peminjam', $request->kelas)
+            ->where('book_id', $request->id)
+            ->first();
+
         if ($transaction) {
+            // update kalau sudah pernah pinjam
             $transaction->update([
                 'jumlah_buku' => $transaction->jumlah_buku + $request->amount,
             ]);
         } else {
+            // transaksi baru
             $transaction = new Transaction();
-            $borrower_image = $request->file('borrower-image');
-            // $transaction->borrower_image =  Storage::put('public/borrower_image', $borrower_image);
-            $transaction->borrower_image = $borrower_image->store('borrower_image','public');
+
+            // ===============================
+            // SIMPAN FOTO DARI KAMERA (BASE64)
+            // ===============================
+            $image = $request->borrower_image;
+
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+
+            $imageName = 'borrower_image/' . uniqid() . '.png';
+
+            Storage::disk('public')->put($imageName, base64_decode($image));
+
+            // isi data transaksi
+            $transaction->borrower_image = $imageName;
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
@@ -58,13 +85,17 @@ class TransactionController extends Controller
             $transaction->save();
         }
 
+        // ===============================
+        // UPDATE STOK BUKU
+        // ===============================
+        $book = Book::findOrFail($request->id);
 
-        $books = Book::all();
-        $books = $books->find($request->id)->update([
-            'stock' => $request->stock - $request->amount,
+        $book->update([
+            'stock' => $book->stock - $request->amount
         ]);
 
-        return redirect('/')->with('success', 'Silahkan Ambil Buku!😊');
+        return redirect('/')
+            ->with('success', 'Silahkan Ambil Buku! 😊');
     }
 
     /**
