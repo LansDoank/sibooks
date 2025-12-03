@@ -29,7 +29,7 @@ class BookController extends Controller
     public function kelas(Request $request)
     {
         $books = Book::all();
-        $kelas = Kelas::find($request);
+        $grade = Grade::find($request);
         $user = Auth::user();
         $grade = null;
 
@@ -45,7 +45,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name'), 'isLogin' => $user]);
+        return view('book.kelas', ['grade' => $grade, 'books' => $books,  'isLogin' => $user]);
     }
 
     public function pengembalian($id)

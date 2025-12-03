@@ -45,7 +45,7 @@
                 <label for="borrower-image" id="borrower-image"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Peminjam :
                 </label>
-                <video id="video" autoplay playsinline style="width:320px"></video>
+                <video id="video" autoplay playsinline style="width:100%;"></video>
                 <canvas id="canvas" hidden></canvas>
 
                 <input type="hidden" id="borrower_image" name="borrower_image">

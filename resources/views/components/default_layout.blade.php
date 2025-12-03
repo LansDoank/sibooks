@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 photoInput.value = canvas.toDataURL('image/png');
 
-                setTimeout(() => document.forms[0].submit(), 500);
+                // setTimeout(() => document.forms[0].submit(), 500);
             }
         }, 500);
     });
