@@ -1,6 +1,7 @@
 <?php
 
 // use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\IndexController;
@@ -30,7 +31,7 @@ Route::post('/book/pengembalian', [TransactionController::class, 'update'])->nam
 
 Route::get('/user/login', [UserController::class, 'login'])->name('login');
 
-Route::post('/user/login', [UserController::class, 'loginPost']);
+Route::post('/user/login', [AuthController::class, 'loginPost']);
 
 Route::post('/user/logout',[UserController::class,'logout'])->name('logout');
 
@@ -79,3 +80,9 @@ Route::get('/admin/class/edit/{id}', [ClassController::class, 'edit'])->name('cl
 Route::post('/admin/class/update', [ClassController::class, 'update'])->name('class.update')->middleware('auth');
 
 Route::get('/admin/class/delete/{id}', [ClassController::class, 'delete'])->name('class.delete')->middleware('auth');
+
+// Google Auth
+
+Route::get('/auth-google-redirect', [AuthController::class, 'google_redirect']);
+
+Route::get('/auth-google-callback', [AuthController::class, 'google_callback']);

@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+
+class AuthController extends Controller
+{
+
+    public function google_redirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function google_callback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        dd($googleUser);
+        // $user = User::where('email',$googleUser->email)->first();
+        // if(!$user){
+        //     $user = User::create([
+        //         'fullname' => $googleUser->name,
+        //         'email' => $googleUser->email,
+        //         'role_id' => 2,
+        //     ]);
+        // }
+        // Auth::login($user);
+        // return redirect()->route('index');
+    }
+    public function loginPost(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role_id === 1) {
+                return redirect()->route('admin.index');
+            } else if ($user->role_id === 2) {
+                return redirect()->route('index');
+            } else {
+                return redirect()->route('index');
+            }
+        } else {
+            return redirect('/user/login')->withErrors(['login' => 'Username atau password salah']);
+        }
+    }
+}
