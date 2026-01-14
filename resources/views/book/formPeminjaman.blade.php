@@ -1,6 +1,6 @@
 <x-default_layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <div class="flex items-center max-w-lg mx-auto h-screen">
+    <div class="flex items-center max-w-lg mx-auto my-10 h-max">
         <form method="post" action="/book/pinjam" class="w-full" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $book->id }}">
