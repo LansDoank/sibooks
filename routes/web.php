@@ -8,12 +8,16 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AkunController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Book;
-use App\Models\Transaction;
+
 
 Route::get('/', [IndexController::class,'index'])->name('index');
+
+Route::get('/login',[AuthController::class,'choose'])->name('choose');
+
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+// Book Routes
 
 Route::get('/book/kelas', [BookController::class, 'kelas'])->name('book.kelas');
 
@@ -29,11 +33,11 @@ Route::get('/book/pengembalian/{book}', [TransactionController::class, 'edit'])-
 
 Route::post('/book/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
 
-Route::get('/user/login', [UserController::class, 'login'])->name('login');
+// User Routes
 
-Route::post('/user/login', [AuthController::class, 'loginPost']);
+Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
 
-Route::post('/user/logout',[UserController::class,'logout'])->name('logout');
+Route::post('/user/login', [UserController::class, 'loginPost']);
 
 Route::get('/user/register', [UserController::class, 'register'])->name('register');
 
@@ -43,7 +47,14 @@ Route::get('/user/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTransaction'])->name('api.transaction');
 
+// Admin Routes
+
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
+
+Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
+
+Route::post('/admin/login', [AdminController::class, 'loginPost']);
+
 
 Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user')->middleware('auth');
 

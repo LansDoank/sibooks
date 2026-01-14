@@ -23,11 +23,9 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if ($user->role_id === 1) {
-                return redirect()->route('admin.index');
-            } else {
+            if ($user->role_id === 2) {
                 return redirect()->route('index');
-            }
+            } 
         } else {
             return redirect('/user/login')->withErrors(['login' => 'Username atau password salah']);
         }

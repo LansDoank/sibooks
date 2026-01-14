@@ -42,13 +42,13 @@
                         @csrf
                         @if(!$isLogin)
                             <li class="text-center">
-                                <a href="/user/login"
+                                <a href="/login"
                                     class="block box-border text-white rounded bg-blue-500  lg:px-5 lg:py-2 border hover:border-blue-400 hover:text-blue-600 transition hover:bg-gray-100 "
                                     type="button">Masuk</a>
                             </li>
                         @else
                             <li class="text-center">
-                                <a href="/user/logout"
+                                <a href="/logout"
                                     class="block box-border text-white rounded bg-red-500 hover:text-red-500 lg:px-5 lg:py-2 border   hover:border-red-400 transition hover:bg-gray-100 "
                                     type="button">Keluar</a>
                             </li>

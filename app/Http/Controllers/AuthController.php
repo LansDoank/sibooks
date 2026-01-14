@@ -10,6 +10,11 @@ use Laravel\Socialite\Facades\Socialite;
 class AuthController extends Controller
 {
 
+    public function choose()
+    {
+        return view('auth.choose',['title' => 'Login Sebagai']);
+    }
+
     public function google_redirect()
     {
         return Socialite::driver('google')->redirect();
@@ -17,17 +22,18 @@ class AuthController extends Controller
     public function google_callback()
     {
         $googleUser = Socialite::driver('google')->user();
-        dd($googleUser);
-        // $user = User::where('email',$googleUser->email)->first();
-        // if(!$user){
-        //     $user = User::create([
-        //         'fullname' => $googleUser->name,
-        //         'email' => $googleUser->email,
-        //         'role_id' => 2,
-        //     ]);
-        // }
-        // Auth::login($user);
-        // return redirect()->route('index');
+        // dd($googleUser);
+        $user = User::where('email',$googleUser->email)->first();
+        if(!$user){
+            $user = User::create([
+                'fullname' => $googleUser->name,
+                'image' => $googleUser->avatar,
+                'email' => $googleUser->email,
+                'role_id' => 2,
+            ]);
+        }
+        Auth::login($user);
+        return redirect()->route('index');
     }
     public function loginPost(Request $request)
     {
@@ -48,5 +54,14 @@ class AuthController extends Controller
         } else {
             return redirect('/user/login')->withErrors(['login' => 'Username atau password salah']);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        return redirect()->route('index')->with('isLogin', false);
     }
 }

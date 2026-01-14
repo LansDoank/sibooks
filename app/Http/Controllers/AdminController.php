@@ -16,11 +16,32 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if($user->role->name == 'user') {
+        if ($user->role->name == 'user') {
             return redirect()->route('index');
         }
 
-        return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname,'user' => $user]);
+        return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname, 'user' => $user]);
+    }
+    public function login()
+    {
+        return view('admin.login');
+    }
+
+    public function loginPost(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role_id === 1) {
+                return redirect()->route('admin.index');
+            } 
+        } else {
+            return redirect('/admin/login')->withErrors(['login' => 'Username atau password salah']);
+        }
     }
 
     public function user()
@@ -28,12 +49,12 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if($user->role->name == 'user') {
+        if ($user->role->name == 'user') {
             return redirect()->route('index');
         }
 
         $accounts = User::all();
-        return view('admin.user', ['title' => 'Tabel Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'accounts' => $accounts,'user' => $user]);
+        return view('admin.user', ['title' => 'Tabel Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'accounts' => $accounts, 'user' => $user]);
     }
 
     public function book()
@@ -41,38 +62,38 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if($user->role->name == 'user') {
+        if ($user->role->name == 'user') {
             return redirect()->route('index');
         }
 
         $books = Book::all();
-        return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books,'user' => $user]);
+        return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books, 'user' => $user]);
     }
 
     public function transaction()
     {
         $user = Auth::user();
         $fullname = $user->fullname;
-  
-        if($user->role->name == 'user') {
+
+        if ($user->role->name == 'user') {
             return redirect()->route('index');
         }
 
         $transactions = Transaction::with('book')->get();
-        return view('admin.transaction', ['title' => 'Tabel Transaksi','fullname' => $fullname,'heading' => 'Transaksi', 'transactions' => $transactions,'user' => $user]);
+        return view('admin.transaction', ['title' => 'Tabel Transaksi', 'fullname' => $fullname, 'heading' => 'Transaksi', 'transactions' => $transactions, 'user' => $user]);
     }
 
     public function class()
     {
         $user = Auth::user();
         $fullname = $user->fullname;
-  
-        if($user->role->name == 'user') {
+
+        if ($user->role->name == 'user') {
             return redirect()->route('index');
         }
 
         $class = Classroom::all();
 
-        return view('admin.class', ['title' => 'Tabel Kelas','fullname' => $fullname,'heading' => 'Kelas','user' => $user,'classes' => $class]);
+        return view('admin.class', ['title' => 'Tabel Kelas', 'fullname' => $fullname, 'heading' => 'Kelas', 'user' => $user, 'classes' => $class]);
     }
 }
