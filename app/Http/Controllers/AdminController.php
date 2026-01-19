@@ -43,7 +43,9 @@ class AdminController extends Controller
             $user = Auth::user();
             if ($user->role_id === 1) {
                 return redirect()->route('admin.index');
-            } 
+            } else {
+                return redirect('/admin/login')->withErrors(['login' => 'Akses ditolak.']);
+            }
         } else {
             return redirect('/admin/login')->withErrors(['login' => 'Username atau password salah']);
         }
@@ -100,5 +102,17 @@ class AdminController extends Controller
         $class = Classroom::all();
 
         return view('admin.class', ['title' => 'Tabel Kelas', 'fullname' => $fullname, 'heading' => 'Kelas', 'user' => $user, 'classes' => $class]);
+    }
+
+    public function data()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+
+        if ($user->role->name == 'user') {
+            return redirect()->route('index');
+        }
+
+        return view('admin.data', ['title' => 'Data Admin', 'heading' => 'Data', 'fullname' => $fullname, 'user' => $user]);
     }
 }

@@ -55,6 +55,7 @@ Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
 
 Route::post('/admin/login', [AdminController::class, 'loginPost']);
 
+Route::get('/admin/data', [AdminController::class, 'data'])->name('admin.data')->middleware('auth');
 
 Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user')->middleware('auth');
 
