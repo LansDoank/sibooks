@@ -13,7 +13,7 @@
 
         <!-- Page Heading -->
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3 mb-2 text-gray-800">Data Akun</h1>
+            <h1 class="h3 mb-2 text-gray-800">Data Siswa</h1>
             <div class="d-flex">
                 <button class="btn btn-success mr-2" onclick="window.location.href='/admin/user/create'">
                     <i class="fas fa-plus me-1"></i> Tambah Akun

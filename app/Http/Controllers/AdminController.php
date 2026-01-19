@@ -20,7 +20,12 @@ class AdminController extends Controller
             return redirect()->route('index');
         }
 
-        return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname, 'user' => $user]);
+        $siswa = User::where('role_id',2)->count();
+        $book = Book::all()->count();
+        $transactions = Transaction::all()->count();
+        $kelas = Classroom::all()->count();
+
+        return view('admin.index', ['title' => 'Admin Dashboard', 'heading' => 'Admin', 'fullname' => $fullname, 'user' => $user,'siswa'=>$siswa,'book'=>$book,'transactions'=>$transactions,'kelas'=>$kelas]);
     }
     public function login()
     {
@@ -54,7 +59,7 @@ class AdminController extends Controller
         }
 
         $accounts = User::all();
-        return view('admin.user', ['title' => 'Tabel Akun', 'heading' => 'Akun', 'fullname' => $fullname, 'accounts' => $accounts, 'user' => $user]);
+        return view('admin.user', ['title' => 'Tabel Siswa', 'heading' => 'Siswa', 'fullname' => $fullname, 'accounts' => $accounts, 'user' => $user]);
     }
 
     public function book()
