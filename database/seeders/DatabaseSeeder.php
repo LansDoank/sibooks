@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Classroom;
 use App\Models\Grade;
 use App\Models\Role;
+use App\Models\School;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Kelas;
@@ -57,6 +58,16 @@ class DatabaseSeeder extends Seeder
                 'name' => $classroom,
             ]);
         }
+
+        $data_sekolah = [
+            "Logo" => "/img/logo-almadani.png",
+            "name" => "SMK Al Madani Garut",
+            "address" => "Jalan Otto Iskandardinata No. 35 Karangpawitan Garut",
+            "email" => "smkalmadani.garut84@gmail.com",
+            "telephone" => " 082216608244"
+        ];
+
+        School::create($data_sekolah);
 
     }
 }

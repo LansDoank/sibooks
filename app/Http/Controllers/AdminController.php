@@ -113,6 +113,6 @@ class AdminController extends Controller
             return redirect()->route('index');
         }
 
-        return view('admin.data', ['title' => 'Data Admin', 'heading' => 'Data', 'fullname' => $fullname, 'user' => $user]);
+        return view('admin.data', ['title' => 'Data Sekolah', 'heading' => 'Data Sekolah', 'fullname' => $fullname, 'user' => $user]);
     }
 }
