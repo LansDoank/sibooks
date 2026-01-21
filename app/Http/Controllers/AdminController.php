@@ -136,10 +136,10 @@ class AdminController extends Controller
             'telephone' => 'nullable|string|max:20',
         ]);
 
-        // Ambil data sekolah yang ada (jika ada) untuk mengecek logo lama
-        $school = School::find(1);
+        // Ambil data pertama yang tersedia
+        $school = School::first();
 
-        // Siapkan array data yang akan diupdate (selain logo)
+        // Siapkan data untuk update
         $dataToUpdate = [
             'name' => $validatedData['name'],
             'address' => $validatedData['address'],
@@ -147,26 +147,20 @@ class AdminController extends Controller
             'telephone' => $validatedData['telephone'],
         ];
 
-        // 2. Logika Upload Gambar
+        // Logika upload logo tetap sama...
         if ($request->hasFile('logo')) {
-            // Hapus logo lama jika ada (opsional, agar storage tidak penuh)
-            if ($school && $school->logo && Storage::exists('public/' . $school->logo)) {
-                Storage::delete('public/' . $school->logo);
+            if ($school && $school->logo) {
+                Storage::disk('public')->delete($school->logo);
             }
-
-            // Simpan file baru ke folder 'public/logos' dan ambil path-nya
-            // Pastikan Anda sudah menjalankan: php artisan storage:link
-            $path = $request->file('logo')->store('logos', 'public');
-
-            // Masukkan path ke array update
-            $dataToUpdate['logo'] = $path;
+            $dataToUpdate['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
-        // 3. Update atau Create
-        School::updateOrCreate(
-            ['id' => 1],
-            $dataToUpdate
-        );
+        // UPDATE ATAU CREATE berdasarkan data pertama
+        if ($school) {
+            $school->update($dataToUpdate);
+        } else {
+            School::create($dataToUpdate);
+        }
 
         return redirect()->route('admin.data')->with('success', 'Data sekolah berhasil diperbarui.');
     }

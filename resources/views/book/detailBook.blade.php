@@ -44,7 +44,7 @@
                             class="flex justify-center text-white font-medium items-center hover:bg-red-600 transition border py-2 px-5 rounded bg-red-500">
                             Kembalikan
                         </a>
-                        @if ($book->download)
+                        <!-- @if ($book->download)
                             <a download href="{{asset('storage/') . $book->download }}" data-modal-target="popup-modal"
                                 data-modal-toggle="popup-modal" type="button" title=""
                                 class="flex justify-center text-white font-medium items-center hover:bg-yellow-600 transition border py-2 px-5 rounded bg-yellow-500">
@@ -56,7 +56,7 @@
                                 class="flex justify-center text-white font-medium items-center transition border py-2 px-5 rounded bg-gray-500">
                                 Tidak Tersedia
                             </a>
-                        @endif
+                        @endif -->
                     </div>
 
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />

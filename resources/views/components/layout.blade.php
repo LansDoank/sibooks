@@ -1,3 +1,4 @@
+@props(['school'])
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +15,7 @@
  
 
     {{$slot}}
-    <x-footer></x-footer>
+    <x-footer :school="$school"></x-footer>
     <script>
         const typed = new Typed('#heading-index', {
             strings: ["PERPUSTAKAAN DIGITAL <br> SMK Al-MADANI GARUT</h2>"],
