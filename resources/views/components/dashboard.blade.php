@@ -162,7 +162,7 @@
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-                                <a class="dropdown-item py-2 flex items-center" href="/admin/data">
+                                <a class="dropdown-item py-2 flex items-center" href="/admin/school">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-gear-fill mr-2" viewBox="0 0 16 16">
                                         <path
