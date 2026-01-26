@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $data_sekolah = [
-            "Logo" => "/img/logo-almadani.png",
+            "Logo" => "logos/logo-almadani.png",
             "name" => "SMK Al Madani Garut",
             "address" => "Jalan Otto Iskandardinata No. 35 Karangpawitan Garut",
             "email" => "smkalmadani.garut84@gmail.com",

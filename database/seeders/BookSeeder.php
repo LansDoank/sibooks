@@ -237,5 +237,82 @@ class BookSeeder extends Seeder
             'stock' => fake()->numberBetween(10,50),
             'grade_id' => 2
         ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/basdatxii.jpeg',
+            'title' => "Basis Data",
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 3
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/binggrisxii.jpeg',
+            'title' => "Bahasa Inggris",
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 3
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/otkkpxii.jpeg',
+            'title' => "Otomatisasi Tata Kelola Kepegawaian",
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 3
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/otkkxii.jpeg',
+            'title' => "Otomatisasi Tata Kelola Keuangan",
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 3
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/pboxii.jpeg',
+            'title' => "Pemograman Berbasis Objek",
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 3
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/pkkxii.jpeg',
+            'title' => "Produk Kreatif dan Kewirausahaan",
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 3
+        ]);
+        Book::create([
+            'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
+            'image' => '/img/pwpbxii.jpeg',
+            'title' => "Pemograman Web Perangkat Bergerak",
+            'slug' => Str::slug(fake()->sentence()) ,
+            'author' => fake()->name(),
+            'publisher' => fake()->name(),
+            'year' => 2025,
+            'stock' => fake()->numberBetween(10,50),
+            'grade_id' => 3
+        ]);
     }
 }
