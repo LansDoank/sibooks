@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Classroom;
 use App\Models\Grade;
 use App\Models\Kelas;
 use App\Models\Role;
+use App\Models\School;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +22,12 @@ class BookController extends Controller
     {
         $books = Book::all();
         $user = Auth::user();
+        $school = School::first() ?? null;
+
         if ($request->search) {
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
-        return view('book.tampil', ['books' => $books, 'isLogin' => $user]);
+        return view('book.tampil', ['books' => $books, 'isLogin' => $user,'school' => $school]);
     }
 
     public function kelas(Request $request)
@@ -32,6 +36,8 @@ class BookController extends Controller
         $grade = Grade::find($request);
         $user = Auth::user();
         $grade = null;
+        $school = School::first() ?? null;
+
 
         if ($request->id) {
             $id = $request->id;
@@ -45,7 +51,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.kelas', ['grade' => $grade, 'books' => $books,  'isLogin' => $user]);
+        return view('book.kelas', ['grade' => $grade, 'books' => $books,  'isLogin' => $user,'school' => $school]);
     }
 
     public function pengembalian($id)
@@ -105,10 +111,12 @@ class BookController extends Controller
     {
         $book = Book::where('slug', '=', $slug)->first();
         $user = Auth::user();
+        $school = School::first() ?? null;
+
         if (!$book) {
             return redirect('/');
         }
-        return view('book.detailBook', ['book' => $book, 'isLogin' => $user]);
+        return view('book.detailBook', ['book' => $book, 'isLogin' => $user,'school' => $school]);
     }
 
     /**
@@ -116,15 +124,27 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = Auth::user();
+        $grades = Grade::all();
+
+        return view('book.edit', ['title' => 'Edit Buku', 'heading' => 'Buku', 'book' => Book::find($id), 'user' => $user,'grades'=>$grades]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,)
     {
-        //
+        $book = Book::findOrFail($request->id);
+        $book->title = $request->title;
+        $book->stock = $request->stock;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->year = $request->year;
+        $book->grade_id = $request->class;
+        $book->save();
+
+        return redirect('/admin/book');
     }
 
     /**
@@ -132,7 +152,9 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        
+        $book = Book::findOrFail($id);
+        $book->delete();
+        return redirect('/admin/book');
     }
 
     public function pdf() {

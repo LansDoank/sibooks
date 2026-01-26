@@ -10,6 +10,11 @@ use Laravel\Socialite\Facades\Socialite;
 class AuthController extends Controller
 {
 
+    public function login()
+    {
+        return view('user.login',['title' => 'Login Sebagai']);
+    }
+
     public function choose()
     {
         return view('auth.choose',['title' => 'Login Sebagai']);
@@ -52,7 +57,7 @@ class AuthController extends Controller
                 return redirect()->route('index');
             }
         } else {
-            return redirect('/user/login')->withErrors(['login' => 'Username atau password salah']);
+            return redirect('/login')->withErrors(['login' => 'Username atau password salah']);
         }
     }
 

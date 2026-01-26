@@ -32,9 +32,9 @@
                                 <th>No</th>
                                 <th>Kode Qr</th>
                                 <th>Judul</th>
+                                <th>Tingkat</th>
                                 <th>Stok</th>
                                 <th>Penulis</th>
-                                <th>Penerbit</th>
                                 <th>Tahun</th>
                                 <th class="text-center">Opsi</th>
                             </tr>
@@ -58,16 +58,16 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ QrCode::generate($book->qr_code) }}</td>
                                     <td>{{ $book->title }}</td>
+                                    <td>Kelas {{ $book->grade->name }}</td>
                                     <td>{{ $book->stock }}</td>
                                     <td>{{ $book->author }}</td>
-                                    <td>{{ $book->publisher }}</td>
                                     <td>{{ $book->year}}</td>
                                     <td class="text-start">
                                         <div class="flex justify-center  gap-2">
                                             <a href="/admin/book/edit/{{ $book->id }}"
                                                 class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>
                                             <a onclick="return confirm('Yakin?');"
-                                                href="/admin/book/delete?id={{ $book->id }}"
+                                                href="/admin/book/delete/{{ $book->id }}"
                                                 class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
                                         </div>
                                     </td>

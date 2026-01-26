@@ -1,5 +1,5 @@
 <x-navbar :isLogin="$isLogin"></x-navbar>
-<x-layout>
+<x-layout :school="$school">
     <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
         <div class="max-w-screen-lg px-4 mx-auto 2xl:px-0">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">

@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class,'index'])->name('index');
 
-Route::get('/login',[AuthController::class,'choose'])->name('choose');
+Route::get('/login',[AuthController::class,'login'])->name('login');
+
+Route::post('/user/login', [AuthController::class, 'loginPost'])->name('login.post');
 
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
@@ -35,10 +37,6 @@ Route::post('/book/pengembalian', [TransactionController::class, 'update'])->nam
 
 // User Routes
 
-Route::get('/user/login', [UserController::class, 'login'])->name('user.login');
-
-Route::post('/user/login', [UserController::class, 'loginPost']);
-
 Route::get('/user/register', [UserController::class, 'register'])->name('register');
 
 Route::post('/user/store', [UserController::class, 'registerPost']);
@@ -51,9 +49,9 @@ Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTra
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 
-Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
+// Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
 
-Route::post('/admin/login', [AdminController::class, 'loginPost']);
+// Route::post('/admin/login', [AdminController::class, 'loginPost']);
 
 Route::get('/admin/school', [AdminController::class, 'school'])->name('admin.data')->middleware('auth');
 
@@ -78,6 +76,12 @@ Route::get('/admin/book/create', [BookController::class, 'create'])->name('book.
 Route::post('/admin/book/store', [BookController::class, 'store'])->name('book.store')->middleware('auth');
 
 Route::get('/admin/book/report/pdf', [BookController::class, 'pdf'])->name('admin.pdf')->middleware('auth');
+
+Route::get('/admin/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit')->middleware('auth');
+
+Route::post('/admin/book/update', [BookController::class, 'update'])->name('book.update')->middleware('auth');
+
+Route::get('/admin/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('auth');
 
 Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
 

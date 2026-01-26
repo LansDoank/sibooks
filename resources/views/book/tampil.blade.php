@@ -58,7 +58,7 @@
             </div>
         </div>
     </nav>
-<x-layout>
+<x-layout :school="$school">
     <section class="max-w-screen-lg  mx-auto p-8 my-4">
         <div class="text-center mb-8">
             <h1 class="font-semibold text-3xl">Hasil pencarian dari : {{ request('search') }}</h1>
