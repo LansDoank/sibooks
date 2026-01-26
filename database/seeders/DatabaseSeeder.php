@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([GradeSeeder::class, BookSeeder::class]);
 
-        Book::factory(30)->recycle([
-            Grade::all()
-        ])->create();
+        // Book::factory(30)->recycle([
+        //     Grade::all()
+        // ])->create();
 
         $role = ['admin', 'user'];
 
