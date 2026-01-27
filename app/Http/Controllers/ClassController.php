@@ -6,6 +6,7 @@ use App\Models\Classroom;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SweetAlert2\Laravel\Swal;
 
 class ClassController extends Controller
 {
@@ -23,6 +24,11 @@ class ClassController extends Controller
         $class->created_at = now();
         $class->updated_at = now();
         $class->save();
+
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data kelas berhasil ditambahkan.',
+        ]);
 
         return redirect()->route('admin.class')->with('success', 'Kelas berhasil ditambahkan.');
     }
@@ -43,8 +49,17 @@ class ClassController extends Controller
             $class->name = $request->name;
             $class->updated_at = now();
             $class->save();
+
+            Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data kelas berhasil diperbarui.',
+        ]);
             return redirect()->route('admin.class')->with('success', 'Kelas berhasil diupdate.');
         } else {
+            Swal::error([
+            'title' => 'Gagal!',
+            'text' => 'Data kelas gagal ditambahkan.',
+        ]);
             return redirect()->route('admin.class')->with('error', 'Kelas tidak ditemukan.');
         }
     }
@@ -53,6 +68,10 @@ class ClassController extends Controller
     {
         $class = Classroom::findOrFail($id);
         if ($class) {
+            Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data kelas berhasil dihapus.',
+        ]);
             $class->delete();
         }
         return redirect()->route('admin.class');
