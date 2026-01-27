@@ -12,6 +12,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use SweetAlert2\Laravel\Swal;
 
 class BookController extends Controller
 {
@@ -27,7 +28,7 @@ class BookController extends Controller
         if ($request->search) {
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
-        return view('book.tampil', ['books' => $books, 'isLogin' => $user,'school' => $school]);
+        return view('book.tampil', ['books' => $books, 'isLogin' => $user, 'school' => $school]);
     }
 
     public function kelas(Request $request)
@@ -51,7 +52,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.kelas', ['grade' => $grade, 'books' => $books,  'isLogin' => $user,'school' => $school]);
+        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'isLogin' => $user, 'school' => $school]);
     }
 
     public function pengembalian($id)
@@ -80,16 +81,10 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'stock' => 'required|int|max:255',
-        //     'grade' => 'required|int|max:255',
-        // ]);
-
         $book = Book::create([
             'qr_code' => config('app.url') . '/book/' . Str::slug($request->title),
             'image' => $request->file('image'),
+            'slug' => Str::slug(fake()->sentence()) ,
             'title' => $request->title,
             'stock' => $request->stock,
             'grade_id' => $request->grade,
@@ -100,6 +95,11 @@ class BookController extends Controller
 
 
         $book->save();
+
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data buku berhasil ditambahkan.',
+        ]);
 
         return redirect('/admin/book');
     }
@@ -116,7 +116,7 @@ class BookController extends Controller
         if (!$book) {
             return redirect('/');
         }
-        return view('book.detailBook', ['book' => $book, 'isLogin' => $user,'school' => $school]);
+        return view('book.detailBook', ['book' => $book, 'isLogin' => $user, 'school' => $school]);
     }
 
     /**
@@ -127,13 +127,13 @@ class BookController extends Controller
         $user = Auth::user();
         $grades = Grade::all();
 
-        return view('book.edit', ['title' => 'Edit Buku', 'heading' => 'Buku', 'book' => Book::find($id), 'user' => $user,'grades'=>$grades]);
+        return view('book.edit', ['title' => 'Edit Buku', 'heading' => 'Buku', 'book' => Book::find($id), 'user' => $user, 'grades' => $grades]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,)
+    public function update(Request $request, )
     {
         $book = Book::findOrFail($request->id);
         $book->title = $request->title;
@@ -143,6 +143,11 @@ class BookController extends Controller
         $book->year = $request->year;
         $book->grade_id = $request->class;
         $book->save();
+
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data buku berhasil diperbarui.',
+        ]);
 
         return redirect('/admin/book');
     }
@@ -154,10 +159,15 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($id);
         $book->delete();
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data buku berhasil dihapus.',
+        ]);
         return redirect('/admin/book');
     }
 
-    public function pdf() {
-        return view('book.pdf',['books' => Book::all(),'title'=>'Laporan Data Buku']);
+    public function pdf()
+    {
+        return view('book.pdf', ['books' => Book::all(), 'title' => 'Laporan Data Buku']);
     }
 }

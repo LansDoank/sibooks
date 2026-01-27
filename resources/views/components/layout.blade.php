@@ -1,4 +1,5 @@
 @props(['school'])
+@include('sweetalert2::index')
 <!DOCTYPE html>
 <html lang="en">
 

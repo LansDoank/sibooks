@@ -1,4 +1,4 @@
-<x-navbar :isLogin="$isLogin"></x-navbar>
+<x-navbar :isLogin="$isLogin" :school="$school"></x-navbar>
 <x-layout :school="$school">
     <section class="bg-white dark:bg-gray-900 antialiased pt-32">
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">

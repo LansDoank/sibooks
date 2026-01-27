@@ -1,4 +1,6 @@
 @props(['title', 'fullname', 'heading', 'user'])
+@include('sweetalert2::index')
+
 <!DOCTYPE html>
 <html lang="en">
 

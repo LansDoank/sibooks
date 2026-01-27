@@ -6,7 +6,9 @@ use App\Models\Book;
 use App\Models\Classroom;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use SweetAlert2\Laravel\Swal;
 
 
 class TransactionController extends Controller
@@ -41,17 +43,10 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // validasi sederhana
-        // $request->validate([
-        //     'id' => 'required',
-        //     'amount' => 'required|numeric|min:1',
-        //     'stock' => 'required|numeric',
-        //     'kelas' => 'required',
-        //     'borrower_image' => 'required'
-        // ]);
+        $user = Auth::user();
 
-        // cek transaksi lama
-        $transaction = Transaction::where('kelas_peminjam', $request->kelas)
+        // cek transaksi lama untuk menghindari duplikat
+        $transaction = Transaction::where('kelas_peminjam', $request->class)
             ->where('book_id', $request->id)
             ->first();
 
@@ -64,17 +59,23 @@ class TransactionController extends Controller
             // transaksi baru
             $transaction = new Transaction();
 
-            // ===============================
-            // SIMPAN FOTO DARI KAMERA (BASE64)
-            // ===============================
-            $image = $request->borrower_image;
+       
+            $image = $request->borrower_image ?? null;
 
-            $image = str_replace('data:image/png;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
+            if ($image) {
+                $image = str_replace('data:image/png;base64,', '', $image);
+                $image = str_replace(' ', '+', $image);
+    
+                $imageName = 'borrower_image/' . uniqid() . '.png';
+    
+                Storage::disk('public')->put($imageName, base64_decode($image));
+            }
 
-            $imageName = 'borrower_image/' . uniqid() . '.png';
-
-            Storage::disk('public')->put($imageName, base64_decode($image));
+            $imageName = $imageName ?? null;
+            
+            if($user->image) {
+                $imageName = $user->image;
+            }
 
             // isi data transaksi
             $transaction->borrower_image = $imageName;
@@ -85,13 +86,16 @@ class TransactionController extends Controller
             $transaction->save();
         }
 
-        // ===============================
-        // UPDATE STOK BUKU
-        // ===============================
+   
         $book = Book::findOrFail($request->id);
 
         $book->update([
             'stock' => $book->stock - $request->amount
+        ]);
+
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Peminjaman Buku Berhasil.',
         ]);
 
         return redirect('/')
@@ -115,6 +119,10 @@ class TransactionController extends Controller
         $book = Book::find($id);
         $borrowed_class = Transaction::where('book_id', '=', $id);
         $borrowed_class = $borrowed_class->where('return_time', '=', null)->get();
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Buku Berhasil Dikembalikan.',
+        ]);
         return view('book.formPengembalian', ['title' => 'Formulir Pengembalian Buku', 'book' => $book, 'transactions' => $borrowed_class]);
     }
 

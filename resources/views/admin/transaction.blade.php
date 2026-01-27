@@ -34,14 +34,22 @@
                         </tfoot>
                         <tbody>
                             @foreach ($transactions as $transaction)
-                                <tr>
-                                    <td><img class="w-24 h-24 object-cover" src="{{ asset( 'storage/'.$transaction->borrower_image) }}" alt=""></td>
-                                    <td>{{ $transaction->kelas_peminjam }}</td>
-                                    <td>{{ $transaction->book->title }}</td>
-                                    <td>{{ $transaction->jumlah_buku }}</td>
-                                    <td>{{ $transaction->borrow_time}}</td>
-                                    <td>{{ $transaction->return_time ?? 'Belum Dikembalikan' }}</td>
-                                </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <img class="w-24 h-24 object-cover" src="{{ 
+                                                            $transaction->borrower_image
+                                ? (str_contains($transaction->borrower_image, 'https')
+                                    ? $transaction->borrower_image
+                                    : asset('storage/' . $transaction->borrower_image))
+                                : asset('img/default-pp.jpg') 
+                                                         }}" alt="">
+                                                        </td>
+                                                        <td>{{ $transaction->kelas_peminjam }}</td>
+                                                        <td>{{ $transaction->book->title }}</td>
+                                                        <td>{{ $transaction->jumlah_buku }}</td>
+                                                        <td>{{ $transaction->borrow_time->format('d M Y , H:i') }}</td>
+                                                        <td>{{ $transaction->return_time ?? 'Belum Dikembalikan' }}</td>
+                                                    </tr>
                             @endforeach
                         </tbody>
                     </table>

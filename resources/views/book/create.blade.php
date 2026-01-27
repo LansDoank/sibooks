@@ -2,7 +2,7 @@
     <section class="bg-white dark:bg-gray-900 border shadow rounded">
         <div class="py-4 px-4 mx-auto max-w-6xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Tambahkan Buku Baru</h2>
-            <form action="/admin/book/store" method="post">
+            <form action="/admin/book/store" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="sm:col-span-2">

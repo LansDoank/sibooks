@@ -6,18 +6,19 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use SweetAlert2\Laravel\Swal;
 
 class AuthController extends Controller
 {
 
     public function login()
     {
-        return view('user.login',['title' => 'Login Sebagai']);
+        return view('user.login', ['title' => 'Login Sebagai']);
     }
 
     public function choose()
     {
-        return view('auth.choose',['title' => 'Login Sebagai']);
+        return view('auth.choose', ['title' => 'Login Sebagai']);
     }
 
     public function google_redirect()
@@ -28,8 +29,8 @@ class AuthController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
         // dd($googleUser);
-        $user = User::where('email',$googleUser->email)->first();
-        if(!$user){
+        $user = User::where('email', $googleUser->email)->first();
+        if (!$user) {
             $user = User::create([
                 'fullname' => $googleUser->name,
                 'image' => $googleUser->avatar,
@@ -49,8 +50,13 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            Swal::success([
+                'title' => 'Berhasil!',
+                'text' => 'Login berhasil.',
+            ]);
+
             if ($user->role_id === 1) {
-                return redirect()->route('admin.index');
+                return redirect('/admin');
             } else if ($user->role_id === 2) {
                 return redirect()->route('index');
             } else {
