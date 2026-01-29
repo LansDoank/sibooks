@@ -18,9 +18,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if ($user->role->name == 'user') {
-            return redirect()->route('index');
-        }
+        
 
         $siswa = User::where('role_id', 2)->count();
         $book = Book::all()->count();
@@ -58,9 +56,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if ($user->role->name == 'user') {
-            return redirect()->route('index');
-        }
+        
 
         $accounts = User::all();
         return view('admin.user', ['title' => 'Tabel Siswa', 'heading' => 'Siswa', 'fullname' => $fullname, 'accounts' => $accounts, 'user' => $user]);
@@ -71,9 +67,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if ($user->role->name == 'user') {
-            return redirect()->route('index');
-        }
+        
 
         $books = Book::all();
         return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books, 'user' => $user]);
@@ -84,9 +78,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if ($user->role->name == 'user') {
-            return redirect()->route('index');
-        }
+        
 
         $transactions = Transaction::with('book')->get();
         return view('admin.transaction', ['title' => 'Tabel Transaksi', 'fullname' => $fullname, 'heading' => 'Transaksi', 'transactions' => $transactions, 'user' => $user]);
@@ -97,9 +89,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $fullname = $user->fullname;
 
-        if ($user->role->name == 'user') {
-            return redirect()->route('index');
-        }
+        
 
         $class = Classroom::all();
 
@@ -112,9 +102,7 @@ class AdminController extends Controller
         $fullname = $user->fullname;
         $school = School::first();
 
-        if ($user->role->name == 'user') {
-            return redirect()->route('index');
-        }
+        
 
         return view('admin.data', ['title' => 'Data Sekolah', 'heading' => 'Data Sekolah', 'fullname' => $fullname, 'user' => $user, 'school' => $school]);
     }
@@ -123,9 +111,7 @@ class AdminController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role->name == 'user') {
-            return redirect()->route('index');
-        }
+        
 
         // 1. Perbaiki Validasi (Logo harus image, bukan string)
         $validatedData = $request->validate([

@@ -47,21 +47,21 @@ Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTra
 
 // Admin Routes
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('isAdmin');
 
 // Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
 
 // Route::post('/admin/login', [AdminController::class, 'loginPost']);
 
-Route::get('/admin/school', [AdminController::class, 'school'])->name('admin.data')->middleware('auth');
+Route::get('/admin/school', [AdminController::class, 'school'])->name('admin.data')->middleware('isAdmin');
 
-Route::post('/admin/school/update', [AdminController::class, 'schoolUpdate'])->name('admin.school.update')->middleware('auth');
+Route::post('/admin/school/update', [AdminController::class, 'schoolUpdate'])->name('admin.school.update')->middleware('isAdmin');
 
-Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user')->middleware('auth');
+Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user')->middleware('isAdmin');
 
-Route::get('/admin/user/create', [UserController::class, 'create'])->name('user.create')->middleware('auth');
+Route::get('/admin/user/create', [UserController::class, 'create'])->name('user.create')->middleware('isAdmin');
 
-Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.store')->middleware('auth');
+Route::post('/admin/user/store', [UserController::class, 'store'])->name('user.store')->middleware('isAdmin');
 
 Route::get('/admin/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
@@ -69,35 +69,35 @@ Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('user
 
 Route::post('/admin/user/update', [UserController::class, 'update'])->name('user.update');
 
-Route::get('/admin/book', [AdminController::class, 'book'])->name('admin.book')->middleware('auth');
+Route::get('/admin/book', [AdminController::class, 'book'])->name('admin.book')->middleware('isAdmin');
 
-Route::get('/admin/book/create', [BookController::class, 'create'])->name('book.create')->middleware('auth');
+Route::get('/admin/book/create', [BookController::class, 'create'])->name('book.create')->middleware('isAdmin');
 
-Route::post('/admin/book/store', [BookController::class, 'store'])->name('book.store')->middleware('auth');
+Route::post('/admin/book/store', [BookController::class, 'store'])->name('book.store')->middleware('isAdmin');
 
-Route::get('/admin/book/report/pdf', [BookController::class, 'pdf'])->name('admin.pdf')->middleware('auth');
+Route::get('/admin/book/report/pdf', [BookController::class, 'pdf'])->name('admin.pdf')->middleware('isAdmin');
 
-Route::get('/admin/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit')->middleware('auth');
+Route::get('/admin/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit')->middleware('isAdmin');
 
-Route::post('/admin/book/update', [BookController::class, 'update'])->name('book.update')->middleware('auth');
+Route::post('/admin/book/update', [BookController::class, 'update'])->name('book.update')->middleware('isAdmin');
 
-Route::get('/admin/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('auth');
+Route::get('/admin/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('isAdmin');
 
-Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
+Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
 
-Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
+Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
 
-Route::get('/admin/class', [AdminController::class, 'class'])->name('admin.class')->middleware('auth');
+Route::get('/admin/class', [AdminController::class, 'class'])->name('admin.class')->middleware('isAdmin');
 
-Route::get('/admin/class/create', [ClassController::class, 'create'])->name('class.create')->middleware('auth');
+Route::get('/admin/class/create', [ClassController::class, 'create'])->name('class.create')->middleware('isAdmin');
 
-Route::post('/admin/class/store', [ClassController::class, 'store'])->name('class.store')->middleware('auth');
+Route::post('/admin/class/store', [ClassController::class, 'store'])->name('class.store')->middleware('isAdmin');
 
-Route::get('/admin/class/edit/{id}', [ClassController::class, 'edit'])->name('class.edit')->middleware('auth');
+Route::get('/admin/class/edit/{id}', [ClassController::class, 'edit'])->name('class.edit')->middleware('isAdmin');
 
-Route::post('/admin/class/update', [ClassController::class, 'update'])->name('class.update')->middleware('auth');
+Route::post('/admin/class/update', [ClassController::class, 'update'])->name('class.update')->middleware('isAdmin');
 
-Route::get('/admin/class/delete/{id}', [ClassController::class, 'delete'])->name('class.delete')->middleware('auth');
+Route::get('/admin/class/delete/{id}', [ClassController::class, 'delete'])->name('class.delete')->middleware('isAdmin');
 
 // Google Auth
 
