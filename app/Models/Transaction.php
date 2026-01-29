@@ -10,6 +10,11 @@ class Transaction extends Model
     protected $fillable = ['jumlah_buku','return_time'];
     protected $with = ['book'];
 
+    protected $casts = [
+    'borrow_time' => 'datetime',
+    'return_time' => 'datetime',
+];
+
     public function book() : BelongsTo {
         return $this->belongsTo(Book::class);
     }

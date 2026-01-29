@@ -1,8 +1,10 @@
-<x-layout>
+<x-layout :school="$school">
+
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="/logo-almadani.png" class="h-10 mt-2" alt="Flowbite Logo" />
+                <img src="{{ asset(($school?->logo) ? 'storage/' . $school->logo : 'logo-almadani.png') }}"
+                    class="h-10 mt-2" alt="School Logo" />
                 <span class="self-center text-2xl  whitespace-nowrap dark:text-white font-bold">SiBooks</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button"
@@ -42,13 +44,13 @@
                         @csrf
                         @if(!$isLogin)
                             <li class="text-center">
-                                <a href="/user/login"
+                                <a href="/login"
                                     class="block box-border text-white rounded bg-blue-500  lg:px-5 lg:py-2 border hover:border-blue-400 hover:text-blue-600 transition hover:bg-gray-100 "
                                     type="button">Masuk</a>
                             </li>
                         @else
                             <li class="text-center">
-                                <a href="/user/logout"
+                                <a href="/logout"
                                     class="block box-border text-white rounded bg-red-500 hover:text-red-500 lg:px-5 lg:py-2 border   hover:border-red-400 transition hover:bg-gray-100 "
                                     type="button">Keluar</a>
                             </li>
@@ -121,7 +123,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="kelas-xi my-6">
+            <div id="kelas-xi" class="kelas-xi my-6">
                 <div class="mb-5 flex justify-between">
                     <h1 class="text-xl font-semibold">Buku Paket Kelas XI</h1>
                     <a class="text-blue-600 font-medium" href="/book/kelas?id=2">Lihat Semuanya</a>
@@ -131,7 +133,7 @@
                         <div
                             class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <a href="/book/{{ $buku->slug }}">
-                                <img class="rounded-t-lg object-cover w-full h-72" src="/ipas.jpg"
+                                <img class="rounded-t-lg object-cover w-full h-72" src="{{ $buku->image }}"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
@@ -161,7 +163,7 @@
                         <div
                             class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <a href="/book/{{ $buku->slug }}">
-                                <img class="rounded-t-lg object-cover w-full h-72" src="/ipas.jpg"
+                                <img class="rounded-t-lg object-cover w-full h-72" src="{{$buku->image}}"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">

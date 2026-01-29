@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Classroom;
 use App\Models\Grade;
 use App\Models\Kelas;
 use App\Models\Role;
+use App\Models\School;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use SweetAlert2\Laravel\Swal;
 
 class BookController extends Controller
 {
@@ -20,18 +23,22 @@ class BookController extends Controller
     {
         $books = Book::all();
         $user = Auth::user();
+        $school = School::first() ?? null;
+
         if ($request->search) {
             $books = Book::where('title', 'like', '%' . $request->search . '%')->get();
         }
-        return view('book.tampil', ['books' => $books, 'isLogin' => $user]);
+        return view('book.tampil', ['books' => $books, 'isLogin' => $user, 'school' => $school]);
     }
 
     public function kelas(Request $request)
     {
         $books = Book::all();
-        $kelas = Kelas::find($request);
+        $grade = Grade::find($request);
         $user = Auth::user();
         $grade = null;
+        $school = School::first() ?? null;
+
 
         if ($request->id) {
             $id = $request->id;
@@ -45,7 +52,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'kelas' => $kelas->value('name'), 'isLogin' => $user]);
+        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'isLogin' => $user, 'school' => $school]);
     }
 
     public function pengembalian($id)
@@ -74,16 +81,10 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'stock' => 'required|int|max:255',
-        //     'grade' => 'required|int|max:255',
-        // ]);
-
         $book = Book::create([
             'qr_code' => config('app.url') . '/book/' . Str::slug($request->title),
             'image' => $request->file('image'),
+            'slug' => Str::slug(fake()->sentence()) ,
             'title' => $request->title,
             'stock' => $request->stock,
             'grade_id' => $request->grade,
@@ -95,6 +96,11 @@ class BookController extends Controller
 
         $book->save();
 
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data buku berhasil ditambahkan.',
+        ]);
+
         return redirect('/admin/book');
     }
 
@@ -105,10 +111,12 @@ class BookController extends Controller
     {
         $book = Book::where('slug', '=', $slug)->first();
         $user = Auth::user();
+        $school = School::first() ?? null;
+
         if (!$book) {
             return redirect('/');
         }
-        return view('book.detailBook', ['book' => $book, 'isLogin' => $user]);
+        return view('book.detailBook', ['book' => $book, 'isLogin' => $user, 'school' => $school]);
     }
 
     /**
@@ -116,15 +124,32 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = Auth::user();
+        $grades = Grade::all();
+
+        return view('book.edit', ['title' => 'Edit Buku', 'heading' => 'Buku', 'book' => Book::find($id), 'user' => $user, 'grades' => $grades]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, )
     {
-        //
+        $book = Book::findOrFail($request->id);
+        $book->title = $request->title;
+        $book->stock = $request->stock;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->year = $request->year;
+        $book->grade_id = $request->class;
+        $book->save();
+
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data buku berhasil diperbarui.',
+        ]);
+
+        return redirect('/admin/book');
     }
 
     /**
@@ -132,6 +157,17 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete();
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Data buku berhasil dihapus.',
+        ]);
+        return redirect('/admin/book');
+    }
+
+    public function pdf()
+    {
+        return view('book.pdf', ['books' => Book::all(), 'title' => 'Laporan Data Buku']);
     }
 }

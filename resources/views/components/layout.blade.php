@@ -1,3 +1,5 @@
+@props(['school'])
+@include('sweetalert2::index')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +13,10 @@
 </head>
 
 <body class="bg-white">
-    
+ 
 
     {{$slot}}
-    <x-footer></x-footer>
+    <x-footer :school="$school"></x-footer>
     <script>
         const typed = new Typed('#heading-index', {
             strings: ["PERPUSTAKAAN DIGITAL <br> SMK Al-MADANI GARUT</h2>"],

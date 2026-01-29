@@ -6,7 +6,9 @@ use App\Models\Book;
 use App\Models\Classroom;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use SweetAlert2\Laravel\Swal;
 
 
 class TransactionController extends Controller
@@ -41,15 +43,42 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $transaction = Transaction::where('kelas_peminjam', '=', $request->kelas)->where('book_id', '=', $request->id)->first();
+        $user = Auth::user();
+
+        // cek transaksi lama untuk menghindari duplikat
+        $transaction = Transaction::where('kelas_peminjam', $request->class)
+            ->where('book_id', $request->id)
+            ->first();
+
         if ($transaction) {
+            // update kalau sudah pernah pinjam
             $transaction->update([
                 'jumlah_buku' => $transaction->jumlah_buku + $request->amount,
             ]);
         } else {
+            // transaksi baru
             $transaction = new Transaction();
-            $borrower_image = $request->file('borrower-image');
-            $transaction->borrower_image = $borrower_image->store('borrower_image');
+
+       
+            $image = $request->borrower_image ?? null;
+
+            if ($image) {
+                $image = str_replace('data:image/png;base64,', '', $image);
+                $image = str_replace(' ', '+', $image);
+    
+                $imageName = 'borrower_image/' . uniqid() . '.png';
+    
+                Storage::disk('public')->put($imageName, base64_decode($image));
+            }
+
+            $imageName = $imageName ?? null;
+            
+            if($user->image) {
+                $imageName = $user->image;
+            }
+
+            // isi data transaksi
+            $transaction->borrower_image = $imageName;
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
@@ -57,13 +86,20 @@ class TransactionController extends Controller
             $transaction->save();
         }
 
+   
+        $book = Book::findOrFail($request->id);
 
-        $books = Book::all();
-        $books = $books->find($request->id)->update([
-            'stock' => $request->stock - $request->amount,
+        $book->update([
+            'stock' => $book->stock - $request->amount
         ]);
 
-        return redirect('/')->with('success', 'Silahkan Ambil Buku!😊');
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Peminjaman Buku Berhasil.',
+        ]);
+
+        return redirect('/')
+            ->with('success', 'Silahkan Ambil Buku! 😊');
     }
 
     /**
@@ -83,6 +119,10 @@ class TransactionController extends Controller
         $book = Book::find($id);
         $borrowed_class = Transaction::where('book_id', '=', $id);
         $borrowed_class = $borrowed_class->where('return_time', '=', null)->get();
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Buku Berhasil Dikembalikan.',
+        ]);
         return view('book.formPengembalian', ['title' => 'Formulir Pengembalian Buku', 'book' => $book, 'transactions' => $borrowed_class]);
     }
 

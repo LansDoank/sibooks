@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Book extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','stock','author','publisher','grade_id','qr_code','image','year'];
+    protected $fillable = ['title','slug','stock','author','publisher','grade_id','qr_code','image','year'];
     protected $with = ['kelas'];
 
     public function kelas(): BelongsTo {

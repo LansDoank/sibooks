@@ -1,17 +1,25 @@
 <?php
 
 // use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AkunController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Book;
-use App\Models\Transaction;
+
 
 Route::get('/', [IndexController::class,'index'])->name('index');
+
+Route::get('/login',[AuthController::class,'login'])->name('login');
+
+Route::post('/user/login', [AuthController::class, 'loginPost'])->name('login.post');
+
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+// Book Routes
 
 Route::get('/book/kelas', [BookController::class, 'kelas'])->name('book.kelas');
 
@@ -25,26 +33,29 @@ Route::post('/book/pinjam', [TransactionController::class, 'store'])->name('tran
 
 Route::get('/book/pengembalian/{book}', [TransactionController::class, 'edit'])->name('transaction.edit');
 
-
 Route::post('/book/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
 
-Route::get('/user/login', [UserController::class, 'login'])->name('login');
-
-Route::post('/user/login', [UserController::class, 'loginPost']);
-
-Route::post('/user/logout',[UserController::class,'logout'])->name('logout');
+// User Routes
 
 Route::get('/user/register', [UserController::class, 'register'])->name('register');
 
 Route::post('/user/store', [UserController::class, 'registerPost']);
 
-
 Route::get('/user/logout', [UserController::class, 'logout'])->name('logout');
-
 
 Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTransaction'])->name('api.transaction');
 
+// Admin Routes
+
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
+
+// Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
+
+// Route::post('/admin/login', [AdminController::class, 'loginPost']);
+
+Route::get('/admin/school', [AdminController::class, 'school'])->name('admin.data')->middleware('auth');
+
+Route::post('/admin/school/update', [AdminController::class, 'schoolUpdate'])->name('admin.school.update')->middleware('auth');
 
 Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user')->middleware('auth');
 
@@ -64,6 +75,32 @@ Route::get('/admin/book/create', [BookController::class, 'create'])->name('book.
 
 Route::post('/admin/book/store', [BookController::class, 'store'])->name('book.store')->middleware('auth');
 
+Route::get('/admin/book/report/pdf', [BookController::class, 'pdf'])->name('admin.pdf')->middleware('auth');
+
+Route::get('/admin/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit')->middleware('auth');
+
+Route::post('/admin/book/update', [BookController::class, 'update'])->name('book.update')->middleware('auth');
+
+Route::get('/admin/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('auth');
+
 Route::get('/admin/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
 
 Route::get('/admin/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('auth');
+
+Route::get('/admin/class', [AdminController::class, 'class'])->name('admin.class')->middleware('auth');
+
+Route::get('/admin/class/create', [ClassController::class, 'create'])->name('class.create')->middleware('auth');
+
+Route::post('/admin/class/store', [ClassController::class, 'store'])->name('class.store')->middleware('auth');
+
+Route::get('/admin/class/edit/{id}', [ClassController::class, 'edit'])->name('class.edit')->middleware('auth');
+
+Route::post('/admin/class/update', [ClassController::class, 'update'])->name('class.update')->middleware('auth');
+
+Route::get('/admin/class/delete/{id}', [ClassController::class, 'delete'])->name('class.delete')->middleware('auth');
+
+// Google Auth
+
+Route::get('/auth-google-redirect', [AuthController::class, 'google_redirect']);
+
+Route::get('/auth-google-callback', [AuthController::class, 'google_callback']);
