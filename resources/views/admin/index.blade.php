@@ -123,7 +123,7 @@
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
+                                    <canvas id="transactionChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +134,12 @@
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Grafik Pengguna</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Buku yang Tersedia</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="bookChart"></canvas>
+                                </div>
                             </div>
 
                         </div>
@@ -151,4 +156,99 @@
 
 
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ambil elemen canvas
+            const ctx = document.getElementById('transactionChart');
+
+            // Fetch data dari API Laravel kamu
+            fetch('/api/transaction/monthly') // Sesuaikan dengan route API kamu
+                .then(response => response.json())
+                .then(data => {
+                    // Mapping data untuk Chart.js
+                    const labels = data.map(item => item.label); // ['Jan', 'Feb', ...]
+                    const totals = data.map(item => item.total); // [2, 5, ...]
+
+                    // Inisialisasi Chart
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Jumlah Peminjaman',
+                                data: totals,
+                                borderColor: '#3b82f6', // Biru yang elegan
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                fill: true,
+                                tension: 0.4, // Membuat garis sedikit melengkung (smooth)
+                                borderWidth: 3,
+                                pointRadius: 4,
+                                pointBackgroundColor: '#3b82f6'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false } // Sembunyikan label dataset jika hanya satu
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { stepSize: 1 } // Karena jumlah buku selalu bulat
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching chart data:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('bookChart');
+
+        // Panggil API yang sudah kita buat tadi
+        fetch('/api/book/status') // Pastikan URL sesuai dengan route kamu
+            .then(response => response.json())
+            .then(data => {
+                new Chart(ctx, {
+                    type: 'pie', // Bisa diganti 'doughnut' jika ingin lubang di tengah
+                    data: {
+                        labels: data.labels, // ["Sedang Dipinjam", "Tersedia"]
+                        datasets: [{
+                            data: data.totals, // [3, 24]
+                            backgroundColor: [
+                                '#3b82f6', // Biru (Sedang Dipinjam)
+                                '#10b981'  // Hijau (Tersedia)
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 2,
+                            hoverOffset: 15 // Animasi membesar saat kursor di atasnya
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom', // Letakkan keterangan di bawah
+                                labels: {
+                                    padding: 20,
+                                    font: { size: 12 }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    // Menambahkan teks "Jenis Buku" pada tooltip
+                                    label: function(context) {
+                                        return ` ${context.label}: ${context.raw} Jenis Buku`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Gagal memuat grafik:', error));
+    });
+    </script>
 </x-dashboard>

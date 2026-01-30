@@ -1,6 +1,7 @@
 <?php
 
 // use App\Http\Controllers\BookController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ClassController;
@@ -51,6 +52,10 @@ Route::prefix('user')->group(function() {
 // Route Api
 
 Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTransaction'])->name('api.transaction');
+
+Route::get('/api/transaction/monthly',[DashboardController::class,'getMonthly']);
+
+Route::get('/api/book/status',[DashboardController::class,'getBookStatus']);
 
 // Admin Routes
 
