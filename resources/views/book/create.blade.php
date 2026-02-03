@@ -17,7 +17,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penulis</label>
                         <input type="text" name="author" id="author"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Masukkan Penulis Buku" >
+                            placeholder="Masukkan Penulis Buku">
                     </div>
                     <div class="w-full">
                         <label for="publisher"
@@ -27,8 +27,8 @@
                             placeholder="Masukkan Penerbit">
                     </div>
                     <div class="w-full">
-                        <label for="year"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun Terbit</label>
+                        <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tahun
+                            Terbit</label>
                         <input type="number" name="year" id="year"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Masukkan Tahun Terbit">
@@ -41,13 +41,26 @@
                             placeholder="Masukkan Stok" required>
                     </div>
                     <div>
-                        <label for="grade"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tingkat Kelas</label>
+                        <label for="grade" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tingkat
+                            Kelas</label>
                         <select id="grade" name="grade"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required>
                             <option disabled selected>Pilih Tingkat Kelas</option>
                             @foreach ($grades as $grade)
-                            <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+                                <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="rack" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tingkat
+                            Kelas</label>
+                        <select id="rack" name="rack"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required>
+                            <option disabled selected>Pilih Rak Buku</option>
+                            @foreach ($racks as $rack)
+                                <option value="{{ $rack->id }}">{{ $rack->name }}</option>
                             @endforeach
                         </select>
                     </div>

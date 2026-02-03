@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Classroom;
 use App\Models\Grade;
 use App\Models\Kelas;
+use App\Models\Rack;
 use App\Models\Role;
 use App\Models\School;
 use App\Models\Transaction;
@@ -72,8 +73,9 @@ class BookController extends Controller
         $fullname = $user->fullname;
         $books = Book::all();
         $grades = Grade::all();
-        // $roles = Role::all();
-        return view('book.create', ['title' => 'Form Buat Buku', 'heading' => 'Buku', 'fullname' => $fullname, 'user' => $user, 'books' => $books, 'grades' => $grades]);
+        $racks = Rack::all();
+
+        return view('book.create', ['title' => 'Form Buat Buku', 'heading' => 'Buku', 'fullname' => $fullname, 'user' => $user, 'books' => $books, 'grades' => $grades,'racks' => $racks]);
     }
 
     /**
@@ -82,8 +84,9 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $book = Book::create([
+            'rack_id' => $request->rack,
             'qr_code' => config('app.url') . '/book/' . Str::slug($request->title),
-            'image' => $request->file('image'),
+            'image' => $request->file('image')->store('books','public'),
             'slug' => Str::slug(fake()->sentence()) ,
             'title' => $request->title,
             'stock' => $request->stock,
@@ -169,5 +172,10 @@ class BookController extends Controller
     public function pdf()
     {
         return view('book.pdf', ['books' => Book::all(), 'title' => 'Laporan Data Buku']);
+    }
+
+    public function getDetailBookApi($slug) {
+        $book = Book::with('rack')->where('slug', $slug)->firstOrFail();
+        return response()->json($book);
     }
 }

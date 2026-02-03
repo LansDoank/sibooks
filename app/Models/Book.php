@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Book extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','slug','stock','author','publisher','grade_id','qr_code','image','year'];
+    protected $fillable = ['rack_id','title','slug','stock','author','publisher','grade_id','qr_code','image','year'];
     protected $with = ['kelas'];
 
     public function kelas(): BelongsTo {
@@ -22,5 +22,9 @@ class Book extends Model
 
     public function transaction() {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function rack() {
+        return $this->belongsTo(Rack::class);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Rack;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
 use Illuminate\Support\Str;
@@ -15,11 +14,7 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        Rack::create([
-            "name" => "fafaw",
-            "coordinate" => "afawf",
-            'category' => 'dafaw'
-        ]);
+        
 
 
         Book::create([
@@ -83,7 +78,7 @@ class BookSeeder extends Seeder
             'grade_id' => 1
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 2,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/dpplgxi.jpeg',
             'title' => "Dasar Dasar Perangkat Lunak dan Gim",
@@ -95,7 +90,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 2,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/foxi.jpeg',
             'title' => "Front Office",
@@ -107,7 +102,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 2,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/mtkx.jpeg',
             'title' => "Matematika",
@@ -119,7 +114,7 @@ class BookSeeder extends Seeder
             'grade_id' => 1
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 2,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/mtkxi.jpeg',
             'title' => "Matematika",
@@ -131,7 +126,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 2,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/otkhxii.jpeg',
             'title' => "Otomatisasi Tata Kelola Humas dan Keprotokolan",
@@ -143,7 +138,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 3,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pabpxi.jpeg',
             'title' => "Pendidikan Agama dan Budi Pekerti",
@@ -155,7 +150,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 3,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pabpxii.jpeg',
             'title' => "Pendidikan Agama dan Budi Pekerti",
@@ -167,7 +162,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 3,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pkkxi (2).jpeg',
             'title' => "Projek Kreatif dan Kewirausahaan",
@@ -179,7 +174,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 3,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pkkxi.jpeg',
             'title' => "Projek Kreatif dan Kewirausahaan",
@@ -191,7 +186,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 3,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pksxi.jpeg',
             'title' => "Pengelolaan Keuangan Sederhana",
@@ -203,7 +198,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 4,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pkxi.jpeg',
             'title' => "Pengelolaan Kearsipan",
@@ -215,7 +210,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 4,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/ppknxi.jpeg',
             'title' => "Pendidikan Pancasila dan Kewarganegaraan",
@@ -227,7 +222,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 5,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/sejarahxi.jpeg',
             'title' => "Sejarah Indonesia",
@@ -239,7 +234,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 5,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/tikx.jpeg',
             'title' => "Teknologi Informasi dan Komunikasi",
@@ -251,7 +246,7 @@ class BookSeeder extends Seeder
             'grade_id' => 1
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 6,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/tpxi.jpeg',
             'title' => "Teknologi Perkantoran",
@@ -263,7 +258,7 @@ class BookSeeder extends Seeder
             'grade_id' => 2
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 6,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/basdatxii.jpeg',
             'title' => "Basis Data",
@@ -275,7 +270,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 7,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/binggrisxii.jpeg',
             'title' => "Bahasa Inggris",
@@ -287,7 +282,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 7,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/otkkpxii.jpeg',
             'title' => "Otomatisasi Tata Kelola Kepegawaian",
@@ -299,7 +294,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 8,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/otkkxii.jpeg',
             'title' => "Otomatisasi Tata Kelola Keuangan",
@@ -311,7 +306,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 8,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pboxii.jpeg',
             'title' => "Pemograman Berbasis Objek",
@@ -323,7 +318,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 9,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pkkxii.jpeg',
             'title' => "Produk Kreatif dan Kewirausahaan",
@@ -335,7 +330,7 @@ class BookSeeder extends Seeder
             'grade_id' => 3
         ]);
         Book::create([
-            'rack_id' => 1,
+            'rack_id' => 9,
             'qr_code' => config('app.url') . '/book/' . Str::slug(fake()->sentence()),
             'image' => '/img/pwpbxii.jpeg',
             'title' => "Pemograman Web Perangkat Bergerak",

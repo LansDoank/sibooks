@@ -57,6 +57,8 @@ Route::get('/api/transaction/monthly',[DashboardController::class,'getMonthly'])
 
 Route::get('/api/book/status',[DashboardController::class,'getBookStatus']);
 
+Route::get('/api/book/{slug}',[BookController::class,'getDetailBookApi'])->name('getDetailBookApi');
+
 // Admin Routes
 
 Route::middleware(['isAdmin'])->prefix('admin')->group(function () { 

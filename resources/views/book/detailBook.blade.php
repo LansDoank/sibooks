@@ -4,11 +4,11 @@
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8">
                 <div class="shrink-0 max-w-md lg:max-w-lg flex justify-end">
-                    <img class="w-[65%] object-cover" src="{{$book->image}}" />
+                    <img class="w-[65%] object-cover" src="{{asset('storage/' . $book->image)}}" />
                 </div>
 
                 <div class="mt-6 sm:mt-8 lg:mt-0 flex flex-col justify-center">
-                    <h1 class="text-xl text-gray-900 font-bold sm:text-4xl mb-7 font-semibold dark:text-white">
+                    <h1 class="text-xl text-gray-900 sm:text-4xl mb-7 font-semibold dark:text-white">
                         {{ $book->title }}
                     </h1>
                     <div class="text-xl">
@@ -51,7 +51,7 @@
                     <div class="w-full mt-3 sm:items-center sm:mt-5 grid grid-cols-2 gap-3">
                         <button onclick="bukaPeta('{{ $book->id_rak }}')"
                             class="bg-blue-600 hover:bg-blue-700 text-center text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300 flex justify-center items-center gap-2">
-                             Lihat Lokasi Rak
+                            Lihat Lokasi Rak
                         </button>
 
                     </div>
@@ -97,20 +97,7 @@
             const modal = document.getElementById('modalPeta');
             modal.classList.remove('hidden');
 
-            // Reset semua highlight yang ada sebelumnya
-            // Sesuaikan selector (rect/path) dengan elemen rak di SVG Anda
-            document.querySelectorAll('rect, path').forEach(el => {
-                el.classList.remove('highlight-rak');
-            });
-
-            // Cari elemen rak berdasarkan ID dari database
-            const targetRak = document.getElementById(rakId);
-
-            if (targetRak) {
-                targetRak.classList.add('highlight-rak');
-            } else {
-                console.error('ID Rak ' + rakId + ' tidak ditemukan di file SVG.');
-            }
+            
         }
 
         function tutupModal() {
@@ -141,15 +128,27 @@
             const rakTarget = document.getElementById(idRakYangDicari);
             if (rakTarget) {
                 rakTarget.style.fill = warnaHighlight;
-                console.log("Lokasi ditemukan: " + idRakYangDicari);
-            } else {
-                console.error("ID Rak tidak ditemukan: " + idRakYangDicari);
             }
         }
 
-        // CARA PENGGUNAAN:
-        // Panggil fungsi ini saat user memilih buku atau saat halaman dimuat
-        // Contoh: Menyorot rak B1
-        highlightRak('E3');
+        // Gabungkan logicnya seperti ini:
+        async function inisialisasiBuku() {
+            const pathArray = window.location.pathname.split('/');
+            const slug = pathArray[pathArray.length - 1];
+
+            try {
+                const response = await fetch(`http://localhost:8000/api/book/${slug}`);
+                const buku = await response.json();
+
+                if (buku) {
+                    highlightRak(buku.rack.name);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        // Jalankan fungsi saat halaman selesai loading
+        window.onload = inisialisasiBuku;
     </script>
 </x-layout>

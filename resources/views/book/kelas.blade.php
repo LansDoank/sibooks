@@ -2,8 +2,9 @@
 <x-layout :school="$school">
     <section class="max-w-screen-lg  mx-auto p-8 my-4">
         <div class="text-center mb-8">
-            @if ($grade|| request('search'))
-                <h1 class="font-semibold text-3xl">Hasil pencarian dari : {{ $grade ? "Kelas " .  $grade :  request('search') }}</h1>
+            @if ($grade || request('search'))
+                <h1 class="font-semibold text-3xl">Hasil pencarian dari :
+                    {{ $grade ? "Kelas " . $grade : request('search') }}</h1>
             @endif
         </div>
         <div>
@@ -32,22 +33,23 @@
     <section class="max-w-screen-lg rounded-md bg-white shadow mx-auto p-8 my-14 border">
         <div>
             @if($grade)
-            <div class="mb-5">
-                <h1 class="text-2xl font-medium">Buku Kelas {{$grade}}</h1>
-            </div>
+                <div class="mb-5">
+                    <h1 class="text-2xl font-medium">Buku Kelas {{$grade}}</h1>
+                </div>
             @endif
             <div class="flex gap-5 flex-wrap justify-center">
                 @foreach ($books as $buku)
                     <div
                         class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="/book/{{ $buku->slug }}">
-                            <img class="rounded-t-lg object-cover w-full h-72"src="{{$buku->image}}"
+                            <img class="rounded-t-lg object-cover w-full h-72" src="{{asset('storage/' . $buku->image)}}"
                                 alt="{{ $buku->title }}" />
                         </a>
                         <div class="p-3">
                             <a href="/book/{{ $buku->slug }}">
                                 <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                    {{ Str::limit($buku->title, 15) }}</h5>
+                                    {{ Str::limit($buku->title, 15) }}
+                                </h5>
                             </a>
                             <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
                                 <p class="mb-2 text-sm font-medium text-gray-700">

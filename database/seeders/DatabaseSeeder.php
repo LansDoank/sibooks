@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
         
 
-        $this->call([GradeSeeder::class, BookSeeder::class]);
+        $this->call([RackSeeder::class,GradeSeeder::class, BookSeeder::class]);
 
         $role = ['admin', 'user'];
 
