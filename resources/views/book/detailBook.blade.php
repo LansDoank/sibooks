@@ -46,7 +46,14 @@
                             class=" flex justify-center text-white font-medium items-center hover:bg-red-600 transition border py-2 px-5 rounded bg-red-500">
                             Kembalikan
                         </a>
-                        
+
+                    </div>
+                    <div class="w-full mt-3 sm:items-center sm:mt-5 grid grid-cols-2 gap-3">
+                        <button onclick="bukaPeta('{{ $book->id_rak }}')"
+                            class="bg-blue-600 hover:bg-blue-700 text-center text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300 flex justify-center items-center gap-2">
+                             Lihat Lokasi Rak
+                        </button>
+
                     </div>
 
 
@@ -55,4 +62,94 @@
             </div>
         </div>
     </section>
+
+
+    <div id="modalPeta" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75" onclick="tutupModal()"></div>
+
+            <div
+                class="inline-block  overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+                <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4 ">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-gray-900">Lokasi Buku di Perpustakaan</h3>
+                        <button onclick="tutupModal()"
+                            class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                    </div>
+
+                    <div class="border-2 border-dashed border-gray-200 rounded-xl p-4 bg-gray-50">
+                        <div class="w-full h-auto">
+                            {{-- Pastikan file ada di: public/img/denah-perpus.svg --}}
+                            {!! file_get_contents(public_path('img/denah-perpus.svg')) !!}
+                        </div>
+                    </div>
+
+                    <p class="mt-4 text-sm text-gray-500 italic">
+                        *Rak yang berwarna kuning adalah lokasi buku yang Anda cari.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function bukaPeta(rakId) {
+            const modal = document.getElementById('modalPeta');
+            modal.classList.remove('hidden');
+
+            // Reset semua highlight yang ada sebelumnya
+            // Sesuaikan selector (rect/path) dengan elemen rak di SVG Anda
+            document.querySelectorAll('rect, path').forEach(el => {
+                el.classList.remove('highlight-rak');
+            });
+
+            // Cari elemen rak berdasarkan ID dari database
+            const targetRak = document.getElementById(rakId);
+
+            if (targetRak) {
+                targetRak.classList.add('highlight-rak');
+            } else {
+                console.error('ID Rak ' + rakId + ' tidak ditemukan di file SVG.');
+            }
+        }
+
+        function tutupModal() {
+            const modal = document.getElementById('modalPeta');
+            modal.classList.add('hidden');
+        }
+
+        // Tutup modal dengan tombol Esc
+        window.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                tutupModal();
+            }
+        });
+        function highlightRak(idRakYangDicari) {
+            // 1. Tentukan warna
+            const warnaDefault = "#8B4513"; // Cokelat
+            const warnaHighlight = "#FFFF00"; // Kuning
+
+            // 2. Ambil semua elemen rak (misalnya semua 'rect' di dalam SVG)
+            const semuaRak = document.querySelectorAll('#denah-perpustakaan rect');
+
+            // 3. Reset semua rak ke warna cokelat
+            semuaRak.forEach(rak => {
+                rak.style.fill = warnaDefault;
+            });
+
+            // 4. Cari rak yang spesifik dan ubah warnanya menjadi kuning
+            const rakTarget = document.getElementById(idRakYangDicari);
+            if (rakTarget) {
+                rakTarget.style.fill = warnaHighlight;
+                console.log("Lokasi ditemukan: " + idRakYangDicari);
+            } else {
+                console.error("ID Rak tidak ditemukan: " + idRakYangDicari);
+            }
+        }
+
+        // CARA PENGGUNAAN:
+        // Panggil fungsi ini saat user memilih buku atau saat halaman dimuat
+        // Contoh: Menyorot rak B1
+        highlightRak('E3');
+    </script>
 </x-layout>

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Classroom;
 use App\Models\Grade;
+use App\Models\Rack;
 use App\Models\Role;
 use App\Models\School;
 use App\Models\User;
@@ -19,13 +20,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
+        
 
         $this->call([GradeSeeder::class, BookSeeder::class]);
-
-        // Book::factory(30)->recycle([
-        //     Grade::all()
-        // ])->create();
 
         $role = ['admin', 'user'];
 
@@ -42,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
         ]);
-        
+
         User::create([
             'role_id' => 2,
             'fullname' => 'User Biasa',
