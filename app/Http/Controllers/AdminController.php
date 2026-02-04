@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Classroom;
+use App\Models\Rack;
 use App\Models\Role;
 use App\Models\School;
 use App\Models\Transaction;
@@ -72,6 +73,17 @@ class AdminController extends Controller
         $books = Book::all();
         return view('admin.book', ['title' => 'Tabel Akun', 'heading' => 'Buku', 'fullname' => $fullname, 'books' => $books, 'user' => $user]);
     }
+
+    public function rack()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+
+        $racks = Rack::all();
+        return view('admin.rack', ['title' => 'Tabel Rak Buku', 'heading' => 'Rak Buku', 'fullname' => $fullname, 'racks' => $racks, 'user' => $user]);
+    }
+
+    
 
     public function transaction()
     {

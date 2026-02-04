@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rack_id')->constrained(
+            $table->foreignId('rack_id')->nullable()->constrained(
                 table: 'racks', indexName: 'rack_id'
             );
             $table->string('qr_code')->nullable();

@@ -6,13 +6,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RackController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'])->name('index')->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 
@@ -95,6 +96,16 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     
     Route::get('/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('isAdmin');
     
+    Route::get('/rack', [AdminController::class, 'rack'])->name('admin.rack')->middleware('isAdmin');
+
+    Route::get('/rack/create', [RackController::class, 'create'])->name('rack.create')->middleware('isAdmin');
+    
+    Route::post('/rack/post', [RackController::class, 'store'])->name('rack.store')->middleware('isAdmin');
+
+    Route::get('/rack/delete/{id}', [RackController::class, 'destroy'])->name('admin.rack.delete')->middleware('isAdmin');
+
+    Route::get('/rack/delete/{id}', [RackController::class, 'destroy'])->name('admin.rack.delete')->middleware('isAdmin');
+
     Route::get('/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
     
     Route::get('/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');

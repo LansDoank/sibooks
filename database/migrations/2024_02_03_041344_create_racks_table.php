@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('racks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('coordinate')->nullable();
+            $table->string('qr_code')->nullable();
             $table->string('category');
             $table->timestamps();
         });
