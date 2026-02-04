@@ -98,11 +98,13 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     
     Route::get('/rack', [AdminController::class, 'rack'])->name('admin.rack')->middleware('isAdmin');
 
-    Route::get('/rack/create', [RackController::class, 'create'])->name('rack.create')->middleware('isAdmin');
+    Route::get('/rack/create',  [RackController::class, 'create'])->name('rack.create')->middleware('isAdmin');
     
-    Route::post('/rack/post', [RackController::class, 'store'])->name('rack.store')->middleware('isAdmin');
+    Route::post('/rack/store', [RackController::class, 'store'])->name('rack.store')->middleware('isAdmin');
 
-    Route::get('/rack/delete/{id}', [RackController::class, 'destroy'])->name('admin.rack.delete')->middleware('isAdmin');
+    Route::get('/rack/edit/{id}', [RackController::class, 'edit'])->name('rack.edit')->middleware('isAdmin');
+
+    Route::post('/rack/update', [RackController::class, 'update'])->name('rack.update')->middleware('isAdmin');
 
     Route::get('/rack/delete/{id}', [RackController::class, 'destroy'])->name('admin.rack.delete')->middleware('isAdmin');
 

@@ -21,6 +21,11 @@
                                 Penulis : {{ $book->author }}
                             </p>
                         </div>
+                        <div class="mt-1 sm:items-center sm:gap-4 sm:flex">
+                            <p class=" font-medium text-gray-600 dark:text-white">
+                                Rak : {{ $book->rack->name ?? 'Tidak ada rak' }}
+                            </p>
+                        </div>
                     </div>
                     @if($book->stock <= 0)
                         <div class="my-3">
