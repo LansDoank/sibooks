@@ -170,14 +170,9 @@
                                 <img class="img-profile rounded-circle" src={{$user->image}}>
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in py-0"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item py-2" href="/logout" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                                <a class="dropdown-item py-2 flex items-center" href="/admin/school">
+                                <a class="dropdown-item py-3 flex items-center" href="/admin/school">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-gear-fill mr-2" viewBox="0 0 16 16">
                                         <path
@@ -185,6 +180,12 @@
                                     </svg>
                                     Data Sekolah
                                 </a>
+                                <a class="dropdown-item py-3" href="/logout" data-toggle="modal"
+                                    data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                                
                             </div>
                         </li>
 

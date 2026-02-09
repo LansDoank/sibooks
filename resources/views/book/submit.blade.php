@@ -34,13 +34,13 @@
             </div>
             <div class="mb-6">
                 <label for="borrower-image" id="borrower-image"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Peminjam :
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Buku :
                 </label>
-                <video id="video" autoplay playsinline style="width:100%;"></video>
+                <!-- <video id="video" autoplay playsinline style="width:100%;"></video>
                 <canvas id="canvas" hidden></canvas>
 
                 <input type="hidden" id="borrower_image" name="borrower_image">
-                <p id="status">Mendeteksi wajah...</p>
+                <p id="status">Mendeteksi wajah...</p> -->
             </div>
             <div class="mb-6">
                 <label for="kondisi_buku" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kondisi

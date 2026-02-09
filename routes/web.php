@@ -34,7 +34,9 @@ Route::middleware(['auth'])->prefix('book')->group(function () {
 
     Route::post('/pinjam', [TransactionController::class, 'store'])->name('transaction.post');
 
-    Route::get('/pengembalian/{book}', [TransactionController::class, 'edit'])->name('transaction.edit');
+    Route::get('/submit/{book}', [TransactionController::class, 'submit'])->name('transaction.submit');
+
+    Route::get('/pengembalian/{slug}', [TransactionController::class, 'edit'])->name('transaction.edit');
 
     Route::post('/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
 });

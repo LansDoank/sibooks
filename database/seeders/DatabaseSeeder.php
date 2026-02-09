@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'role_id' => 1,
             'fullname' => 'Admin',
-            'image' => '/img/default-pp.jpg',
+            'image' => '/img/default-pp.png',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
         ]);
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'role_id' => 2,
             'fullname' => 'User Biasa',
-            'image' => '/img/default-pp.jpg',
+            'image' => '/img/default-pp.png',
             'email' => 'user@gmail.com',
             'password' => bcrypt('user'),
         ]);

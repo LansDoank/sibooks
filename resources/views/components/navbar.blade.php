@@ -1,4 +1,5 @@
-@props(['school','isLogin'])
+@props(['school', 'isLogin'])
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -38,7 +39,57 @@
                         class="block py-2 px-3 flex items-center text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Kelas
                         XII</a>
                 </li>
-                <form action="/user/logout" method="POST" class="m-0">
+                <li class="flex items-center">
+                    <button id="dropdownUserButton" data-dropdown-toggle="dropdownUser"
+                        class="flex items-center text-sm font-medium text-gray-900 px-2 hover:text-blue-600 dark:hover:text-blue-500 md:me-0 focus:ring-4  dark:text-white"
+                        type="button">
+                        <span class="sr-only">Open user menu</span>
+                        <span class="mr-3 hidden lg:inline">{{ $isLogin->fullname }}</span>
+                        <img class="w-10 h-10 rounded-circle " src="{{ $isLogin->image }}" alt="user photo">
+
+                    </button>
+
+                    <div id="dropdownUser"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                            <div class="font-medium truncate">{{ $isLogin->email ?? 'User' }}</div>
+                        </div>
+                        <ul class=" text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserButton">
+                        @if ($isLogin->role_id == 1)
+                                <li>
+                                    <a href="/admin"
+                                        class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-person-circle me-2" viewBox="0 0 16 16">
+                                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                            <path fill-rule="evenodd"
+                                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                        </svg>
+                                        Halaman Admin
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                        <ul class=" text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserButton">
+                            <li>
+                                <a href="/admin/school"
+                                    class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                        class="bi bi-gear-fill mr-2" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                                    </svg>
+                                    Data Sekolah
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="">
+                            <a href="/logout"
+                                class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Keluar</a>
+                        </div>
+                    </div>
+                </li>
+                <!-- <form action="/user/logout" method="POST" class="m-0">
                     @csrf
                     @if(!$isLogin)
                         <li class="text-center">
@@ -54,7 +105,7 @@
                         </li>
 
                     @endif
-                </form>
+                </form> -->
             </ul>
         </div>
     </div>

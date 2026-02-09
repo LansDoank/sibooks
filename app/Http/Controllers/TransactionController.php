@@ -38,6 +38,12 @@ class TransactionController extends Controller
         return view('book.formPeminjaman', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Peminjaman Buku']);
     }
 
+    public function submit($id) {
+        $book = Book::find($id);
+        $classrooms = Classroom::all();
+        return view('book.submit', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Pengajuan Peminjaman Buku']);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -82,6 +88,7 @@ class TransactionController extends Controller
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
+            $transaction->kondisi_buku = $request->kondisi_buku;
             $transaction->borrow_time = now();
             $transaction->save();
         }

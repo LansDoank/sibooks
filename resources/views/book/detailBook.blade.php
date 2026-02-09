@@ -34,11 +34,19 @@
                     @endif
                     <div class="w-full mt-3 sm:items-center sm:mt-5 grid grid-cols-2 gap-3">
                         @if ($book->stock > 0)
-                            <a href="/book/pinjam/{{ $book->id }}" data-modal-target="popup-modal"
-                                data-modal-toggle="popup-modal" type="button" title=""
-                                class=" flex justify-center text-white font-medium items-center bg-green-600  border py-2 px-5 rounded bg-green-500 hover:bg-green-700 transition">
-                                Pinjam
-                            </a>
+                            @if ($isLogin->role_id == 1)
+                                <a href="/book/pinjam/{{ $book->id }}" data-modal-target="popup-modal"
+                                    data-modal-toggle="popup-modal" type="button" title=""
+                                    class=" flex justify-center text-white font-medium items-center bg-green-600  border py-2 px-5 rounded bg-green-500 hover:bg-green-700 transition">
+                                    Pinjam
+                                </a>
+                            @else
+                                <a href="/book/submit/{{ $book->id }}" data-modal-target="popup-modal"
+                                    data-modal-toggle="popup-modal" type="button" title=""
+                                    class=" flex justify-center text-white font-medium items-center bg-green-600  border py-2 px-5 rounded bg-green-500 hover:bg-green-700 transition">
+                                    Ajukan Peminjaman
+                                </a>
+                            @endif
                         @else
                             <button disabled data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button"
                                 title=""
@@ -102,7 +110,7 @@
             const modal = document.getElementById('modalPeta');
             modal.classList.remove('hidden');
 
-            
+
         }
 
         function tutupModal() {

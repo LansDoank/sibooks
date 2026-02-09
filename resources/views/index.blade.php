@@ -1,5 +1,5 @@
 <x-layout :school="$school">
-    <x-navbar :school="$school" :isLogin="$isLogin"></x-navbar>
+    <x-navbar :school="$school" :isLogin="$isLogin" :user="$isLogin"></x-navbar>
     <x-slot:isLogin>{{ $isLogin }}</x-slot:isLogin>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-md sm:py-16 lg:px-6">

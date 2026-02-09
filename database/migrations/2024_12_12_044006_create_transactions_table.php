@@ -19,6 +19,7 @@ return new class extends Migration
                 table: 'books', indexName: 'transaction_book_id'
             );
             $table->integer('jumlah_buku');
+            $table->enum('kondisi_buku',['Mulus','Rusak Ringan','Butuh Perbaikan'])->nullable();
             $table->dateTime('borrow_time');
             $table->dateTime('return_time')->nullable();
             $table->timestamps();

@@ -18,6 +18,7 @@
                                 <th>Kelas Peminjam</th>
                                 <th class="w-48">Nama Buku</th>
                                 <th>Jumlah Buku</th>
+                                <th>Kondisi Buku</th>
                                 <th>Waktu Pinjam</th>
                                 <th>Waktu Pengembalian</th>
                             </tr>
@@ -28,6 +29,7 @@
                                 <th>Kelas Peminjam</th>
                                 <th>Nama Buku</th>
                                 <th>Jumlah Buku</th>
+                                <th>Kondisi Buku</th>
                                 <th>Waktu Pinjam</th>
                                 <th>Waktu Pengembalian</th>
                             </tr>
@@ -37,16 +39,17 @@
                                                     <tr>
                                                         <td>
                                                             <img class="w-24 h-24 object-cover" src="{{ 
-                                                            $transaction->borrower_image
+                                                                                    $transaction->borrower_image
                                 ? (str_contains($transaction->borrower_image, 'https')
                                     ? $transaction->borrower_image
                                     : asset('storage/' . $transaction->borrower_image))
                                 : asset('img/default-pp.jpg') 
-                                                         }}" alt="">
+                                                                                 }}" alt="">
                                                         </td>
                                                         <td>{{ $transaction->kelas_peminjam }}</td>
                                                         <td>{{ $transaction->book->title }}</td>
                                                         <td>{{ $transaction->jumlah_buku }}</td>
+                                                        <td>{{ $transaction->kondisi_buku }}</td>
                                                         <td>{{ $transaction->borrow_time->format('d M Y , H:i') }}</td>
                                                         <td>{{ $transaction->return_time ?? 'Belum Dikembalikan' }}</td>
                                                     </tr>
