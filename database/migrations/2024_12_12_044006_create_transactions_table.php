@@ -20,6 +20,7 @@ return new class extends Migration
             );
             $table->integer('jumlah_buku');
             $table->enum('kondisi_buku',['Mulus','Rusak Ringan','Butuh Perbaikan'])->nullable();
+            $table->boolean('is_verified')->default(false);
             $table->dateTime('borrow_time');
             $table->dateTime('return_time')->nullable();
             $table->timestamps();

@@ -39,6 +39,8 @@ Route::middleware(['auth'])->prefix('book')->group(function () {
     Route::get('/pengembalian/{slug}', [TransactionController::class, 'edit'])->name('transaction.edit');
 
     Route::post('/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
+
+    Route::get('/verification/{slug}', [TransactionController::class, 'verification'])->name('transaction.verification');
 });
 
 // User Routes  

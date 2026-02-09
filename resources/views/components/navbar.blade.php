@@ -45,7 +45,7 @@
                         type="button">
                         <span class="sr-only">Open user menu</span>
                         <span class="mr-3 hidden lg:inline">{{ $isLogin->fullname }}</span>
-                        <img class="w-10 h-10 rounded-circle " src="{{ $isLogin->image }}" alt="user photo">
+                        <img class="w-10 h-10 rounded-full overflow-hidden" src="{{ $isLogin->image }}" alt="user photo">
 
                     </button>
 

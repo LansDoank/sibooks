@@ -23,6 +23,12 @@ class TransactionController extends Controller
         return response()->json($transactions);
     }
 
+    public function verification( $id)
+    {
+        $transaction = Transaction::find($id);
+        return view('book.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
+    }
+
     public function index()
     {
         //
@@ -105,7 +111,7 @@ class TransactionController extends Controller
             'text' => 'Peminjaman Buku Berhasil.',
         ]);
 
-        return redirect('/')
+        return redirect('/book/verification/' . $transaction->id)
             ->with('success', 'Silahkan Ambil Buku! 😊');
     }
 
