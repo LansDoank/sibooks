@@ -56,7 +56,6 @@
         })
     })
 </script>
-<!-- <script src="https://unpkg.com/face-api.js"></script> -->
 <!-- <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
@@ -131,9 +130,8 @@
     });
 </script> -->
 <script defer src="https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js"></script>
-<script defer src="https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js"></script>
 
-<script>
+<!-- <script>
 document.addEventListener('DOMContentLoaded', () => {
 
     const video = document.getElementById('video');
@@ -203,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     });
 });
-</script>
+</script> -->
 
 
 </html>

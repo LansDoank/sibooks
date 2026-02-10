@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
-    protected $fillable = ['jumlah_buku','return_time'];
+    protected $fillable = ['jumlah_buku','return_time','is_verified'];
     protected $with = ['book'];
 
     protected $casts = [

@@ -29,6 +29,24 @@ class TransactionController extends Controller
         return view('book.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
     }
 
+    public function vericationAdmin( $id)
+    {
+        $transaction = Transaction::find($id);
+
+        $transaction->update([
+            'is_verified' => true
+        ]);
+
+        $transaction->save();
+
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Verifikasi Peminjaman Berhasil.',
+        ]);
+
+        return redirect('/');
+    }
+
     public function index()
     {
         //

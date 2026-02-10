@@ -44,11 +44,13 @@ class UserController extends Controller
             'email' => 'required|string|max:255',
             'password' => 'required|string',
             'role' => 'required',
+            'user_image' => 'required',
         ]);
 
         $user = User::create([
             'role_id' => $request->role,
             'fullname' => $request->fullname,
+            'image' => $request->input('user_image'),
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'created_at' => now(),
@@ -57,7 +59,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.login')->with('success', 'Akun berhasil dibuat.');
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat.');
     }
 
     public function logout(Request $request)

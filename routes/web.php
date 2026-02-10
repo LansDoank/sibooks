@@ -99,6 +99,8 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     Route::post('/book/update', [BookController::class, 'update'])->name('book.update')->middleware('isAdmin');
     
     Route::get('/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('isAdmin');
+
+    Route::get('/book/verification/{id}', [TransactionController::class, 'vericationAdmin'])->name('book.verificationAdmin')->middleware('isAdmin');
     
     Route::get('/rack', [AdminController::class, 'rack'])->name('admin.rack')->middleware('isAdmin');
 
