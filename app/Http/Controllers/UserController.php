@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use SweetAlert2\Laravel\Swal;
 
 class UserController extends Controller
@@ -47,10 +48,21 @@ class UserController extends Controller
             'user_image' => 'required',
         ]);
 
+        $userImage = $request->user_image ?? null;
+
+            if ($userImage) {
+                $userImage = str_replace('data:image/png;base64,', '', $userImage);
+                $userImage = str_replace(' ', '+', $userImage);
+    
+                $userImageName = 'user_image/' . uniqid() . '.png';
+    
+                Storage::disk('public')->put($userImageName, base64_decode($userImage));
+            }
+
         $user = User::create([
             'role_id' => $request->role,
             'fullname' => $request->fullname,
-            'image' => $request->input('user_image'),
+            'image' => $userImageName ?? null,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'created_at' => now(),

@@ -45,7 +45,13 @@
                         type="button">
                         <span class="sr-only">Open user menu</span>
                         <span class="mr-3 hidden lg:inline">{{ $isLogin->fullname }}</span>
-                        <img class="w-10 h-10 rounded-full overflow-hidden" src="{{ $isLogin->image }}" alt="user photo">
+                        <img class="w-10 h-10 rounded-full overflow-hidden" src="{{ 
+                                                                                    $isLogin->image
+    ? (str_contains($isLogin->image, 'https')
+        ? $isLogin->image
+        : asset('storage/' . $isLogin->image))
+    : asset('img/default-pp.jpg') 
+                                                                                 }}" alt="user photo">
 
                     </button>
 
@@ -55,7 +61,7 @@
                             <div class="font-medium truncate">{{ $isLogin->email ?? 'User' }}</div>
                         </div>
                         <ul class=" text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserButton">
-                        @if ($isLogin->role_id == 1)
+                            @if ($isLogin->role_id == 1)
                                 <li>
                                     <a href="/admin"
                                         class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">

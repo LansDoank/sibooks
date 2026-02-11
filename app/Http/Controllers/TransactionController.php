@@ -75,6 +75,7 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
 
+
         // cek transaksi lama untuk menghindari duplikat
         $transaction = Transaction::where('kelas_peminjam', $request->class)
             ->where('book_id', $request->id)
@@ -101,18 +102,34 @@ class TransactionController extends Controller
                 Storage::disk('public')->put($imageName, base64_decode($image));
             }
 
+            $bookImage = $request->book_image ?? null;
+
+            if ($bookImage) {
+                $bookImage = str_replace('data:image/png;base64,', '', $bookImage);
+                $bookImage = str_replace(' ', '+', $bookImage);
+    
+                $bookName = 'book_image/' . uniqid() . '.png';
+    
+                Storage::disk('public')->put($bookName, base64_decode($bookImage));
+            }
+
+
             $imageName = $imageName ?? null;
             
-            if($user->image) {
-                $imageName = $user->image;
-            }
+            // if($user->image) {
+            //     $imageName = $user->image;
+            // }
 
             // isi data transaksi
             $transaction->borrower_image = $imageName;
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
+            $transaction->book_image = $bookName ?? null;
             $transaction->kondisi_buku = $request->kondisi_buku;
+            if($user->role->name == 'admin') {
+                $transaction->is_verified = true;
+            }
             $transaction->borrow_time = now();
             $transaction->save();
         }
@@ -128,6 +145,11 @@ class TransactionController extends Controller
             'title' => 'Berhasil!',
             'text' => 'Peminjaman Buku Berhasil.',
         ]);
+
+
+        if($user->role->name === 'admin') {
+            return redirect('/')->with('success', 'Peminjaman buku berhasil');
+        }
 
         return redirect('/book/verification/' . $transaction->id)
             ->with('success', 'Silahkan Ambil Buku! 😊');

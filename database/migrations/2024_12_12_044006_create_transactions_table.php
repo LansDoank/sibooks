@@ -19,6 +19,7 @@ return new class extends Migration
                 table: 'books', indexName: 'transaction_book_id'
             );
             $table->integer('jumlah_buku');
+            $table->string('book_image')->nullable();
             $table->enum('kondisi_buku',['Mulus','Rusak Ringan','Butuh Perbaikan'])->nullable();
             $table->boolean('is_verified')->default(false);
             $table->dateTime('borrow_time');

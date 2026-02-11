@@ -131,7 +131,7 @@
 </script> -->
 <script defer src="https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js"></script>
 
-<!-- <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
 
     const video = document.getElementById('video');
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     });
 });
-</script> -->
+</script>
 
 
 </html>
