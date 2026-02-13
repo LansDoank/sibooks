@@ -39,6 +39,10 @@
                         @csrf
                         <input type="hidden" name="role" value="2">
                         <div>
+                            @error('user_image')
+                                <p class="text-red-500 text-sm rounded py-2 bg-red-100 border text-center border-red-700 mb-2">
+                                    Foto Selfie harus diisi!</p>
+                            @enderror
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto
                                 Selfie</label>
 
@@ -84,7 +88,7 @@
                         <button type="submit"
                             class="w-full text-white bg-blue-600 transition hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Daftar</button>
                         <p class="text-sm text-center font-light text-gray-500 dark:text-gray-400">
-                            Sudah mempunyai akun? <a href="/user/login"
+                            Sudah mempunyai akun? <a href="/login"
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login</a>
                         </p>
                     </form>
@@ -93,46 +97,46 @@
         </div>
     </section>
     <script>
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const startBtn = document.getElementById('start-camera');
-    const takePhotoBtn = document.getElementById('take-photo');
-    const cameraContainer = document.getElementById('camera-container');
-    const photoPreview = document.getElementById('photo-preview');
-    const imageInput = document.getElementById('user_image');
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const startBtn = document.getElementById('start-camera');
+        const takePhotoBtn = document.getElementById('take-photo');
+        const cameraContainer = document.getElementById('camera-container');
+        const photoPreview = document.getElementById('photo-preview');
+        const imageInput = document.getElementById('user_image');
 
-    startBtn.addEventListener('click', async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
-            video.srcObject = stream;
-            cameraContainer.style.display = 'block';
-            startBtn.style.display = 'none';
-            takePhotoBtn.style.display = 'block';
-        } catch (err) {
-            alert("Gagal mengakses kamera: " + err);
-        }
-    });
+        startBtn.addEventListener('click', async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+                video.srcObject = stream;
+                cameraContainer.style.display = 'block';
+                startBtn.style.display = 'none';
+                takePhotoBtn.style.display = 'block';
+            } catch (err) {
+                alert("Gagal mengakses kamera: " + err);
+            }
+        });
 
-    takePhotoBtn.addEventListener('click', () => {
-        const context = canvas.getContext('2d');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        takePhotoBtn.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        const data = canvas.toDataURL('image/png');
-        imageInput.value = data; // Simpan string base64 ke input hidden
-        
-        photoPreview.src = data;
-        photoPreview.classList.remove('hidden');
-        cameraContainer.style.display = 'none';
-        takePhotoBtn.innerText = "Ambil Ulang Foto";
-        
-        // Hentikan kamera setelah ambil foto
-        let stream = video.srcObject;
-        let tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-    });
-</script>
+            const data = canvas.toDataURL('image/png');
+            imageInput.value = data; // Simpan string base64 ke input hidden
+
+            photoPreview.src = data;
+            photoPreview.classList.remove('hidden');
+            cameraContainer.style.display = 'none';
+            takePhotoBtn.innerText = "Ambil Ulang Foto";
+
+            // Hentikan kamera setelah ambil foto
+            let stream = video.srcObject;
+            let tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+        });
+    </script>
 </body>
 
 </html>
