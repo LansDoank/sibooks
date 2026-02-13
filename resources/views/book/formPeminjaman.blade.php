@@ -8,6 +8,10 @@
             <div class="mb-3">
                 <h1 class="text-2xl font-medium text-gray-800">Pinjam Buku</h1>
             </div>
+             @error('borrower_image')
+                <p class="text-red-500 text-sm rounded py-2 bg-red-100 border text-center border-red-700 mb-2">
+                    Foto Peminjam harus diisi!</p>
+            @enderror
             <div class="mb-6">
                 <label for="nama-buku" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
                     Buku</label>
@@ -57,4 +61,5 @@
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pinjam</button>
         </form>
     </div>
+    
 </x-default_layout>

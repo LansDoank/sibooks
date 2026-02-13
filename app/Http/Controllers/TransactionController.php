@@ -23,13 +23,13 @@ class TransactionController extends Controller
         return response()->json($transactions);
     }
 
-    public function verification( $id)
+    public function verification($id)
     {
         $transaction = Transaction::find($id);
         return view('book.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
     }
 
-    public function vericationAdmin( $id)
+    public function vericationAdmin($id)
     {
         $transaction = Transaction::find($id);
 
@@ -62,7 +62,8 @@ class TransactionController extends Controller
         return view('book.formPeminjaman', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Peminjaman Buku']);
     }
 
-    public function submit($id) {
+    public function submit($id)
+    {
         $book = Book::find($id);
         $classrooms = Classroom::all();
         return view('book.submit', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Pengajuan Peminjaman Buku']);
@@ -73,7 +74,26 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $user = Auth::user();
+
+        if ($user->role->name == 'admin') {
+            $request->validate([
+                'borrower_image' => 'required',
+            ]);
+        } else {
+            $request->validate([
+                'book_image' => 'required',
+            ]);
+        }
+
+        $request->validate([
+            'title' => 'required|string',
+            'amount' => 'required|integer|min:1',
+            'class' => 'required|string',
+            'kondisi_buku' => 'required|string',
+        ]);
 
 
         // cek transaksi lama untuk menghindari duplikat
@@ -90,15 +110,15 @@ class TransactionController extends Controller
             // transaksi baru
             $transaction = new Transaction();
 
-       
+
             $image = $request->borrower_image ?? null;
 
             if ($image) {
                 $image = str_replace('data:image/png;base64,', '', $image);
                 $image = str_replace(' ', '+', $image);
-    
+
                 $imageName = 'borrower_image/' . uniqid() . '.png';
-    
+
                 Storage::disk('public')->put($imageName, base64_decode($image));
             }
 
@@ -107,15 +127,15 @@ class TransactionController extends Controller
             if ($bookImage) {
                 $bookImage = str_replace('data:image/png;base64,', '', $bookImage);
                 $bookImage = str_replace(' ', '+', $bookImage);
-    
+
                 $bookName = 'book_image/' . uniqid() . '.png';
-    
+
                 Storage::disk('public')->put($bookName, base64_decode($bookImage));
             }
 
 
             $imageName = $imageName ?? null;
-            
+
             // if($user->image) {
             //     $imageName = $user->image;
             // }
@@ -127,14 +147,14 @@ class TransactionController extends Controller
             $transaction->jumlah_buku = $request->amount;
             $transaction->book_image = $bookName ?? null;
             $transaction->kondisi_buku = $request->kondisi_buku;
-            if($user->role->name == 'admin') {
+            if ($user->role->name == 'admin') {
                 $transaction->is_verified = true;
             }
             $transaction->borrow_time = now();
             $transaction->save();
         }
 
-   
+
         $book = Book::findOrFail($request->id);
 
         $book->update([
@@ -147,7 +167,7 @@ class TransactionController extends Controller
         ]);
 
 
-        if($user->role->name === 'admin') {
+        if ($user->role->name === 'admin') {
             return redirect('/')->with('success', 'Peminjaman buku berhasil');
         }
 
