@@ -45,13 +45,16 @@
                         type="button">
                         <span class="sr-only">Open user menu</span>
                         <span class="mr-3 hidden lg:inline">{{ $isLogin->fullname }}</span>
-                        <img class="w-10 h-10 rounded-full overflow-hidden" src="{{ 
+                        <div class="w-8 h-8 rounded-full overflow-hidden bg-cover">
+
+                            <img class="w-full" src="{{ 
                                                                                     $isLogin->image
     ? (str_contains($isLogin->image, 'https')
         ? $isLogin->image
         : asset('storage/' . $isLogin->image))
     : asset('img/default-pp.jpg') 
                                                                                  }}" alt="user photo">
+                        </div>
 
                     </button>
 

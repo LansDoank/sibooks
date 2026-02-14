@@ -28,7 +28,7 @@
                 SiBooks
             </a>
             <div
-                class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-lg xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -40,27 +40,32 @@
                         <input type="hidden" name="role" value="2">
                         <div>
                             @error('user_image')
-                                <p class="text-red-500 text-sm rounded py-2 bg-red-100 border text-center border-red-700 mb-2">
+                                <p
+                                    class="text-red-500 text-sm rounded py-2 bg-red-100 border text-center border-red-700 mb-2">
                                     Foto Selfie harus diisi!</p>
                             @enderror
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto
                                 Selfie</label>
 
-                            <div id="camera-container" class="relative bg-black rounded-lg overflow-hidden mb-2"
+                            <div id="camera-container"
+                                class="relative mx-auto bg-black rounded-full overflow-hidden mb-4 w-64 h-64 border-4 border-slate-200 shadow-xl flex items-center justify-center"
                                 style="display: none;">
-                                <video id="video" class="w-full h-auto" autoplay></video>
+                                <video id="video" class="absolute min-w-full min-h-full object-cover" autoplay
+                                    playsinline></video>
                                 <canvas id="canvas" class="hidden"></canvas>
                             </div>
 
+                            <img id="photo-preview"
+                                class="mx-auto w-64 h-64 object-cover rounded-full shadow-md mb-4 hidden border-4 border-blue-500 scale-x-[-1]">
                             <button type="button" id="start-camera"
-                                class="w-full mb-2 text-sm bg-gray-600 text-white py-2 rounded-lg">Buka Kamera</button>
+                                class="w-full mb-2 text-sm bg-gray-600 hover:bg-gray-700 text-white py-2.5 rounded-lg transition font-semibold">Buka
+                                Kamera</button>
+
                             <button type="button" id="take-photo"
-                                class="w-full mb-2 text-sm bg-green-600 text-white py-2 rounded-lg"
+                                class="w-full mb-2 text-sm bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg transition font-semibold"
                                 style="display: none;">Ambil Foto</button>
 
                             <input type="hidden" name="user_image" id="user_image">
-
-                            <img id="photo-preview" class="w-full rounded-lg hidden shadow-md mb-2">
                         </div>
                         <div>
                             <label for="fullname"
@@ -107,31 +112,55 @@
 
         startBtn.addEventListener('click', async () => {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+                // Mendapatkan daftar semua perangkat kamera
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+                // Mencari iVCam di dalam daftar nama kamera
+                const ivcam = videoDevices.find(device => device.label.toLowerCase().includes('ivcam'));
+
+                const constraints = {
+                    video: ivcam ? { deviceId: { exact: ivcam.deviceId } } : { facingMode: "user" },
+                    audio: false
+                };
+
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 video.srcObject = stream;
                 cameraContainer.style.display = 'block';
                 startBtn.style.display = 'none';
                 takePhotoBtn.style.display = 'block';
             } catch (err) {
-                alert("Gagal mengakses kamera: " + err);
+                console.error(err);
+                alert("Gagal mengakses kamera. Pastikan iVCam terhubung dan gunakan localhost/HTTPS.");
             }
         });
 
         takePhotoBtn.addEventListener('click', () => {
             const context = canvas.getContext('2d');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Tentukan ukuran kotak (ambil sisi terpendek dari video)
+            const size = Math.min(video.videoWidth, video.videoHeight);
+
+            // Hitung posisi tengah (offset) agar gambar tidak miring
+            const sourceX = (video.videoWidth - size) / 2;
+            const sourceY = (video.videoHeight - size) / 2;
+
+            // Set ukuran canvas menjadi persegi sempurna
+            canvas.width = 500; // Ukuran hasil akhir (500x500 px cukup tajam)
+            canvas.height = 500;
+
+            // Gambar ulang dengan teknik cropping: drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+            context.drawImage(video, sourceX, sourceY, size, size, 0, 0, 500, 500);
 
             const data = canvas.toDataURL('image/png');
-            imageInput.value = data; // Simpan string base64 ke input hidden
+            imageInput.value = data;
 
             photoPreview.src = data;
             photoPreview.classList.remove('hidden');
             cameraContainer.style.display = 'none';
             takePhotoBtn.innerText = "Ambil Ulang Foto";
 
-            // Hentikan kamera setelah ambil foto
+            // Matikan kamera
             let stream = video.srcObject;
             let tracks = stream.getTracks();
             tracks.forEach(track => track.stop());

@@ -1,17 +1,17 @@
 <x-default_layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <div class="flex items-center max-w-lg mx-auto my-10 h-max">
-        <form method="post" action="/book/pinjam" class="w-full" enctype="multipart/form-data">
+    <div class="flex items-center max-w-lg mx-auto my-10 h-[680px]">
+        <form method="post" action="/book/submit/store" class="w-full" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $book->id }}">
             <input type="hidden" name="stock" value="{{ $book->stock }}">
             <div class="mb-3">
-                <h1 class="text-2xl font-medium text-gray-800">Pinjam Buku</h1>
+                <h1 class="text-2xl font-medium text-gray-800">Ajukan Peminjaman Buku</h1>
             </div>
-            @error('book_image')
+            <!-- @error('book_image')
                 <p class="text-red-500 text-sm rounded py-2 bg-red-100 border text-center border-red-700 mb-2">
                     Foto Kondisi buku harus diisi!</p>
-            @enderror
+            @enderror -->
             <div class="mb-6">
                 <label for="nama-buku" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
                     Buku</label>
@@ -36,7 +36,7 @@
                     @endforeach
                 </select>
             </div>
-            <div>
+            <!-- <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Kondisi Buku :</label>
 
                 <div id="camera-container" class="relative bg-black rounded-lg overflow-hidden mb-2"
@@ -65,12 +65,12 @@
                     <option value="Rusak Ringan">Rusak Ringan</option>
                     <option value="Butuh Perbaikan">Butuh Perbaikan</option>
                 </select>
-            </div>
+            </div> -->
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pinjam</button>
         </form>
     </div>
-    <script>
+    <!-- <script>
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
         const startBtn = document.getElementById('start-camera');
@@ -110,5 +110,5 @@
             let tracks = stream.getTracks();
             tracks.forEach(track => track.stop());
         });
-    </script>
+    </script> -->
 </x-default_layout>

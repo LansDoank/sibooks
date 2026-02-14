@@ -36,11 +36,13 @@ Route::middleware(['auth'])->prefix('book')->group(function () {
 
     Route::get('/submit/{book}', [TransactionController::class, 'submit'])->name('transaction.submit');
 
+    Route::post('/submit/store', [TransactionController::class, 'submitStore'])->name('book.submit.post');
+
     Route::get('/pengembalian/{slug}', [TransactionController::class, 'edit'])->name('transaction.edit');
 
     Route::post('/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
 
-    Route::get('/verification/{slug}', [TransactionController::class, 'verification'])->name('transaction.verification');
+    Route::get('/verification/{slug}', [TransactionController::class, 'getVerification'])->name('transaction.verification');
 });
 
 // User Routes  
@@ -100,7 +102,9 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     
     Route::get('/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('isAdmin');
 
-    Route::get('/book/verification/{id}', [TransactionController::class, 'vericationAdmin'])->name('book.verificationAdmin')->middleware('isAdmin');
+    Route::get('/verification/{id}', [TransactionController::class, 'verificationAdmin'])->name('book.verificationAdmin')->middleware('isAdmin');
+
+    Route::get('/transaction/verification/{id}', [TransactionController::class, 'verification'])->name('book.verificationAdmin')->middleware('isAdmin');
     
     Route::get('/rack', [AdminController::class, 'rack'])->name('admin.rack')->middleware('isAdmin');
 

@@ -13,9 +13,6 @@ use SweetAlert2\Laravel\Swal;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
 
     public function getTransaction($id)
     {
@@ -23,13 +20,18 @@ class TransactionController extends Controller
         return response()->json($transactions);
     }
 
-    public function verification($id)
+    public function getVerification($id)
     {
         $transaction = Transaction::find($id);
         return view('book.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
     }
 
-    public function vericationAdmin($id)
+    public function verificationAdmin($id) {
+         $transaction = Transaction::find($id);
+        return view('admin.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
+    }
+
+    public function verification($id)
     {
         $transaction = Transaction::find($id);
 
@@ -52,14 +54,11 @@ class TransactionController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create($id)
     {
         $book = Book::find($id);
         $classrooms = Classroom::all();
-        return view('book.formPeminjaman', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Peminjaman Buku']);
+        return view('book.borrow', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Peminjaman Buku']);
     }
 
     public function submit($id)
@@ -68,31 +67,28 @@ class TransactionController extends Controller
         $classrooms = Classroom::all();
         return view('book.submit', ['classrooms' => $classrooms, 'book' => $book, 'title' => 'Formulir Pengajuan Peminjaman Buku']);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
 
         $user = Auth::user();
 
-        if ($user->role->name == 'admin') {
-            $request->validate([
-                'borrower_image' => 'required',
-            ]);
-        } else {
-            $request->validate([
-                'book_image' => 'required',
-            ]);
-        }
+        // if ($user->role->name == 'admin') {
+        //     $request->validate([
+        //         'borrower_image' => 'required',
+        //     ]);
+        // } else {
+        //     $request->validate([
+        //         'book_image' => 'required',
+        //     ]);
+        // }
+
+        // dd($request);
 
         $request->validate([
             'title' => 'required|string',
             'amount' => 'required|integer|min:1',
             'class' => 'required|string',
-            'kondisi_buku' => 'required|string',
         ]);
 
 
@@ -107,45 +103,26 @@ class TransactionController extends Controller
                 'jumlah_buku' => $transaction->jumlah_buku + $request->amount,
             ]);
         } else {
+            
             // transaksi baru
             $transaction = new Transaction();
 
+            $borrowImage = $request->borrow_image ?? null;
 
-            $image = $request->borrower_image ?? null;
+            if ($borrowImage) {
+                $borrowImage = str_replace('data:image/png;base64,', '', $borrowImage);
+                $borrowImage = str_replace(' ', '+', $borrowImage);
 
-            if ($image) {
-                $image = str_replace('data:image/png;base64,', '', $image);
-                $image = str_replace(' ', '+', $image);
+                $imageName = 'borrow_image/' . uniqid() . '.png';
 
-                $imageName = 'borrower_image/' . uniqid() . '.png';
-
-                Storage::disk('public')->put($imageName, base64_decode($image));
+                Storage::disk('public')->put($imageName, base64_decode($borrowImage));
             }
-
-            $bookImage = $request->book_image ?? null;
-
-            if ($bookImage) {
-                $bookImage = str_replace('data:image/png;base64,', '', $bookImage);
-                $bookImage = str_replace(' ', '+', $bookImage);
-
-                $bookName = 'book_image/' . uniqid() . '.png';
-
-                Storage::disk('public')->put($bookName, base64_decode($bookImage));
-            }
-
-
-            $imageName = $imageName ?? null;
-
-            // if($user->image) {
-            //     $imageName = $user->image;
-            // }
 
             // isi data transaksi
-            $transaction->borrower_image = $imageName;
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
-            $transaction->book_image = $bookName ?? null;
+            $transaction->borrow_image = $imageName ?? null;
             $transaction->kondisi_buku = $request->kondisi_buku;
             if ($user->role->name == 'admin') {
                 $transaction->is_verified = true;
@@ -174,19 +151,95 @@ class TransactionController extends Controller
         return redirect('/book/verification/' . $transaction->id)
             ->with('success', 'Silahkan Ambil Buku! 😊');
     }
+    public function submitStore(Request $request)
+    {
 
-    /**
-     * Display the specified resource.
-     */
+
+        $user = Auth::user();
+
+        // if ($user->role->name == 'admin') {
+        //     $request->validate([
+        //         'borrower_image' => 'required',
+        //     ]);
+        // } 
+
+        // dd($request);
+
+        $request->validate([
+            'title' => 'required|string',
+            'amount' => 'required|integer|min:1',
+            'class' => 'required|string',
+            // 'kondisi_buku' => 'required|string',
+        ]);
+
+
+        // cek transaksi lama untuk menghindari duplikat
+        $transaction = Transaction::where('kelas_peminjam', $request->class)
+            ->where('book_id', $request->id)
+            ->first();
+
+        if ($transaction) {
+            // update kalau sudah pernah pinjam
+            $transaction->update([
+                'jumlah_buku' => $transaction->jumlah_buku + $request->amount,
+            ]);
+        } else {
+            // transaksi baru
+            $transaction = new Transaction();
+
+            $borrowImage = $request->borrow_image ?? null;
+
+            if ($borrowImage) {
+                $borrowImage = str_replace('data:image/png;base64,', '', $borrowImage);
+                $borrowImage = str_replace(' ', '+', $borrowImage);
+
+                $imageName = 'borrow_image/' . uniqid() . '.png';
+
+                Storage::disk('public')->put($imageName, base64_decode($borrowImage));
+            }
+
+
+            $imageName = $imageName ?? null;
+
+            // isi data transaksi
+            $transaction->kelas_peminjam = $request->class;
+            $transaction->book_id = $request->id;
+            $transaction->jumlah_buku = $request->amount;
+            $transaction->borrow_image = $imageName ?? null;
+            $transaction->kondisi_buku = $request->kondisi_buku;
+            if ($user->role->name == 'admin') {
+                $transaction->is_verified = true;
+            }
+            $transaction->borrow_time = now();
+            $transaction->save();
+        }
+
+
+        $book = Book::findOrFail($request->id);
+
+        $book->update([
+            'stock' => $book->stock - $request->amount
+        ]);
+
+        Swal::success([
+            'title' => 'Berhasil!',
+            'text' => 'Peminjaman Buku Berhasil.',
+        ]);
+
+
+        if ($user->role->name === 'admin') {
+            return redirect('/')->with('success', 'Peminjaman buku berhasil');
+        }
+
+        return redirect('/book/verification/' . $transaction->id)
+            ->with('success', 'Silahkan Ambil Buku! 😊');
+    }
     public function show(string $id)
     {
         $book = Book::find($id);
         return view('book.form', ['book' => $book, 'title' => 'Formulir Peminjaman Buku']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $book = Book::find($id);
@@ -196,12 +249,9 @@ class TransactionController extends Controller
             'title' => 'Berhasil!',
             'text' => 'Buku Berhasil Dikembalikan.',
         ]);
-        return view('book.formPengembalian', ['title' => 'Formulir Pengembalian Buku', 'book' => $book, 'transactions' => $borrowed_class]);
+        return view('book.return', ['title' => 'Formulir Pengembalian Buku', 'book' => $book, 'transactions' => $borrowed_class]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request)
     {
         // Transaction
@@ -220,11 +270,8 @@ class TransactionController extends Controller
         return redirect('/')->with('success', 'pengembalian buku berhasil');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        
     }
 }
