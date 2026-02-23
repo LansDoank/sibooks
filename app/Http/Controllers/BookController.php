@@ -53,7 +53,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.kelas', ['grade' => $grade, 'books' => $books, 'isLogin' => $user, 'school' => $school]);
+        return view('book.class', ['grade' => $grade, 'books' => $books, 'isLogin' => $user, 'school' => $school]);
     }
 
     public function pengembalian($id)
@@ -119,7 +119,7 @@ class BookController extends Controller
         if (!$book) {
             return redirect('/');
         }
-        return view('book.detailBook', ['book' => $book, 'isLogin' => $user, 'school' => $school]);
+        return view('book.detail', ['book' => $book, 'isLogin' => $user, 'school' => $school]);
     }
 
     /**

@@ -13,7 +13,7 @@
 <body>
     {{ $slot }}
 </body>
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         const classSelect = document.querySelector('#kelas-peminjam');
         const amountSelect = document.querySelector('#book_amount');
@@ -56,7 +56,7 @@
         })
     })
 </script>
-<!-- <script>
+<script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const photoInput = document.getElementById('borrower_image');
@@ -128,7 +128,7 @@
             }
         }, 500);
     });
-</script> -->
+</script>
 <script defer src="https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js"></script>
 
 <script>
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     });
 });
-</script>
+</script> -->
 
 
 </html>

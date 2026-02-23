@@ -39,12 +39,12 @@
                                                     <tr>
                                                         <td>
                                                             <img class="w-24 h-24 object-cover" src="{{ 
-                                                                                    $transaction->borrower_image
-                                ? (str_contains($transaction->borrower_image, 'https')
-                                    ? $transaction->borrower_image
-                                    : asset('storage/' . $transaction->borrower_image))
+                                                                                                            $transaction->borrow_image
+                                ? (str_contains($transaction->borrow_image, 'https')
+                                    ? $transaction->borrow_image
+                                    : asset('storage/' . $transaction->borrow_image))
                                 : asset('img/default-pp.jpg') 
-                                                                                 }}" alt="">
+                                                                                                         }}" alt="">
                                                         </td>
                                                         <td>{{ $transaction->kelas_peminjam }}</td>
                                                         <td>{{ $transaction->book->title }}</td>

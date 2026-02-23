@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('borrower_image')->nullable();
+            // $table->string('borrower_image')->nullable();
             $table->string('kelas_peminjam');
             $table->foreignId('book_id')->constrained(
                 table: 'books', indexName: 'transaction_book_id'
             );
             $table->integer('jumlah_buku');
-            $table->string('book_image')->nullable();
+            $table->string('borrow_image')->nullable();
             $table->enum('kondisi_buku',['Mulus','Rusak Ringan','Butuh Perbaikan'])->nullable();
             $table->boolean('is_verified')->default(false);
             $table->dateTime('borrow_time');
