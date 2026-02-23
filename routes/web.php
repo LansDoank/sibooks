@@ -28,6 +28,8 @@ Route::middleware(['auth'])->prefix('book')->group(function () {
 
     Route::get('/tampil', [BookController::class, 'index'])->name('book.index');
 
+    Route::get('/rack', [RackController::class, 'rack'])->name('book.rack');
+
     Route::get('/{book}', [BookController::class, 'show'])->name("book.show");
 
     Route::get('/pinjam/{book}', [TransactionController::class, 'create'])->name('transaction.show');
@@ -123,6 +125,10 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     Route::get('/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
 
     Route::get('/transaction/edit/{id}', [AdminController::class, 'editTransaction'])->name('admin.transaction.edit')->middleware('isAdmin');
+    
+    Route::post('/transaction/update', [AdminController::class, 'updateTransaction'])->name('admin.transaction.update')->middleware('isAdmin');
+
+    Route::get('/transaction/delete/{id}', [AdminController::class, 'deleteTransaction'])->name('admin.transaction.delete')->middleware('isAdmin');
     
     Route::get('/class', [AdminController::class, 'class'])->name('admin.class')->middleware('isAdmin');
     

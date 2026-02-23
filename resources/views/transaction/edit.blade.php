@@ -7,25 +7,40 @@
                 @csrf
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="sm:col-span-2">
-                        <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="class" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Nama Kelas</label>
-                        <input value="{{ $transaction->kelas_peminjam }}" type="text" name="fullname" id="fullname"
+                        <input value="{{ $transaction->kelas_peminjam }}" type="text" name="class" id="fullname"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Masukkan nama lengkap" required autofocus>
+                            placeholder="Masukkan nama lengkap"  autofocus>
                     </div>
                     <div class="w-full">
-                        <label for="email"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                        <input value="{{ $transaction->email }}" type="email" name="email" id="email"
+                        <label for="amount"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Buku</label>
+                        <input value="{{ $transaction->jumlah_buku }}" type="number" name="amount" id="amount"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Email Lengkap" required>
+                            placeholder="50" >
                     </div>
                     <div class="w-full">
-                        <label for="password"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                        <input type="password" name="password" id="password"
+                        <label for="is_verified"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Verifikasi Admin</label>
+                        <select name="is_verified" id="is_verified" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option value="1" {{ $transaction->is_verified == 1 ? 'selected' : '' }}>Sudah Diverifikasi</option>
+                            <option value="0" {{ $transaction->is_verified == 0 ? 'selected' : '' }}>Belum Diverifikasi</option>
+                        </select>
+                    </div>
+                    <div class="w-full">
+                        <label for="borrow_time"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pinjam</label>
+                        <input value="{{ $transaction->borrow_time }}" type="date" name="borrow_time" id="borrow_time"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Masukkan Password" >
+                            placeholder="50" >
+                    </div>
+                    <div class="w-full">
+                        <label for="return_time"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pengembalian</label>
+                        <input value="{{ $transaction->return_time }}" type="date" name="return_time" id="return_time"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            >
                     </div>
                     
                 </div>

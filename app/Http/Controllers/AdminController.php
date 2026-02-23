@@ -171,4 +171,24 @@ class AdminController extends Controller
         $transaction = Transaction::findOrFail($id);
         return view('transaction.edit', ['title' => 'Edit Transaksi', 'fullname' => $fullname, 'heading' => 'Edit Transaksi', 'transaction' => $transaction, 'user' => $user]);
     }
+
+    public function updateTransaction(Request $request)
+    {
+        $transaction = Transaction::findOrFail($request->id);
+        $validatedData = $request->validate([
+            'is_verified' => 'required|in:0,1',
+        ]);
+
+        $transaction->update($validatedData);
+
+        return redirect()->route('admin.transaction')->with('success', 'Status transaksi berhasil diperbarui.');
+    }
+
+    public function deleteTransaction($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+
+        return redirect()->route('admin.transaction')->with('success', 'Transaksi berhasil dihapus.');
+    }
 }
