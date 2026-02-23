@@ -121,6 +121,8 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     Route::get('/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
     
     Route::get('/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
+
+    Route::get('/transaction/edit/{id}', [AdminController::class, 'editTransaction'])->name('admin.transaction.edit')->middleware('isAdmin');
     
     Route::get('/class', [AdminController::class, 'class'])->name('admin.class')->middleware('isAdmin');
     

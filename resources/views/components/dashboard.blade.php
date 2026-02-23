@@ -1,4 +1,4 @@
-@props(['title', 'fullname', 'heading', 'user'])
+@props(['title',  'heading', 'user'])
 @include('sweetalert2::index')
 
 <!DOCTYPE html>
@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="/css/sb-admin-2.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -25,7 +24,6 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
 
-    <!-- Custom styles for this template-->
 
 </head>
 
@@ -196,28 +194,8 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- <table id="myTable" class="display">
-                        <thead>
-                            <tr>
-                                <th>Column 1</th>
-                                <th>Column 2</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Row 1 Data 1</td>
-                                <td>Row 1 Data 2</td>
-                            </tr>
-                            <tr>
-                                <td>Row 2 Data 1</td>
-                                <td>Row 2 Data 2</td>
-                            </tr>
-                        </tbody>
-                    </table> -->
                     {{$slot}}
-
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->

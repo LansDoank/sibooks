@@ -18,9 +18,9 @@
                                 <th>Kelas Peminjam</th>
                                 <th class="w-48">Nama Buku</th>
                                 <th>Jumlah Buku</th>
-                                <th>Kondisi Buku</th>
                                 <th>Waktu Pinjam</th>
                                 <th>Waktu Pengembalian</th>
+                                <th class="text-center">Opsi</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -29,9 +29,9 @@
                                 <th>Kelas Peminjam</th>
                                 <th>Nama Buku</th>
                                 <th>Jumlah Buku</th>
-                                <th>Kondisi Buku</th>
                                 <th>Waktu Pinjam</th>
                                 <th>Waktu Pengembalian</th>
+                                <th class="text-center">Opsi</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -39,19 +39,27 @@
                                                     <tr>
                                                         <td>
                                                             <img class="w-24 h-24 object-cover" src="{{ 
-                                                                                                            $transaction->borrow_image
+                                                                                                                                    $transaction->borrow_image
                                 ? (str_contains($transaction->borrow_image, 'https')
                                     ? $transaction->borrow_image
                                     : asset('storage/' . $transaction->borrow_image))
                                 : asset('img/default-pp.jpg') 
-                                                                                                         }}" alt="">
+                                                                                                                                 }}" alt="">
                                                         </td>
                                                         <td>{{ $transaction->kelas_peminjam }}</td>
                                                         <td>{{ $transaction->book->title }}</td>
                                                         <td>{{ $transaction->jumlah_buku }}</td>
-                                                        <td>{{ $transaction->kondisi_buku }}</td>
                                                         <td>{{ $transaction->borrow_time->format('d M Y , H:i') }}</td>
                                                         <td>{{ $transaction->return_time ?? 'Belum Dikembalikan' }}</td>
+                                                        <td class="text-start">
+                                        <div class="flex justify-center  gap-2">
+                                            <a href="/admin/transaction/edit/{{ $transaction->id }}"
+                                                class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>
+                                            <a onclick="return confirm('Yakin?');"
+                                                href="/admin/transaction/delete/{{ $transaction->id }}"
+                                                class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
+                                        </div>
+                                    </td>
                                                     </tr>
                             @endforeach
                         </tbody>

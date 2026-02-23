@@ -162,4 +162,13 @@ class AdminController extends Controller
 
         return redirect()->route('admin.data')->with('success', 'Data sekolah berhasil diperbarui.');
     }
+
+    public function editTransaction($id)
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+
+        $transaction = Transaction::findOrFail($id);
+        return view('transaction.edit', ['title' => 'Edit Transaksi', 'fullname' => $fullname, 'heading' => 'Edit Transaksi', 'transaction' => $transaction, 'user' => $user]);
+    }
 }
