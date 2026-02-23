@@ -47,7 +47,7 @@ class UserController extends Controller
             'role' => 'required',
             'user_image' => 'required',
         ]);
-
+        
         $userImage = $request->user_image ?? null;
 
             if ($userImage) {
