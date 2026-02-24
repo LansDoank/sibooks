@@ -26,8 +26,9 @@ class TransactionController extends Controller
         return view('book.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
     }
 
-    public function verificationAdmin($id) {
-         $transaction = Transaction::find($id);
+    public function verificationAdmin($id)
+    {
+        $transaction = Transaction::find($id);
         return view('admin.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
     }
 
@@ -73,17 +74,6 @@ class TransactionController extends Controller
 
         $user = Auth::user();
 
-        // if ($user->role->name == 'admin') {
-        //     $request->validate([
-        //         'borrower_image' => 'required',
-        //     ]);
-        // } else {
-        //     $request->validate([
-        //         'book_image' => 'required',
-        //     ]);
-        // }
-
-        // dd($request);
 
         $request->validate([
             'title' => 'required|string',
@@ -103,7 +93,7 @@ class TransactionController extends Controller
                 'jumlah_buku' => $transaction->jumlah_buku + $request->amount,
             ]);
         } else {
-            
+
             // transaksi baru
             $transaction = new Transaction();
 
@@ -123,7 +113,7 @@ class TransactionController extends Controller
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
             $transaction->borrow_image = $imageName ?? null;
-            $transaction->kondisi_buku = $request->kondisi_buku;
+            $transaction->kondisi_buku = $request->book_condition;
             if ($user->role->name == 'admin') {
                 $transaction->is_verified = true;
             }
@@ -153,17 +143,7 @@ class TransactionController extends Controller
     }
     public function submitStore(Request $request)
     {
-
-
         $user = Auth::user();
-
-        // if ($user->role->name == 'admin') {
-        //     $request->validate([
-        //         'borrower_image' => 'required',
-        //     ]);
-        // } 
-
-        // dd($request);
 
         $request->validate([
             'title' => 'required|string',
@@ -192,21 +172,18 @@ class TransactionController extends Controller
             if ($borrowImage) {
                 $borrowImage = str_replace('data:image/png;base64,', '', $borrowImage);
                 $borrowImage = str_replace(' ', '+', $borrowImage);
-
-                $imageName = 'borrow_image/' . uniqid() . '.png';
-
-                Storage::disk('public')->put($imageName, base64_decode($borrowImage));
+    
+                $borrowImageName = 'user_image/' . uniqid() . '.png';
+    
+                Storage::disk('public')->put($borrowImageName, base64_decode($borrowImage));
             }
-
-
-            $imageName = $imageName ?? null;
 
             // isi data transaksi
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
-            $transaction->borrow_image = $imageName ?? null;
-            $transaction->kondisi_buku = $request->kondisi_buku;
+            $transaction->borrow_image = $borrowImageName ?? null;
+            $transaction->kondisi_buku = $request->book_condition;
             if ($user->role->name == 'admin') {
                 $transaction->is_verified = true;
             }
@@ -272,6 +249,6 @@ class TransactionController extends Controller
 
     public function destroy(string $id)
     {
-        
+
     }
 }

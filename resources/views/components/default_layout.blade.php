@@ -13,7 +13,7 @@
 <body>
     {{ $slot }}
 </body>
-<!-- <script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const classSelect = document.querySelector('#kelas-peminjam');
         const amountSelect = document.querySelector('#book_amount');
@@ -34,7 +34,7 @@
 
     })
 </script>
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function () {
 
         const borrower_input = document.querySelector('#borrower-input');
