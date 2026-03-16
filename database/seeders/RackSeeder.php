@@ -32,7 +32,7 @@ class RackSeeder extends Seeder
                 "name" => $data['name'],
                 "category" => $data['category'],
                 // Kita susun URL-nya di sini menggunakan nilai name yang sedang di-loop
-                "qr_code" => config('app.url') . '/peta?rack=' . $data['name'],
+                "qr_code" => config('app.url') . '/book/rack?name=' . $data['name'],
             ]);
         }
     }

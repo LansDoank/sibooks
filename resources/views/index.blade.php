@@ -1,4 +1,4 @@
-<x-layout :school="$school">
+<x-layout :school="$school" >
     <x-navbar :school="$school" :isLogin="$isLogin" :user="$isLogin"></x-navbar>
     <x-slot:isLogin>{{ $isLogin }}</x-slot:isLogin>
     <section class="bg-white dark:bg-gray-900">

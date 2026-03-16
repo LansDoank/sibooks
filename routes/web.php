@@ -28,7 +28,7 @@ Route::middleware(['auth'])->prefix('book')->group(function () {
 
     Route::get('/tampil', [BookController::class, 'index'])->name('book.index');
 
-    Route::get('/rack', [RackController::class, 'rack'])->name('book.rack');
+    Route::get('/rack', [RackController::class, 'index'])->name('book.rack');
 
     Route::get('/{book}', [BookController::class, 'show'])->name("book.show");
 

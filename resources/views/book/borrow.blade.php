@@ -48,7 +48,7 @@
                     <div id="overlay"
                         class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                         <div
-                            class="w-64 h-64 border-2 border-blue-500 rounded-lg opacity-50 shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]">
+                            class="w-64 h-64 border-2 border-blue-500 rounded-l0_0g opacity-50 shadow-[_0_9999px_rgba(0,0,0,0.5)]">
                         </div>
                         <p class="text-white text-xs mt-4 font-light bg-blue-600 px-3 py-1 rounded-full">Posisikan Wajah
                             & Buku di dalam kotak</p>
