@@ -92,9 +92,8 @@
                     </div>
 
                     <div class="border-2 border-dashed border-gray-200 rounded-xl p-4 bg-gray-50">
-                        <div class="w-full h-auto">
-                            {{-- Pastikan file ada di: public/img/denah-perpus.svg --}}
-                            {!! file_get_contents(public_path('img/denah-perpus.svg')) !!}
+                        <div class="w-full">
+                            {!! file_get_contents(storage_path('app/public/img/denah-perpus.svg')) !!}
                         </div>
                     </div>
 
