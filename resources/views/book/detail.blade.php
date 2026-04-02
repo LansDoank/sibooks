@@ -1,21 +1,22 @@
 <x-navbar :isLogin="$isLogin" :school="$school"></x-navbar>
 <x-layout :school="$school">
-    <section class="bg-white dark:bg-gray-900 antialiased pt-32">
+    <section class="bg-white dark:bg-gray-900 antialiased pt-12 md:pt-32">
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-8">
-                <div class="shrink-0 max-w-md lg:max-w-lg flex justify-end">
-                    <img class="w-[65%] object-cover" src="{{asset('storage/' . $book->image)}}" />
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="flex justify-center lg:justify-center">
+                    <img class="w-2/3 sm:w-1/2 lg:w-[65%] object-cover rounded-lg shadow"
+                        src="{{asset('storage/' . $book->image)}}" />
                 </div>
 
-                <div class="mt-6 sm:mt-8 lg:mt-0 flex flex-col justify-center">
-                    <h1 class="text-xl text-gray-900 sm:text-4xl mb-7 font-semibold dark:text-white">
+                <div class="mt-6 sm:mt-8 lg:mt-0 flex flex-col justify-center text-center lg:text-left">
+                    <h1 class="text-2xl text-gray-900 md:text-4xl mb-7 font-semibold dark:text-white">
                         {{ $book->title }}
                     </h1>
-                    <div class="text-xl">
+                    <div class="text-xl text-left">
                         <a href="#">
-                            <p class="text-gray-600 font-medium mt-1">Kelas : {{ $book->grade->name }}</p>
+                            <p class="text-gray-600 font-medium mt-1 md:text-base text-">Kelas : {{ $book->grade->name }}</p>
                         </a>
-                        <p class="text-gray-600 font-medium mt-1">Stock : {{ $book->stock }}</p>
+                        <p class="text-gray-600 font-medium mt-1 md:text-base text-">Stock : {{ $book->stock }}</p>
                         <div class="mt-1 sm:items-center sm:gap-4 sm:flex">
                             <p class=" font-medium text-gray-600 dark:text-white">
                                 Penulis : {{ $book->author }}
@@ -32,7 +33,7 @@
                             <p class="text-sm text-red-600">Maaf Buku Kosong</p>
                         </div>
                     @endif
-                    <div class="w-full mt-3 sm:items-center sm:mt-5 grid grid-cols-2 gap-3">
+                    <div class="w-full mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
                         @if ($book->stock > 0)
                             @if ($isLogin->role_id == 1)
                                 <a href="/book/pinjam/{{ $book->id }}" data-modal-target="popup-modal"
@@ -61,7 +62,7 @@
                         </a>
 
                     </div>
-                    <div class="w-full mt-3 sm:items-center sm:mt-5 grid grid-cols-2 gap-3">
+                    <div class="w-full mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <button onclick="bukaPeta('{{ $book->id_rak }}')"
                             class="bg-blue-600 hover:bg-blue-700 text-center text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300 flex justify-center items-center gap-2">
                             Lihat Lokasi Rak
