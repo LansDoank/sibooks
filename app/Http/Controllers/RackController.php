@@ -94,4 +94,29 @@ class RackController extends Controller
         ]);
         return redirect('/admin/rack');
     }
+
+    public function map()
+    {
+        $user = Auth::user();
+        $fullname = $user->fullname;
+        return view('rack.map', ['title' => 'Form Edit Denah Rak', 'heading' => 'Denah Rak', 'fullname' => $fullname, 'user' => $user]);
+
+    }
+
+    public function mapPost(Request $request)
+    {
+        $request->validate([
+            'map' => 'required|mimes:svg|max:2048'
+        ]);
+
+        $file = $request->file('map');
+
+        // nama file fix
+        $namaFile = 'denah-perpus.svg';
+
+        // simpan ke public/storage/img
+        $file->storeAs('img', $namaFile, 'public');
+
+        return redirect('/admin/rack')->with('success', 'Map berhasil diupload');
+    }
 }

@@ -2,11 +2,11 @@
     <x-navbar :school="$school" :isLogin="$isLogin" :user="$isLogin"></x-navbar>
     <x-slot:isLogin>{{ $isLogin }}</x-slot:isLogin>
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-md sm:py-16 lg:px-6">
+        <div class="py-24 px-4 mx-auto max-w-screen-md sm:py-36 lg:px-6">
             <div class="max-w-screen mb-8 lg:mb-16 text-center">
                 <h2 id="heading-index"
-                    class="mb-4 text-5xl tracking-tight font-extrabold text-gray-900 dark:text-white"></h2>
-                <p id="subheading-index" class="text-gray-500 sm:text-xl dark:text-gray-400"></p>
+                    class="md:mb-4 mb-2 md:text-5xl text-xl tracking-tight font-extrabold text-gray-900 dark:text-white"></h2>
+                <p id="subheading-index" class="text-gray-500 md:text-xl text-sm dark:text-gray-400"></p>
             </div>
             <div>
                 <form class="max-w-md mx-auto" action="/book/tampil" method="GET">
@@ -32,28 +32,28 @@
         </div>
     </section>
     <section class="bg-white dark:bg-gray-900">
-        <div class="mx-auto max-w-screen-lg bg-white shadow-xl border rounded-md p-8">
+        <div class="mx-auto max-w-screen-lg bg-white shadow-xl border md:rounded-md p-4 md:p-8">
             <div class="kelas-x mt-2">
                 <div class="mb-5 flex justify-between">
-                    <h1 class="text-xl font-semibold">Buku Paket Kelas X</h1>
-                    <a class="text-blue-600 font-medium" href="/book/kelas?id=1">Lihat Semuanya</a>
+                    <h1 class="md:text-xl text-sm font-semibold">Buku Paket Kelas X</h1>
+                    <a class="text-blue-600 font-medium md:text-lg text-sm" href="/book/kelas?id=1">Lihat Semuanya</a>
                 </div>
-                <div class="flex gap-5 flex-wrap justify-center">
+                <div class="flex gap-2 md:gap-5 overflow-x-auto flex-nowrap md:flex-wrap md:justify-center">
                     @foreach ($kelasX as $buku)
                         <div
-                            class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            class="md:w-56 w-92 flex-shrink-0 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <a href="/book/{{ $buku->slug }}">
-                                <img class="rounded-t-lg object-cover w-full h-72" src="{{asset('storage/' . $buku->image)}}"
+                                <img class="rounded-t-lg object-cover w-full md:h-72 h-40" src="{{asset('storage/' . $buku->image)}}"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
                                 <a href="/book/{{ $buku->slug }}">
-                                    <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                    <h5 class=" md:text-xl text-xs font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ Str::limit($buku->title, 15) }}
                                     </h5>
                                 </a>
                                 <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
-                                    <p class="mb-2 text-sm font-medium text-gray-700">
+                                    <p class="mb-2 md:text-sm text-xs font-medium text-gray-700">
                                         Kelas {{ $buku->grade->name }}
                                     </p>
                                 </a>
@@ -64,29 +64,28 @@
             </div>
             <div id="kelas-xi" class="kelas-xi my-6">
                 <div class="mb-5 flex justify-between">
-                    <h1 class="text-xl font-semibold">Buku Paket Kelas XI</h1>
-                    <a class="text-blue-600 font-medium" href="/book/kelas?id=2">Lihat Semuanya</a>
+                    <h1 class="md:text-xl text-sm font-semibold">Buku Paket Kelas XI</h1>
+                    <a class="text-blue-600 font-medium md:text-lg text-sm" href="/book/kelas?id=2">Lihat Semuanya</a>
                 </div>
-                <div class="flex gap-5 flex-wrap justify-center">
+                <div class="flex gap-2 md:gap-5 overflow-x-auto flex-nowrap md:flex-wrap md:justify-center">
                     @foreach ($kelasXi as $buku)
                         <div
-                            class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            class="md:w-56 w-92 flex-shrink-0 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <a href="/book/{{ $buku->slug }}">
-                                <img class="rounded-t-lg object-cover w-full h-72" src="{{ $buku->image }}"
+                                <img class="rounded-t-lg object-cover w-full md:h-72 h-40" src="{{ $buku->image }}"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
                                 <a href="/book/{{ $buku->slug }}">
-                                    <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                    <h5 class=" md:text-xl text-xs font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ Str::limit($buku->title, 15) }}
                                     </h5>
                                 </a>
-                                <a class=" mt-2" href="/book/kelas?id=2">
-                                    <p class="mb-2 text-sm font-medium text-gray-700 hover:underline">
+                                <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
+                                    <p class="mb-2 md:text-sm text-xs font-medium text-gray-700">
                                         Kelas {{ $buku->grade->name }}
                                     </p>
                                 </a>
-
                             </div>
                         </div>
                     @endforeach
@@ -94,25 +93,25 @@
             </div>
             <div class="kelas-xii my-6">
                 <div class="mb-5 flex justify-between">
-                    <h1 class="text-xl font-semibold">Buku Paket Kelas XII</h1>
-                    <a class="text-blue-600 font-medium" href="/book/kelas?id=3">Lihat Semuanya</a>
+                    <h1 class="md:text-xl text-sm font-semibold">Buku Paket Kelas XII</h1>
+                    <a class="text-blue-600 font-medium md:text-lg text-sm" href="/book/kelas?id=3">Lihat Semuanya</a>
                 </div>
-                <div class="flex gap-5 flex-wrap justify-center">
+                <div class="flex gap-2 md:gap-5 overflow-x-auto flex-nowrap md:flex-wrap md:justify-center">
                     @foreach ($kelasXii as $buku)
                         <div
-                            class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            class="md:w-56 w-92 flex-shrink-0 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <a href="/book/{{ $buku->slug }}">
-                                <img class="rounded-t-lg object-cover w-full h-72" src="{{asset('storage/' . $buku->image)}}"
+                                <img class="rounded-t-lg object-cover w-full md:h-72 h-40" src="{{asset('storage/' . $buku->image)}}"
                                     alt="{{ $buku->title }}" />
                             </a>
                             <div class="p-3">
                                 <a href="/book/{{ $buku->slug }}">
-                                    <h5 class=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                    <h5 class=" md:text-xl text-xs font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ Str::limit($buku->title, 15) }}
                                     </h5>
                                 </a>
-                                <a class="hover:underline" href="/book/kelas?id=3">
-                                    <p class="mb-2 text-sm font-medium text-gray-700">
+                                <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
+                                    <p class="mb-2 md:text-sm text-xs font-medium text-gray-700">
                                         Kelas {{ $buku->grade->name }}
                                     </p>
                                 </a>

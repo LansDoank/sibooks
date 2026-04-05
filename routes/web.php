@@ -115,10 +115,14 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     Route::post('/rack/store', [RackController::class, 'store'])->name('rack.store')->middleware('isAdmin');
 
     Route::get('/rack/edit/{id}', [RackController::class, 'edit'])->name('rack.edit')->middleware('isAdmin');
-
+    
     Route::post('/rack/update', [RackController::class, 'update'])->name('rack.update')->middleware('isAdmin');
+    
+    Route::get('/rack/map/edit', [RackController::class, 'map'])->name('admin.rack.map')->middleware('isAdmin');
 
-    Route::get('/rack/delete/{id}', [RackController::class, 'destroy'])->name('admin.rack.delete')->middleware('isAdmin');
+    Route::post('/rack/map/post', [RackController::class, 'mapPost'])->name('admin.rack.map')->middleware('isAdmin');
+
+    Route::get('/rack/edit/{id}', [RackController::class, 'edit'])->name('rack.edit')->middleware('isAdmin');
 
     Route::get('/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
     

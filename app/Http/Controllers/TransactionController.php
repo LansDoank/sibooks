@@ -29,6 +29,13 @@ class TransactionController extends Controller
     public function verificationAdmin($id)
     {
         $transaction = Transaction::find($id);
+        $book = Book::findOrFail($transaction->book_id);
+
+        $book->update([
+            'stock' => $book->stock - $transaction->jumlah_buku
+        ]);
+
+        $book->save();
         return view('admin.verification', ['transaction' => $transaction, 'title' => 'Verifikasi Peminjaman Buku']);
     }
 
@@ -40,7 +47,17 @@ class TransactionController extends Controller
             'is_verified' => true
         ]);
 
+        $book = Book::findOrFail($transaction->book_id);
+
+        $book->update([
+            'stock' => $book->stock - $transaction->jumlah_buku
+        ]);
+
+        $book->save();
+
         $transaction->save();
+
+        
 
         Swal::success([
             'title' => 'Berhasil!',
@@ -192,11 +209,11 @@ class TransactionController extends Controller
         }
 
 
-        $book = Book::findOrFail($request->id);
+        // $book = Book::findOrFail($request->id);
 
-        $book->update([
-            'stock' => $book->stock - $request->amount
-        ]);
+        // $book->update([
+        //     'stock' => $book->stock - $request->amount
+        // ]);
 
         Swal::success([
             'title' => 'Berhasil!',
