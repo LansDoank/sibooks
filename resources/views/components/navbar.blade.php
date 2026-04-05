@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset(($school?->logo) ? 'storage/' . $school->logo : 'logo-almadani.png') }}"
                 class="h-10 mt-2" alt="School Logo" />
             <span class="self-center text-2xl  whitespace-nowrap dark:text-white font-bold">SiBooks</span>
