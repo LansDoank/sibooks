@@ -1,9 +1,9 @@
 <x-navbar :isLogin="$isLogin" :school="$school"></x-navbar>
 <x-layout :school="$school">
-    <section class="max-w-screen-lg  mx-auto p-8 my-4">
+    <section class="max-w-screen-lg  mx-auto p-8 md:my-4 mt-20">
         @if (request('name'))
             <div class="text-center mb-8">
-                <h1 class="font-semibold text-3xl">Buku dari rak : {{ request('name') }}</h1>
+                <h1 class="font-semibold text-xl md:text-3xl">Buku dari rak : {{ request('name') }}</h1>
             </div>
         @else
             <div class="text-center mb-8">
@@ -32,28 +32,28 @@
             </form>
         </div>
     </section>
-    <section class="max-w-screen-lg rounded-md bg-white shadow mx-auto p-8 my-14 border">
+    <section class="max-w-screen-lg rounded-md bg-white shadow mx-auto md:p-8 p-4 md:my-14 border">
         <div>
-            <div class="flex gap-5 flex-wrap justify-center">
+            <div class="flex gap-2 md:gap-5 overflow-x-auto flex-nowrap md:flex-wrap md:justify-center">
                 @foreach ($books as $buku)
                     <div
-                        class="w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        class="md:w-56 w-24 overflow-hidden flex-shrink-0 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="/book/{{ $buku->slug }}">
-                            <img class="rounded-t-lg object-cover w-full h-72" src="{{asset('storage/' . $buku->image)}}"
+                            <img class="rounded-t-lg object-cover w-full h-32" src="{{asset('storage/' . $buku->image)}}"
                                 alt="{{ $buku->title }}" />
                         </a>
-                        <div class="p-3">
-                            <a href="/book/{{ $buku->slug }}">
-                                <h5 class="mb-1 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                    {{ Str::limit($buku->title, 15) }}
-                                </h5>
-                            </a>
-                            <a class="hover:underline" href="/book/kelas?id={{$buku->grade->id}}">
-                                <p class="mb-1 text-sm font-medium text-gray-700">
-                                    Kelas {{$buku->grade->name}}
-                                </p>
-                            </a>
-                        </div>
+                        <div class="p-2 md:p-3">
+                                <a href="/book/{{ $buku->slug }}">
+                                    <h5 class=" md:text-xl text-xs font-bold tracking-tight text-gray-900 dark:text-white">
+                                        {{ Str::limit($buku->title, 15) }}
+                                    </h5>
+                                </a>
+                                <a class="mt-2 hover:underline" href="/book/kelas?id={{ $buku->grade->id }}">
+                                    <p class="md:mb-2 md:text-sm text-xs font-medium text-gray-700">
+                                        Kelas {{ $buku->grade->name }}
+                                    </p>
+                                </a>
+                            </div>
                     </div>
                 @endforeach
             </div>

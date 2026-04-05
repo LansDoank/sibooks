@@ -1,12 +1,12 @@
 <x-default_layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <div class="flex items-center max-w-lg mx-auto my-10 h-[680px]">
-        <form method="post" action="/book/submit/store" class="w-full" enctype="multipart/form-data">
+    <div class="flex items-center justify-center w-full px-4 sm:px-6 lg:px-8 my-6 sm:my-10">
+       <form method="post" action="/book/pinjam" class="w-full max-w-lg md:max-w-xl lg:max-w-2xl">
             @csrf
             <input type="hidden" name="id" value="{{ $book->id }}">
             <input type="hidden" name="stock" value="{{ $book->stock }}">
             <div class="mb-3">
-                <h1 class="text-2xl font-medium text-gray-800">Ajukan Peminjaman Buku</h1>
+                <h1 class="text-xl sm:text-2xl font-medium text-gray-800">Ajukan Peminjaman Buku</h1>
             </div>
 
             <div class="mb-6">
@@ -39,13 +39,13 @@
                 </label>
 
                 <div id="camera-wrapper"
-                    class="relative overflow-hidden border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 dark:bg-gray-800 aspect-video flex items-center justify-center">
+    class="relative overflow-hidden border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 dark:bg-gray-800 aspect-[4/3] sm:aspect-video flex items-center justify-center">
                     <video id="video" autoplay playsinline class="absolute inset-0 w-full h-full object-cover"></video>
 
                     <div id="overlay"
                         class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                         <div
-                            class="w-64 h-64 border-2 border-blue-500 rounded-lg opacity-50 shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]">
+                            class="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 border-2 border-blue-500 rounded-lg opacity-50 shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]">
                         </div>
                         <p class="text-white text-xs mt-4 font-light bg-blue-600 px-3 py-1 rounded-full">Posisikan Wajah
                             & Buku di dalam kotak</p>

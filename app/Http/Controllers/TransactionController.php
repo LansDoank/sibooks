@@ -139,12 +139,6 @@ class TransactionController extends Controller
         }
 
 
-        $book = Book::findOrFail($request->id);
-
-        $book->update([
-            'stock' => $book->stock - $request->amount
-        ]);
-
         Swal::success([
             'title' => 'Berhasil!',
             'text' => 'Peminjaman Buku Berhasil.',
