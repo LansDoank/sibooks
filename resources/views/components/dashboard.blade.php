@@ -1,4 +1,4 @@
-@props(['title',  'heading', 'user'])
+@props(['title', 'heading', 'user'])
 @include('sweetalert2::index')
 
 <!DOCTYPE html>
@@ -183,7 +183,7 @@
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-                                
+
                             </div>
                         </li>
 
@@ -240,15 +240,14 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Bootstrap core JavaScript-->
+    <!-- jQuery WAJIB dulu -->
     <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- SB Admin -->
+    <script src="/js/sb-admin-2.min.js"></script>
 
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
@@ -256,7 +255,13 @@
     <!-- Custom scripts for all pages-->
     <!-- (hapus jika file tidak ada) -->
     <!-- <script src="/js/sb-admin-2.js"></script> -->
-
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        if (window.innerWidth < 768) {
+            document.getElementById('accordionSidebar').classList.add('toggled');
+        }
+    });
+     </script>
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable({

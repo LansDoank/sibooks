@@ -1,7 +1,7 @@
 <x-layout :school="$school" >
     <x-navbar :school="$school" :isLogin="$isLogin" :user="$isLogin"></x-navbar>
     <x-slot:isLogin>{{ $isLogin }}</x-slot:isLogin>
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-900 m-0 md:mt-20 ">
         <div class="md:py-24 pt-24 pb-5 px-4 mx-auto max-w-screen-md sm:py-36 lg:px-6">
             <div class="max-w-screen mb-8 lg:mb-16 text-center">
                 <h2 id="heading-index"

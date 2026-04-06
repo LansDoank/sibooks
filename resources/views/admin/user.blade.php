@@ -1,5 +1,5 @@
 <x-dashboard :title="$title" :fullname="$fullname" :heading="$heading" :user="$user">
-    <div class="container-fluid">
+    <div class="container-fluid px-0">
 
         @if (Session::get('success'))
             <div class="bg-green-100 rounded px-4 py-2 my-3 text-green-500 border !border-green-300">
@@ -11,14 +11,15 @@
             </div>
         @endif
 
-        <!-- Page Heading -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3 mb-2 text-gray-800">Data Siswa</h1>
-            <div class="d-flex">
-                <button class="btn btn-success mr-2" onclick="window.location.href='/admin/user/create'">
-                    <i class="fas fa-plus me-1"></i> Tambah Akun
-                </button>
-            </div>
+        <div
+            class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+
+            <h1 class="h3 mb-2 mb-md-0 text-gray-800">Data Siswa</h1>
+
+            <button class="btn btn-success px-3" onclick="window.location.href='/admin/user/create'">
+                <i class="fas fa-plus me-1"></i> Tambah Akun
+            </button>
+
         </div>
 
         <!-- DataTales Example -->
@@ -28,7 +29,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="myTable" class="table table-bordered text-start table-auto" id="dataTable" width="100%"
+                    <table id="myTable" class="table table-bordered text-start table-auto text-nowrap" width="100%"
                         cellspacing="0">
                         <thead>
                             <tr>
@@ -60,12 +61,13 @@
                                     <td class="text-start">{{ $account->role->name }}</td>
                                     <td class="text-start">{{ $account->created_at->diffForHumans() }}</td>
                                     <td class="text-start">
-                                        <div class="flex justify-center  gap-2">
+                                        <div class="d-flex flex-column flex-md-row justify-content-center gap-1 gap-md-2">
                                             <a href="/admin/user/edit/{{ $account->id }}"
-                                                class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>
+                                                class="btn btn-sm btn-warning text-white">Edit</a>
+
                                             <a onclick="return confirm('Yakin?');"
                                                 href="/admin/user/delete/{{ $account->id }}"
-                                                class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
+                                                class="btn btn-sm btn-danger">Delete</a>
                                         </div>
                                     </td>
 

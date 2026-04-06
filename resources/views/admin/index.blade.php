@@ -4,12 +4,12 @@
         <!-- Main Content -->
         <div id="content">
 
-            <div class="container-fluid">
+            <div class="container-fluid px-2 px-sm-3 px-md-4">
 
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between mb-4 gap-2">
                     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
+                    <a href="#" class="d-none d-sm-inline-block w-25 btn btn-sm btn-danger shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Cetak PDF</a>
                 </div>
 

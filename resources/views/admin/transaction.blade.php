@@ -1,5 +1,5 @@
 <x-dashboard :title="$title" :fullname="$fullname" :heading="$heading" :user="$user">
-    <div class="container-fluid">
+    <div class="container-fluid px-0">
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Data Transaksi</h1>
@@ -38,13 +38,14 @@
                             @foreach ($transactions as $transaction)
                                                     <tr>
                                                         <td>
-                                                            <img class="w-24 h-24 object-cover" src="{{ 
-                                                                                                                                    $transaction->borrow_image
+                                                            <img class="w-24 h-24 object-cover"
+                                                                src="{{ 
+                                                                                                                                                            $transaction->borrow_image
                                 ? (str_contains($transaction->borrow_image, 'https')
                                     ? $transaction->borrow_image
                                     : asset('storage/' . $transaction->borrow_image))
                                 : asset('img/default-pp.jpg') 
-                                                                                                                                 }}" alt="">
+                                                                                                                                                         }}" alt="">
                                                         </td>
                                                         <td>{{ $transaction->kelas_peminjam }}</td>
                                                         <td>{{ $transaction->book->title }}</td>
@@ -52,14 +53,14 @@
                                                         <td>{{ $transaction->borrow_time->format('d M Y , H:i') }}</td>
                                                         <td>{{ $transaction->return_time ?? 'Belum Dikembalikan' }}</td>
                                                         <td class="text-start">
-                                        <div class="flex justify-center  gap-2">
-                                            <a href="/admin/transaction/edit/{{ $transaction->id }}"
-                                                class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-white text-decoration-none">Edit</a>
-                                            <a onclick="return confirm('Yakin?');"
-                                                href="/admin/transaction/delete/{{ $transaction->id }}"
-                                                class="bg-red-400 text-decoration-none hover:bg-red-500 px-3 py-1 rounded text-white">Delete</a>
-                                        </div>
-                                    </td>
+                                                            <div class="d-flex flex-column flex-md-row justify-content-center gap-1 gap-md-2">
+                                                                <a href="/admin/transaction/edit/{{ $transaction->id }}"
+                                                                    class="btn btn-sm btn-warning text-white">Edit</a>
+                                                                <a onclick="return confirm('Yakin?');"
+                                                                    href="/admin/transaction/delete/{{ $transaction->id }}"
+                                                                    class="btn btn-sm btn-danger">Delete</a>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                             @endforeach
                         </tbody>
