@@ -1,6 +1,6 @@
 <x-navbar :isLogin="$isLogin" :school="$school"></x-navbar>
 <x-layout :school="$school">
-    <section class="max-w-screen-lg  mx-auto p-8 my-4">
+    <section class="max-w-screen-lg  mx-auto p-8 mt-20 md:my-28">
         <div class="text-center mb-8">
             <h1 class="font-semibold text-3xl">Hasil pencarian dari : {{ request('search') }}</h1>
         </div>

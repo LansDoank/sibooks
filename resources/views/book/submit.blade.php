@@ -1,7 +1,7 @@
 <x-default_layout>
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="flex items-center justify-center w-full px-4 sm:px-6 lg:px-8 my-6 sm:my-10">
-       <form method="post" action="/book/pinjam" class="w-full max-w-lg md:max-w-xl lg:max-w-2xl">
+       <form method="post" action="/book/submit/store" class="w-full max-w-lg md:max-w-xl lg:max-w-2xl">
             @csrf
             <input type="hidden" name="id" value="{{ $book->id }}">
             <input type="hidden" name="stock" value="{{ $book->stock }}">

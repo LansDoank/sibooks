@@ -57,7 +57,7 @@ class TransactionController extends Controller
 
         $transaction->save();
 
-        
+
 
         Swal::success([
             'title' => 'Berhasil!',
@@ -138,6 +138,12 @@ class TransactionController extends Controller
             $transaction->save();
         }
 
+        $book = Book::findOrFail($request->id);
+
+        $book->update([
+            'stock' => $book->stock - $request->amount
+        ]);
+
 
         Swal::success([
             'title' => 'Berhasil!',
@@ -183,9 +189,9 @@ class TransactionController extends Controller
             if ($borrowImage) {
                 $borrowImage = str_replace('data:image/png;base64,', '', $borrowImage);
                 $borrowImage = str_replace(' ', '+', $borrowImage);
-    
+
                 $borrowImageName = 'user_image/' . uniqid() . '.png';
-    
+
                 Storage::disk('public')->put($borrowImageName, base64_decode($borrowImage));
             }
 
