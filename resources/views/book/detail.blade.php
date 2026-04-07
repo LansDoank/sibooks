@@ -1,6 +1,6 @@
 <x-navbar :isLogin="$isLogin" :school="$school"></x-navbar>
 <x-layout :school="$school">
-    <section class="bg-white dark:bg-gray-900 antialiased pt-12 md:pt-32">
+    <section class="bg-white dark:bg-gray-900 antialiased pt-28 md:pt-32">
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div class="flex justify-center lg:justify-center">

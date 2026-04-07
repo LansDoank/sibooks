@@ -2,6 +2,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
+
 <nav class="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-50 top-0 left-0">
     <div class="max-w-screen-xl flex items-center justify-between mx-auto px-4 py-3">
 
