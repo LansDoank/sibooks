@@ -31,6 +31,8 @@ class TransactionController extends Controller
         $transaction = Transaction::find($id);
         $book = Book::findOrFail($transaction->book_id);
 
+        
+
         $book->update([
             'stock' => $book->stock - $transaction->jumlah_buku
         ]);
@@ -43,6 +45,9 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::find($id);
 
+        if($transaction->is_verified == true) {
+            return redirect('/')->with('error', 'Buku sudah diverifikasi!');
+        }
         $transaction->update([
             'is_verified' => true
         ]);
