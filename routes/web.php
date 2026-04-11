@@ -30,6 +30,8 @@ Route::middleware(['auth'])->prefix('book')->group(function () {
 
     Route::get('/rack', [RackController::class, 'index'])->name('book.rack');
 
+    Route::get('/history', [TransactionController::class, 'history'])->name('transaction.history');
+
     Route::get('/{book}', [BookController::class, 'show'])->name("book.show");
 
     Route::get('/pinjam/{book}', [TransactionController::class, 'create'])->name('transaction.show');
@@ -45,16 +47,18 @@ Route::middleware(['auth'])->prefix('book')->group(function () {
     Route::post('/pengembalian', [TransactionController::class, 'update'])->name('transaction.update');
 
     Route::get('/verification/{slug}', [TransactionController::class, 'getVerification'])->name('transaction.verification');
+
 });
+
 
 // User Routes  
 
-Route::prefix('user')->group(function() {
+Route::prefix('user')->group(function () {
 
     Route::get('/register', [UserController::class, 'register'])->name('register');
-    
+
     Route::post('/store', [UserController::class, 'registerPost']);
-    
+
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
@@ -62,62 +66,62 @@ Route::prefix('user')->group(function() {
 
 Route::get('/api/kelas/{transaction_id}', [TransactionController::class, 'getTransaction'])->name('api.transaction');
 
-Route::get('/api/transaction/monthly',[DashboardController::class,'getMonthly']);
+Route::get('/api/transaction/monthly', [DashboardController::class, 'getMonthly']);
 
-Route::get('/api/book/status',[DashboardController::class,'getBookStatus']);
+Route::get('/api/book/status', [DashboardController::class, 'getBookStatus']);
 
-Route::get('/api/book/{slug}',[BookController::class,'getDetailBookApi'])->name('getDetailBookApi');
+Route::get('/api/book/{slug}', [BookController::class, 'getDetailBookApi'])->name('getDetailBookApi');
 
 // Admin Routes
 
-Route::middleware(['isAdmin'])->prefix('admin')->group(function () { 
+Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
 
     Route::get('/', [AdminController::class, 'index'])->name('admin.index')->middleware('isAdmin');
-    
+
     Route::get('/school', [AdminController::class, 'school'])->name('admin.data')->middleware('isAdmin');
-    
+
     Route::post('/school/update', [AdminController::class, 'schoolUpdate'])->name('admin.school.update')->middleware('isAdmin');
-    
+
     Route::get('/user', [AdminController::class, 'user'])->name('admin.user')->middleware('isAdmin');
-    
+
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create')->middleware('isAdmin');
-    
+
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store')->middleware('isAdmin');
-    
+
     Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
-    
+
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    
+
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
-    
+
     Route::get('/book', [AdminController::class, 'book'])->name('admin.book')->middleware('isAdmin');
-    
+
     Route::get('/book/create', [BookController::class, 'create'])->name('book.create')->middleware('isAdmin');
-    
+
     Route::post('/book/store', [BookController::class, 'store'])->name('book.store')->middleware('isAdmin');
-    
+
     Route::get('/book/report/pdf', [BookController::class, 'pdf'])->name('admin.pdf')->middleware('isAdmin');
-    
+
     Route::get('/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit')->middleware('isAdmin');
-    
+
     Route::post('/book/update', [BookController::class, 'update'])->name('book.update')->middleware('isAdmin');
-    
+
     Route::get('/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete')->middleware('isAdmin');
 
     Route::get('/verification/{id}', [TransactionController::class, 'verificationAdmin'])->name('book.verificationAdmin')->middleware('isAdmin');
 
     Route::get('/transaction/verification/{id}', [TransactionController::class, 'verification'])->name('book.verificationAdmin')->middleware('isAdmin');
-    
+
     Route::get('/rack', [AdminController::class, 'rack'])->name('admin.rack')->middleware('isAdmin');
 
-    Route::get('/rack/create',  [RackController::class, 'create'])->name('rack.create')->middleware('isAdmin');
-    
+    Route::get('/rack/create', [RackController::class, 'create'])->name('rack.create')->middleware('isAdmin');
+
     Route::post('/rack/store', [RackController::class, 'store'])->name('rack.store')->middleware('isAdmin');
 
     Route::get('/rack/edit/{id}', [RackController::class, 'edit'])->name('rack.edit')->middleware('isAdmin');
-    
+
     Route::post('/rack/update', [RackController::class, 'update'])->name('rack.update')->middleware('isAdmin');
-    
+
     Route::get('/rack/map/edit', [RackController::class, 'map'])->name('admin.rack.map')->middleware('isAdmin');
 
     Route::post('/rack/map/post', [RackController::class, 'mapPost'])->name('admin.rack.map')->middleware('isAdmin');
@@ -125,25 +129,25 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     Route::get('/rack/edit/{id}', [RackController::class, 'edit'])->name('rack.edit')->middleware('isAdmin');
 
     Route::get('/transaction', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
-    
+
     Route::get('/transaction/add', [AdminController::class, 'transaction'])->name('admin.transaction')->middleware('isAdmin');
 
     Route::get('/transaction/edit/{id}', [AdminController::class, 'editTransaction'])->name('admin.transaction.edit')->middleware('isAdmin');
-    
+
     Route::post('/transaction/update', [AdminController::class, 'updateTransaction'])->name('admin.transaction.update')->middleware('isAdmin');
 
     Route::get('/transaction/delete/{id}', [AdminController::class, 'deleteTransaction'])->name('admin.transaction.delete')->middleware('isAdmin');
-    
+
     Route::get('/class', [AdminController::class, 'class'])->name('admin.class')->middleware('isAdmin');
-    
+
     Route::get('/class/create', [ClassController::class, 'create'])->name('class.create')->middleware('isAdmin');
-    
+
     Route::post('/class/store', [ClassController::class, 'store'])->name('class.store')->middleware('isAdmin');
-    
+
     Route::get('/class/edit/{id}', [ClassController::class, 'edit'])->name('class.edit')->middleware('isAdmin');
-    
+
     Route::post('/class/update', [ClassController::class, 'update'])->name('class.update')->middleware('isAdmin');
-    
+
     Route::get('/class/delete/{id}', [ClassController::class, 'delete'])->name('class.delete')->middleware('isAdmin');
 });
 

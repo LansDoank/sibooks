@@ -25,7 +25,8 @@
 
         <!-- MENU -->
         <div class="hidden w-full md:block md:w-auto absolute md:static top-full left-0" id="navbar-default">
-            <ul class="font-medium flex flex-col p-4 mt-2 border rounded-lg bg-gray-50 w-full md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
+            <ul
+                class="font-medium flex flex-col p-4 mt-2 border rounded-lg bg-gray-50 w-full md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
 
                 <!-- MENU ITEM -->
                 <li>
@@ -60,7 +61,7 @@
                 <li class="relative">
                     <button id="dropdownUserButton" data-dropdown-toggle="dropdownUser"
                         class="flex items-center gap-2 px-3 py-2 hover:text-blue-600 dark:text-white">
-                        
+
                         <!-- Nama (hidden di mobile) -->
                         <span class="hidden lg:block text-sm font-medium">
                             {{ $isLogin->fullname }}
@@ -68,13 +69,12 @@
 
                         <!-- Foto -->
                         <div class="w-8 h-8 rounded-full overflow-hidden">
-                            <img class="w-full h-full object-cover"
-                                src="{{ 
+                            <img class="w-full h-full object-cover" src="{{ 
                                     $isLogin->image
-                                        ? (str_contains($isLogin->image, 'https')
-                                            ? $isLogin->image
-                                            : asset('storage/' . $isLogin->image))
-                                        : asset('img/default-pp.jpg') 
+    ? (str_contains($isLogin->image, 'https')
+        ? $isLogin->image
+        : asset('storage/' . $isLogin->image))
+    : asset('img/default-pp.jpg') 
                                 }}">
                         </div>
                     </button>
@@ -82,7 +82,7 @@
                     <!-- DROPDOWN -->
                     <div id="dropdownUser"
                         class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow dark:bg-gray-700 z-50">
-                        
+
                         <div class="px-4 py-3 text-sm">
                             <p class="font-medium truncate">{{ $isLogin->email ?? 'User' }}</p>
                         </div>
@@ -96,6 +96,12 @@
                                 class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                                 Data Sekolah
                             </a>
+                        @elseif ($isLogin->role_id == 2)
+                            <a href="/book/history"
+                                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
+                                Riwayat
+                            </a>
+
                         @endif
 
                         <a href="/logout"

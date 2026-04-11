@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
-    protected $fillable = ['jumlah_buku','return_time','is_verified','book_image'];
+    protected $fillable = ['user_id','jumlah_buku','return_time','is_verified','book_image'];
     protected $with = ['book'];
 
     protected $casts = [
@@ -17,5 +17,9 @@ class Transaction extends Model
 
     public function book() : BelongsTo {
         return $this->belongsTo(Book::class);
+    }
+
+    public function user() : BelongsTo {
+        return $this->belongsTo(User::class);
     }
 }
