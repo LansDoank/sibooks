@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Classroom;
+use App\Models\School;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -131,6 +132,7 @@ class TransactionController extends Controller
             }
 
             // isi data transaksi
+            $transaction->user_id = $user->id;
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
@@ -201,6 +203,7 @@ class TransactionController extends Controller
             }
 
             // isi data transaksi
+            $transaction->user_id = $user->id;
             $transaction->kelas_peminjam = $request->class;
             $transaction->book_id = $request->id;
             $transaction->jumlah_buku = $request->amount;
@@ -272,5 +275,13 @@ class TransactionController extends Controller
     public function destroy(string $id)
     {
 
+    }
+
+    public function history() {
+        $school = School::first() ?? null;
+        $user = Auth::user();
+        $transactions = Transaction::where('user_id', $user->id)->get();
+
+        return view('book.history',['school' => $school, 'user' => $user, 'title' => 'Riwayat Peminjaman Buku','transactions' => $transactions]);
     }
 }
