@@ -11,9 +11,9 @@
                     class="md:w-[80%] lg:w-[60%] bg-white shadow rounded-2xl p-4 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
                     <!-- Info Buku -->
-                    <div class="flex items-start flex-wrap gap-4">
+                    <div class="flex items-center md:items-start justify-center flex-wrap gap-4">
                         <img src="{{ asset('/storage' . $transaction->book->image) ?? 'https://via.placeholder.com/80' }}" alt="cover"
-                            class="w-32 h-42 object-cover rounded-lg">
+                            class="w-32 h-42 object-cover object-center rounded-lg">
 
                         <div>
                             <h2 class="text-lg font-semibold text-gray-800">
@@ -41,7 +41,7 @@
                     <!-- Status -->
                     <div class="flex flex-col md:items-end gap-2">
                         @if ($transaction->is_verified == true)
-                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700 w-fit">
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700 text-center w-full md:w-fit">
                                 Dipinjam
                             </span>
                         @elseif ($transaction->is_verified == false)
@@ -50,7 +50,7 @@
                             </span>
                             @endif
                             <!-- Button kode qr -->
-                            <a href="/book/verification/{{ $transaction->id }}" class="text-sm bg-blue-600 text-white hover:bg-blue-700 py-2 px-4 rounded-full">
+                            <a href="/book/verification/{{ $transaction->id }}" class="text-sm text-center bg-blue-600 text-white hover:bg-blue-700 py-2 px-4 rounded-full">
                                 Lihat Kode Qr
                             </a>
 
