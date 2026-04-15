@@ -101,7 +101,7 @@
             </div>
         </div>
     </section>
-    <script>
+    {{-- <script>
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
         const startBtn = document.getElementById('start-camera');
@@ -117,7 +117,7 @@
                 const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
                 // Mencari iVCam di dalam daftar nama kamera
-                const ivcam = videoDevices.find(device => device.label.toLowerCase().includes('ivcam'));
+                // const ivcam = videoDevices.find(device => device.label.toLowerCase().includes('ivcam'));
 
                 const constraints = {
                     video: ivcam ? { deviceId: { exact: ivcam.deviceId } } : { facingMode: "user" },
@@ -165,7 +165,60 @@
             let tracks = stream.getTracks();
             tracks.forEach(track => track.stop());
         });
-    </script>
+    </script> --}}
+    <script>
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const startBtn = document.getElementById('start-camera');
+const takePhotoBtn = document.getElementById('take-photo');
+const cameraContainer = document.getElementById('camera-container');
+const photoPreview = document.getElementById('photo-preview');
+const imageInput = document.getElementById('user_image');
+
+startBtn.addEventListener('click', async () => {
+    try {
+        const constraints = {
+            video: true, // langsung pakai kamera default laptop
+            audio: false
+        };
+
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+
+        cameraContainer.style.display = 'block';
+        startBtn.style.display = 'none';
+        takePhotoBtn.style.display = 'block';
+    } catch (err) {
+        console.error(err);
+        alert("Gagal mengakses kamera. Pastikan izin kamera aktif dan gunakan HTTPS / localhost.");
+    }
+});
+
+takePhotoBtn.addEventListener('click', () => {
+    const context = canvas.getContext('2d');
+
+    const size = Math.min(video.videoWidth, video.videoHeight);
+    const sourceX = (video.videoWidth - size) / 2;
+    const sourceY = (video.videoHeight - size) / 2;
+
+    canvas.width = 500;
+    canvas.height = 500;
+
+    context.drawImage(video, sourceX, sourceY, size, size, 0, 0, 500, 500);
+
+    const data = canvas.toDataURL('image/png');
+    imageInput.value = data;
+
+    photoPreview.src = data;
+    photoPreview.classList.remove('hidden');
+    cameraContainer.style.display = 'none';
+    takePhotoBtn.innerText = "Ambil Ulang Foto";
+
+    let stream = video.srcObject;
+    let tracks = stream.getTracks();
+    tracks.forEach(track => track.stop());
+});
+</script>
 </body>
 
 </html>
