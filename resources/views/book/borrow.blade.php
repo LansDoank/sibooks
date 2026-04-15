@@ -21,8 +21,8 @@
             <div class="mb-6">
                 <label for="jumlah-buku" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah
                     Buku <p class="text-gray-500 font-base text-xs">Stock : {{ $book->stock }}</p></label>
-                <input value="{{ $book->stock }}" min="1" max="{{ $book->stock }}" name="amount" type="number"
-                    id="jumlah-buku"
+                <input value="{{ $book->stock }}" min="1" max="{{ $book->stock }}" name="amount"
+                    type="number" id="jumlah-buku"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div class="mb-6">
@@ -32,7 +32,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected disabled value="">Pilih Kelas</option>
                     @foreach ($classrooms as $classroom)
-                        <option value="{{$classroom->name}}">{{$classroom->name}}</option>
+                        <option value="{{ $classroom->name }}">{{ $classroom->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -43,7 +43,8 @@
 
                 <div id="camera-wrapper"
                     class="relative overflow-hidden border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 dark:bg-gray-800 aspect-video flex items-center justify-center">
-                    <video id="video" autoplay playsinline class="absolute inset-0 w-full h-full object-cover"></video>
+                    <video id="video" autoplay playsinline
+                        class="absolute inset-0 w-full h-full object-cover"></video>
 
                     <div id="overlay"
                         class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
@@ -108,7 +109,13 @@
                 const ivcam = videoDevices.find(device => device.label.toLowerCase().includes('ivcam'));
 
                 const constraints = {
-                    video: ivcam ? { deviceId: { exact: ivcam.deviceId } } : { facingMode: "user" },
+                    video: ivcam ? {
+                        deviceId: {
+                            exact: ivcam.deviceId
+                        }
+                    } : {
+                        facingMode: "user"
+                    },
                     audio: false
                 };
 
@@ -154,6 +161,85 @@
             tracks.forEach(track => track.stop());
         });
     </script> -->
+    {{-- <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const takePhotoBtn = document.getElementById('take-photo');
+        const photoPreview = document.getElementById('photo-preview');
+        const imageInput = document.getElementById('borrow_image');
+        const statusText = document.getElementById('status-text');
+        const statusDot = document.getElementById('status-dot');
+        const overlay = document.getElementById('overlay');
+
+        let stream = null;
+
+        // Fungsi mulai kamera otomatis
+        async function startCamera() {
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                const ivcam = videoDevices.find(device => device.label.toLowerCase().includes('ivcam'));
+
+                const constraints = {
+                    video: ivcam ? {
+                        deviceId: {
+                            exact: ivcam.deviceId
+                        }
+                    } : {
+                        facingMode: "user"
+                    },
+                    audio: false
+                };
+
+                stream = await navigator.mediaDevices.getUserMedia(constraints);
+                video.srcObject = stream;
+                statusText.innerText = "Kamera Ready";
+                statusDot.classList.replace('bg-red-500', 'bg-green-500');
+            } catch (err) {
+                statusText.innerText = "Kamera Gagal";
+                console.error(err);
+            }
+        }
+
+        // Jalankan kamera saat halaman load
+        startCamera();
+
+        takePhotoBtn.addEventListener('click', () => {
+            if (photoPreview.classList.contains('hidden')) {
+                // PROSES AMBIL FOTO
+                const context = canvas.getContext('2d');
+                const size = Math.min(video.videoWidth, video.videoHeight);
+                const sourceX = (video.videoWidth - size) / 2;
+                const sourceY = (video.videoHeight - size) / 2;
+
+                canvas.width = 500;
+                canvas.height = 500;
+
+                context.drawImage(video, sourceX, sourceY, size, size, 0, 0, 500, 500);
+
+                const data = canvas.toDataURL('image/png');
+                imageInput.value = data; // Masukkan ke input hidden
+
+                // Tampilkan Preview, Sembunyikan Video & Overlay
+                photoPreview.src = data;
+                photoPreview.classList.remove('hidden');
+                video.classList.add('hidden');
+                overlay.classList.add('hidden');
+
+                takePhotoBtn.innerText = "Ambil Ulang Foto";
+                takePhotoBtn.classList.replace('bg-blue-100', 'bg-gray-200');
+            } else {
+                // PROSES RESET (AMBIL ULANG)
+                photoPreview.classList.add('hidden');
+                video.classList.remove('hidden');
+                overlay.classList.remove('hidden');
+                imageInput.value = "";
+
+                takePhotoBtn.innerText = "Ambil Foto";
+                takePhotoBtn.classList.replace('bg-gray-200', 'bg-blue-100');
+            }
+        });
+    </script> --}}
     <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
@@ -166,20 +252,18 @@
 
     let stream = null;
 
-    // Fungsi mulai kamera otomatis
     async function startCamera() {
         try {
-            const devices = await navigator.mediaDevices.enumerateDevices();
-            const videoDevices = devices.filter(device => device.kind === 'videoinput');
-            const ivcam = videoDevices.find(device => device.label.toLowerCase().includes('ivcam'));
-
             const constraints = {
-                video: ivcam ? { deviceId: { exact: ivcam.deviceId } } : { facingMode: "user" },
+                video: {
+                    facingMode: "user" // 👈 pakai kamera depan / bawaan laptop
+                },
                 audio: false
             };
 
             stream = await navigator.mediaDevices.getUserMedia(constraints);
             video.srcObject = stream;
+
             statusText.innerText = "Kamera Ready";
             statusDot.classList.replace('bg-red-500', 'bg-green-500');
         } catch (err) {
@@ -188,12 +272,10 @@
         }
     }
 
-    // Jalankan kamera saat halaman load
     startCamera();
 
     takePhotoBtn.addEventListener('click', () => {
         if (photoPreview.classList.contains('hidden')) {
-            // PROSES AMBIL FOTO
             const context = canvas.getContext('2d');
             const size = Math.min(video.videoWidth, video.videoHeight);
             const sourceX = (video.videoWidth - size) / 2;
@@ -205,23 +287,21 @@
             context.drawImage(video, sourceX, sourceY, size, size, 0, 0, 500, 500);
 
             const data = canvas.toDataURL('image/png');
-            imageInput.value = data; // Masukkan ke input hidden
+            imageInput.value = data;
 
-            // Tampilkan Preview, Sembunyikan Video & Overlay
             photoPreview.src = data;
             photoPreview.classList.remove('hidden');
             video.classList.add('hidden');
             overlay.classList.add('hidden');
-            
+
             takePhotoBtn.innerText = "Ambil Ulang Foto";
             takePhotoBtn.classList.replace('bg-blue-100', 'bg-gray-200');
         } else {
-            // PROSES RESET (AMBIL ULANG)
             photoPreview.classList.add('hidden');
             video.classList.remove('hidden');
             overlay.classList.remove('hidden');
             imageInput.value = "";
-            
+
             takePhotoBtn.innerText = "Ambil Foto";
             takePhotoBtn.classList.replace('bg-gray-200', 'bg-blue-100');
         }

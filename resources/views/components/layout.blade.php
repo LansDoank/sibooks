@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SiBooks - Perpustakaan Digital SMK AL-MADANI GARUT</title>
+    <link rel="icon" href="/img/logo-almadani.png">
     @vite('resources/css/app.css')
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 </head>
